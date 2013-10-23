@@ -62,7 +62,8 @@ public class HealthServiceTestActivity extends Activity {
 		setContentView(R.layout.main);
 		
 		OnLongClickListener l = new OnLongClickListener() {
-		    public boolean onLongClick(View v) {
+		    @Override
+            public boolean onLongClick(View v) {
 		    	finish();
 		    	return true;
 		    }

@@ -159,6 +159,7 @@ public class Handlers {
         final TextView text = field;
         final String alert = menssage;
         tm.post(new Runnable() {
+            @Override
             public void run() {
                 text.setText(alert);
             }

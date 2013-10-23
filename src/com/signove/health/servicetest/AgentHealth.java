@@ -36,11 +36,13 @@ public class AgentHealth {
             handler.handle_packet_associated(dev, xmldata);
 
             Runnable req1 = new Runnable() {
+                @Override
                 public void run() {
                     RequestConfig(idev);
                 }
             };
             Runnable req2 = new Runnable() {
+                @Override
                 public void run() {
                     RequestDeviceAttributes(idev);
                 }

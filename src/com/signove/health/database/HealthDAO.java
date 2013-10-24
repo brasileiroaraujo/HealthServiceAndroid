@@ -70,7 +70,7 @@ public class HealthDAO {
         dataBase.delete(TABLE_NAME, COLUMN_ID + " = ?", whereArgs);
     }
  
-    public void fecharConexao() {
+    public void closeConnection() {
         if(dataBase != null && dataBase.isOpen())
             dataBase.close(); 
     }

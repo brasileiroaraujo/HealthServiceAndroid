@@ -85,7 +85,7 @@ public class Handlers {
             Node datalist_node = datalists.item(i);
             NodeList entries = ((Element) datalist_node).getElementsByTagName("entry");
 
-            for (int j = 0; j < entries.getLength(); ++j) {
+            for (int j = 0; j < 3; ++j) {
 
                 Log.w("Antidote", "processing entry " + j);
 

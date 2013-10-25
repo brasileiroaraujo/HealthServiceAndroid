@@ -1,10 +1,14 @@
 package com.signove.health.servicetest;
 
-import java.util.HashMap;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.HashMap; 
 import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -48,6 +52,9 @@ public class HealthServiceTestActivity extends Activity {
 	TimePicker timePicker; 
 	Button btnOk;
 	Button btnClearHistory;
+	private AlarmManager alarmManager;
+	private PendingIntent pendingIntent;
+	private Intent myIntent;
 	
 	private HealthAgentAPI.Stub agent;
 
@@ -80,8 +87,10 @@ public class HealthServiceTestActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.activity_main);
+		
+		alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+		myIntent = new Intent(this, NotificationReceiver.class);
 		
 		SharedPreferences sharedPreferences = 
                  getSharedPreferences(APP_PREF_FILE, MODE_PRIVATE);
@@ -114,8 +123,12 @@ public class HealthServiceTestActivity extends Activity {
 					break;
 				case R.id.btnOk:
 					if(cbNotification.isChecked()){
+						setAlarm();
 						setNotificationActive(cbNotification.isChecked(), timePicker.getCurrentHour(), timePicker.getCurrentMinute());
 						Toast.makeText(getApplicationContext(), "Notifications preferences saved with success", Toast.LENGTH_SHORT).show();
+					} else {
+						alarmManager.cancel(PendingIntent.getBroadcast(
+								getApplicationContext(), 0, myIntent,0));
 					}
 					break;
 				case R.id.btnClearHistory:
@@ -209,6 +222,34 @@ public class HealthServiceTestActivity extends Activity {
 		  editor.putInt(NOTIFICATION_HOUR, hour);   
 		  editor.putInt(NOTIFICATION_MINUTE, minute);   
 		  editor.commit();   
+	}
+	
+	private void setAlarm() {
+
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,
+				myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+		Calendar cur_cal = new GregorianCalendar();
+		cur_cal.setTimeInMillis(System.currentTimeMillis());
+
+		GregorianCalendar data = new GregorianCalendar(
+				cur_cal.get(Calendar.YEAR), cur_cal.get(Calendar.MONTH),
+				cur_cal.get(Calendar.DAY_OF_MONTH),
+				timePicker.getCurrentHour(),
+				timePicker.getCurrentMinute());
+
+		 Log.e("ANO",String.valueOf(data.get(Calendar.YEAR)));
+		 Log.e("MES",String.valueOf(data.get(Calendar.MONTH)));
+		 Log.e("DIA",String.valueOf(data.get(Calendar.DAY_OF_MONTH)));
+		// Log.e("HORA",String.valueOf(data.get(Calendar.HOUR_OF_DAY)));
+		// Log.e("MIN",String.valueOf(data.get(Calendar.MINUTE)));
+
+//		Log.e("DATEPICKER", String.valueOf(dpNotificationTime.getCurrentHour()));
+//		Log.e("DATEPICKER",
+//				String.valueOf(dpNotificationTime.getCurrentMinute()));
+
+		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+				data.getTimeInMillis(), 1000 * 30, pendingIntent);
 	}
 	
 }

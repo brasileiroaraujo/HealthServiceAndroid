@@ -26,6 +26,7 @@
                          android:name="com.signove.health.service.HealthService" />
             </intent-filter>
         </activity>
+        <receiver  android:process=":remote" android:name="NotificationReceiver"></receiver>
     </application>
 
 </manifest>

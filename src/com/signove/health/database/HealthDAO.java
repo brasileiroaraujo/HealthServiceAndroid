@@ -69,7 +69,11 @@ public class HealthDAO {
  
         dataBase.delete(TABLE_NAME, COLUMN_ID + " = ?", whereArgs);
     }
- 
+    
+    public void deleteAll() {
+        dataBase.delete(TABLE_NAME, null, null);
+    }
+    
     public void closeConnection() {
         if(dataBase != null && dataBase.isOpen())
             dataBase.close(); 

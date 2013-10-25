@@ -19,7 +19,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		
-		Intent intent1 = new Intent(context, HealthServiceTestActivity.class);
+		Intent intent1 = new Intent(context, SplashScreen.class);
 		PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent1, 0);
 		
 		Bitmap bm = BitmapFactory.decodeResource(context.getResources(), R.drawable.heart_80px);

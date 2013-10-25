@@ -23,14 +23,16 @@ import com.signove.health.structures.HealthData;
 public class HealthDAO {
     public static final String TABLE_NAME = "HEALTH";
     public static final String COLUMN_ID = "ID";
-    public static final String COLUMN_HEARTBEAT = "HEARTBEAT";
+    public static final String COLUMN_SYS = "SYSTOLIC";
+    public static final String COLUMN_DIS = "DIASTOLIC";
+    public static final String COLUMN_MAP = "MAP";
     public static final String COLUMN_DEVICE = "DEVICE";
     public static final String COLUMN_DATE = "DATE_MEASUREMENT";
  
  
     public static final String SCRIPT_CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "("
-            + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_HEARTBEAT + " REAL," + COLUMN_DATE + " TEXT,"
-            + COLUMN_DEVICE + " TEXT" + ")";
+            + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_SYS + " REAL," +  COLUMN_DIS + " REAL," +  COLUMN_MAP + " REAL," + 
+            COLUMN_DATE + " TEXT," + COLUMN_DEVICE + " TEXT" + ")";
  
     public static final String SCRIPT_DROP_TABLE =  "DROP TABLE IF EXISTS " + TABLE_NAME;
  
@@ -97,16 +99,20 @@ public class HealthDAO {
                 do {
  
                     int indexID = cursor.getColumnIndex(COLUMN_ID);
-                    int indexHeartbeat = cursor.getColumnIndex(COLUMN_HEARTBEAT);
+                    int indexSystolic = cursor.getColumnIndex(COLUMN_SYS);
+                    int indexDiastolic = cursor.getColumnIndex(COLUMN_DIS);
+                    int indexMap = cursor.getColumnIndex(COLUMN_MAP);
                     int indexDevice = cursor.getColumnIndex(COLUMN_DEVICE);
                     int indexDate = cursor.getColumnIndex(COLUMN_DATE);
  
                     int id = cursor.getInt(indexID);
-                    Double heartbeat = cursor.getDouble(indexHeartbeat);
+                    Double sys = cursor.getDouble(indexSystolic);
+                    Double dis = cursor.getDouble(indexDiastolic);
+                    Double map = cursor.getDouble(indexMap);
                     String device = cursor.getString(indexDevice);
                     String date = cursor.getString(indexDate);
  
-                    HealthData health = new HealthData(device, heartbeat, convertToDate(date), id);
+                    HealthData health = new HealthData(device, sys, dis, map, convertToDate(date), id);
  
                     healthDatas.add(health);
  
@@ -121,7 +127,9 @@ public class HealthDAO {
  
     private ContentValues contentValues(HealthData healthData) {
         ContentValues values = new ContentValues();
-        values.put(COLUMN_HEARTBEAT, healthData.getHeartbeat());
+        values.put(COLUMN_SYS, healthData.getSystolic());
+        values.put(COLUMN_DIS, healthData.getDiastolic());
+        values.put(COLUMN_MAP, healthData.getMAP());
         values.put(COLUMN_DEVICE, healthData.getDevice());
         values.put(COLUMN_DATE, convertToString(healthData.getDate()));
  

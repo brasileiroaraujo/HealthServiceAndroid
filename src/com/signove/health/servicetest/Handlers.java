@@ -1,6 +1,8 @@
 package com.signove.health.servicetest;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.w3c.dom.Document;
@@ -25,6 +27,7 @@ public class Handlers {
     private Handler tm;
     private ParserXML parser;
     private Activity frame;
+    private List<Double> datas = new ArrayList<Double>();
 
     public Handlers(TextView device, TextView data,TextView menssage, Map<String, String> map, Activity frame) {
         this.menssage = menssage;
@@ -148,9 +151,10 @@ public class Handlers {
                 }
 
                 if (ok) {
-                    if (unit != "")
+                    if (unit != ""){
                         measurement += value + " " + unit + "\n";
-                    else
+                        datas.add(Double.parseDouble(value));
+                    }else
                         measurement += value + " ";
                 }
             }
@@ -159,14 +163,14 @@ public class Handlers {
         show(data, measurement);
         show(menssage, "Measurement");
         show_dev(path);
-        persistInDatabase(measurement, path);
+        persistInDatabase(datas, path);
     }
     
-    private void persistInDatabase(String measurement, String path) {
+    private void persistInDatabase(List<Double> datas, String path) {
         if (map.containsKey(path) && frame != null) {
             HealthDAO healthDao = HealthDAO.getInstance(frame);
-            Log.w("AntidoteDatabase", "Insert " + map.get(path) + " - " + measurement + " ("+ new Date() + ")");
-            HealthData healthObject = new HealthData(map.get(path), 75.0, new Date());
+            Log.w("AntidoteDatabase", "Insert " + map.get(path) + " - " + datas.toArray().toString() + " ("+ new Date() + ")");
+            HealthData healthObject = new HealthData(map.get(path), datas.get(0), datas.get(1), datas.get(2), new Date());
             healthDao.save(healthObject);
         }else{
             Log.w("AntidoteDatabase", "Cannot save this health data.");

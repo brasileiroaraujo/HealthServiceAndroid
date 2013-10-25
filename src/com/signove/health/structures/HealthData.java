@@ -4,21 +4,30 @@ import java.util.Date;
 
 public class HealthData implements Comparable<HealthData>{
     private String device;
-    private Double heartbeat;
+    private Double systolic;
+    private Double diastolic;
+    private Double MAP;
     private Date date;
     private Integer id;
     
-    public HealthData(String device, Double heartbeat, Date date, Integer id) {
+    public HealthData(String device, Double systolic, Double diastolic,
+            Double map, Date date, Integer id) {
+        super();
         this.device = device;
-        this.heartbeat = heartbeat;
+        this.systolic = systolic;
+        this.diastolic = diastolic;
+        MAP = map;
         this.date = date;
         this.id = id;
     }
     
-    public HealthData(String device, Double heartbeat, Date date) {
+    public HealthData(String device, Double systolic, Double diastolic,
+            Double map, Date date) {
         super();
         this.device = device;
-        this.heartbeat = heartbeat;
+        this.systolic = systolic;
+        this.diastolic = diastolic;
+        MAP = map;
         this.date = date;
     }
 
@@ -28,14 +37,6 @@ public class HealthData implements Comparable<HealthData>{
 
     public void setDevice(String device) {
         this.device = device;
-    }
-
-    public Double getHeartbeat() {
-        return heartbeat;
-    }
-
-    public void setHeartbeat(Double heartbeat) {
-        this.heartbeat = heartbeat;
     }
 
     public Date getDate() {
@@ -59,5 +60,29 @@ public class HealthData implements Comparable<HealthData>{
             return 1;
         }
         return 0;
+    }
+
+    public Double getSystolic() {
+        return systolic;
+    }
+
+    public void setSystolic(Double systolic) {
+        this.systolic = systolic;
+    }
+
+    public Double getDiastolic() {
+        return diastolic;
+    }
+
+    public void setDiastolic(Double diastolic) {
+        this.diastolic = diastolic;
+    }
+
+    public Double getMAP() {
+        return MAP;
+    }
+
+    public void setMAP(Double mAP) {
+        MAP = mAP;
     }
 }

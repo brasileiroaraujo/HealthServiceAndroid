@@ -65,7 +65,7 @@
                             android:layout_height="36dp"
                             android:layout_marginTop="25dp"
                             android:contentDescription="@string/image_status"
-                            android:src="@drawable/status_busy" />
+                            android:src="@drawable/status_red" />
                     </LinearLayout>
 					
                     <TextView
@@ -124,12 +124,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" 
                     android:orientation="vertical">
+                   
+                     <TextView
+                        android:id="@+id/tvHistoryEmpty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="15sp" />
+                    
                     <ListView
                             android:id="@+id/listViewDataHistory"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1" >
                         </ListView>
+                       
+                        
                 </LinearLayout>
 
                 <LinearLayout

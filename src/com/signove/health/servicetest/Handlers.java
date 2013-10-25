@@ -148,7 +148,7 @@ public class Handlers {
                 }
             }
         }
-
+        System.out.println("Dataaa "+measurement);
         show(data, measurement);
         show(menssage, "Measurement");
         show_dev(path);  

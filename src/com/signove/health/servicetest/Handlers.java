@@ -12,8 +12,10 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.signove.health.database.HealthDAO;
@@ -23,13 +25,15 @@ public class Handlers {
     private TextView menssage;
     private TextView device;
     private TextView data;
+    private ListView list;
     private Map<String, String> map;
     private Handler tm;
     private ParserXML parser;
     private Activity frame;
     private List<Double> datas = new ArrayList<Double>();
-
-    public Handlers(TextView device, TextView data,TextView menssage, Map<String, String> map, Activity frame) {
+    private Context context;
+    
+    public Handlers(TextView device, TextView data,TextView menssage, Map<String, String> map, Activity frame, ListView list, Context context) {
         this.menssage = menssage;
         this.data = data;
         this.device = device;
@@ -37,6 +41,8 @@ public class Handlers {
         this.tm = new Handler();
         this.parser = new ParserXML();
         this.frame = frame;
+        this.list = list;
+        this.context = context;
     }
 
     public void handle_packet_connected(String path, String dev)
@@ -88,7 +94,7 @@ public class Handlers {
             Node datalist_node = datalists.item(i);
             NodeList entries = ((Element) datalist_node).getElementsByTagName("entry");
 
-            for (int j = 0; j < 9; ++j) {
+            for (int j = 0; j < 6; ++j) {
 
                 Log.w("Antidote", "processing entry " + j);
 
@@ -164,6 +170,7 @@ public class Handlers {
         show(menssage, "Measurement");
         show_dev(path);
         persistInDatabase(datas, path);
+        updateHistoryList();
     }
     
     private void persistInDatabase(List<Double> datas, String path) {
@@ -189,6 +196,18 @@ public class Handlers {
             }
         });
     }
+    
+    public void updateHistoryList()
+    {
+        tm.post(new Runnable() {
+            @Override
+            public void run() {
+            	HealthDataAdapter adapter = new HealthDataAdapter(context, HealthDAO.getInstance(context).ListAll());
+                list.setAdapter(adapter);
+            }
+        });
+    }
+    
     
     public void show_dev(String path)
     {

@@ -165,10 +165,11 @@ public class Handlers {
     private void persistInDatabase(String measurement, String path) {
         if (map.containsKey(path) && frame != null) {
             HealthDAO healthDao = HealthDAO.getInstance(frame);
+            Log.w("AntidoteDatabase", "Insert " + map.get(path) + " - " + measurement + " ("+ new Date() + ")");
             HealthData healthObject = new HealthData(map.get(path), 75.0, new Date());
             healthDao.save(healthObject);
         }else{
-            Log.w("Antidote", "Cannot save this health data.");
+            Log.w("AntidoteDatabase", "Cannot save this health data.");
         }
         
     }

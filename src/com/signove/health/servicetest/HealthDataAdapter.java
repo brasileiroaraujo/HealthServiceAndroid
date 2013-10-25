@@ -1,5 +1,6 @@
 package com.signove.health.servicetest;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import com.signove.health.structures.HealthData;
@@ -41,12 +42,12 @@ public class HealthDataAdapter extends BaseAdapter {
 	        HealthData data = mData.get(posicao);
 
 	        TextView tvDate = (TextView) view.findViewById(R.id.historyDate);
-	        tvDate.setText(data.getDate().toString());
+	        tvDate.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(data.getDate()));
 
 	        TextView tvDevice = (TextView) 
 	                              view.findViewById(R.id.historyDevice);
 	        tvDevice.setText(data.getDevice());
-
+	        
 	        TextView tvData = (TextView) view.findViewById(R.id.historyData);
 	        tvData.setText(String.valueOf(data.getHeartbeat()));
 

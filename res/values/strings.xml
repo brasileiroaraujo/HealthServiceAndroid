@@ -5,7 +5,7 @@
     <string name="app_name">HealthServiceTest</string>
     <string name="image_status">Essa imagem indica o status de conexão do agente com o celular</string>
     <string name="text_notifications">Notifications</string>
-    <string name="text_notifications_description">Notifications are cents and cents</string>
+    <string name="text_notifications_description">Enabling notification you will receive reminders to make the measurement</string>
     <string name="btn_ok">OK</string>
     <string name="btn_clear_history">Clear history</string>
     <string name="tab_history">History</string>

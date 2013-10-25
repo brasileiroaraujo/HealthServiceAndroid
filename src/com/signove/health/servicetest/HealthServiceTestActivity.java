@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
@@ -50,10 +51,12 @@ public class HealthServiceTestActivity extends Activity {
 	TimePicker timePicker; 
 	Button btnOk;
 	Button btnClearHistory;
+	Context context = this;
 	private AlarmManager alarmManager;
 	private PendingIntent pendingIntent;
 	private Intent myIntent;
-	
+	List<HealthData> datasHistory;
+	ListView list;
 	private HealthAgentAPI.Stub agent;
 
 	Map <String, String> map;
@@ -65,7 +68,7 @@ public class HealthServiceTestActivity extends Activity {
 
 			// that's how we get the client side of the IPC connection
 			api = HealthServiceAPI.Stub.asInterface(service);
-			agent = new AgentHealth(device, data, menssage, map, api, frame).getAgent();
+			agent = new AgentHealth(device, data, menssage, map, api, frame, list, context).getAgent();
 			try {
 				Log.w("HST", "Configuring...");
 				api.ConfigurePassive(agent, specs);
@@ -151,7 +154,7 @@ public class HealthServiceTestActivity extends Activity {
 		tabs.addTab(spec); 
 		tabs.setCurrentTab(0); 
 		
-	    ListView list = (ListView) findViewById(R.id.listViewDataHistory);
+	    list = (ListView) findViewById(R.id.listViewDataHistory);
         status = (TextView) findViewById(R.id.tvSugestion);
 		menssage = (TextView) findViewById(R.id.tvMsg);
 		device = (TextView) findViewById(R.id.tVDevice);
@@ -173,7 +176,7 @@ public class HealthServiceTestActivity extends Activity {
 	    
 		map = new HashMap<String, String>();
 
-	    List<HealthData> datasHistory = HealthDAO.getInstance(this).ListAll();
+	    datasHistory = HealthDAO.getInstance(this).ListAll();
         if(datasHistory.size() == 0){
         	history.setText("History empty");
         }else{
@@ -243,4 +246,11 @@ public class HealthServiceTestActivity extends Activity {
 				data.getTimeInMillis(), 1000 * 30, pendingIntent);
 	}
 	
+	public List<HealthData> getHealthHistoryList(){
+		return datasHistory;
+	}
+	
+	public void setHealthHistoryList(List<HealthData> list){
+		datasHistory = list;
+	}
 }

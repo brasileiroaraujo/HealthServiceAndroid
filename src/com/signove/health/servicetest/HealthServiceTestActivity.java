@@ -36,8 +36,6 @@ import com.signove.health.structures.HealthData;
 public class HealthServiceTestActivity extends Activity {
 	private static final String APP_PREF_FILE = "appPreferences";
 	private static final String NOTIFICATION_ACTIVE = "notificationActive";
-	private static final String NOTIFICATION_HOUR = "notificationHour";
-	private static final String NOTIFICATION_MINUTE = "notificationMinute";
 	
 	int [] specs = {0x1004};
 	HealthServiceAPI api;
@@ -95,10 +93,7 @@ public class HealthServiceTestActivity extends Activity {
 		SharedPreferences sharedPreferences = 
                  getSharedPreferences(APP_PREF_FILE, MODE_PRIVATE);
 	    boolean notification = sharedPreferences.getBoolean(NOTIFICATION_ACTIVE, true);
-	    if (notification) {        
-	       //TODO theo
-	    } 
-	    
+	  
 		OnLongClickListener l = new OnLongClickListener() {
 		    @Override
             public boolean onLongClick(View v) {
@@ -115,21 +110,19 @@ public class HealthServiceTestActivity extends Activity {
 				case R.id.checkBoxNotifications:
 					if(cbNotification.isChecked()){
 						timePicker.setEnabled(true);
-						btnOk.setEnabled(true);
 					}else{
 						timePicker.setEnabled(false);
-						btnOk.setEnabled(false);
 					}
 					break;
 				case R.id.btnOk:
 					if(cbNotification.isChecked()){
 						setAlarm();
-						setNotificationActive(cbNotification.isChecked(), timePicker.getCurrentHour(), timePicker.getCurrentMinute());
-						Toast.makeText(getApplicationContext(), "Notifications preferences saved with success", Toast.LENGTH_SHORT).show();
 					} else {
 						alarmManager.cancel(PendingIntent.getBroadcast(
 								getApplicationContext(), 0, myIntent,0));
 					}
+					setNotificationActive(cbNotification.isChecked());
+					Toast.makeText(getApplicationContext(), "Notifications preferences saved with success", Toast.LENGTH_SHORT).show();
 					break;
 				case R.id.btnClearHistory:
 					//TODO put clear history
@@ -214,13 +207,11 @@ public class HealthServiceTestActivity extends Activity {
 
 	}
 	
-	private void setNotificationActive(boolean value, Integer hour, Integer minute) {
+	private void setNotificationActive(boolean value) {
 		  SharedPreferences sharedPreferences =     
 		      getSharedPreferences(APP_PREF_FILE, MODE_PRIVATE);
 		  SharedPreferences.Editor editor = sharedPreferences.edit();      
-		  editor.putBoolean(NOTIFICATION_ACTIVE, value); 
-		  editor.putInt(NOTIFICATION_HOUR, hour);   
-		  editor.putInt(NOTIFICATION_MINUTE, minute);   
+		  editor.putBoolean(NOTIFICATION_ACTIVE, value);   
 		  editor.commit();   
 	}
 	

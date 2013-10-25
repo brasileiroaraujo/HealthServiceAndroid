@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TableRow
+            android:id="@+id/tableRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+             <TextView
+		        android:id="@+id/historyDate"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="Date"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+            <ImageView
+                android:id="@+id/imageViewHistoryBluetooth"
+                android:layout_width="10dp"
+                android:layout_height="20dp"
+                android:src="@drawable/bluetooth" />
+            <TextView
+		        android:id="@+id/historyDevice"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="15dp"
+		        android:text="Device"/>
+            
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tableRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/imageViewHistoryData"
+                android:layout_width="10dp"
+                android:layout_height="20dp"
+                android:src="@drawable/health" />
+
+           <TextView
+	        android:id="@+id/historyData"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="15dp"
+	        android:text="Data"/>
+        </TableRow>
+
+</TableLayout>

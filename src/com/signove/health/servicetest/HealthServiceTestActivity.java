@@ -1,6 +1,7 @@
 package com.signove.health.servicetest;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
@@ -13,16 +14,20 @@ import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnLongClickListener;
+import android.widget.ListView;
+import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.signove.health.database.HealthDAO;
 import com.signove.health.service.HealthAgentAPI;
 import com.signove.health.service.HealthServiceAPI;
+import com.signove.health.structures.HealthData;
 
 public class HealthServiceTestActivity extends Activity {
 	int [] specs = {0x1004};
 	HealthServiceAPI api;
 
-	TextView status;
+	//TextView status;
 	TextView menssage;
 	TextView device;
 	TextView data;
@@ -59,7 +64,7 @@ public class HealthServiceTestActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.main);
+		setContentView(R.layout.activity_main);
 		
 		OnLongClickListener l = new OnLongClickListener() {
 		    @Override
@@ -69,12 +74,37 @@ public class HealthServiceTestActivity extends Activity {
 		    }
 		};
 		
-		status = (TextView) findViewById(R.id.status);
-		menssage = (TextView) findViewById(R.id.msg);
-		device = (TextView) findViewById(R.id.device);
-		data = (TextView) findViewById(R.id.data);
+		TabHost tabs=(TabHost)findViewById(R.id.tabhost); 
+		tabs.setup(); 
+		TabHost.TabSpec spec=tabs.newTabSpec("tag1"); 
+		spec.setContent(R.id.data); 
+		spec.setIndicator("Data"); 
+		tabs.addTab(spec); 
+		spec=tabs.newTabSpec("tag2"); 
+		spec.setContent(R.id.history); 
+		spec.setIndicator("History"); 
+		tabs.addTab(spec); 
+		spec=tabs.newTabSpec("tag3"); 
+		spec.setContent(R.id.settings); 
+		spec.setIndicator("Settings"); 
+		tabs.addTab(spec); 
+		tabs.setCurrentTab(0); 
+		
+		
+		ListView list = (ListView) findViewById(R.id.listViewDataHistory);
 
-		status.setOnLongClickListener(l);
+        List<HealthData> datasHistory = HealthDAO.getInstance(this).ListAll();
+
+        HealthDataAdapter adapter = new HealthDataAdapter(getApplicationContext(), datasHistory);
+        list.setAdapter(adapter);
+        
+		
+		//status = (TextView) findViewById(R.id.status);
+		menssage = (TextView) findViewById(R.id.tvMsg);
+		device = (TextView) findViewById(R.id.tVDevice);
+		data = (TextView) findViewById(R.id.tVMeasurement);
+
+		//status.setOnLongClickListener(l);
 		menssage.setOnLongClickListener(l);
 		device.setOnLongClickListener(l);
 		data.setOnLongClickListener(l);
@@ -86,7 +116,7 @@ public class HealthServiceTestActivity extends Activity {
 		bindService(intent, serviceConnection, 0);
 		Log.w("HST", "Activity created");
 
-		status.setText("Ready");
+		//status.setText("Ready");
 		menssage.setText("--");
 		device.setText("--");
 		data.setText("--");

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TabHost
+        android:id="@+id/tabhost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:showDividers="middle" >
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+            </TabWidget>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <LinearLayout
+                    android:id="@+id/data"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="10dp" >
+
+                    <LinearLayout
+                        android:id="@+id/deviceData"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal"
+                        android:background="#050505" >
+
+                        <ImageView
+                            android:id="@+id/imageViewBluetooh"
+                            android:layout_width="36dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.54"
+                            android:src="@drawable/bluetooth" />
+
+                        <TextView
+                            android:id="@+id/tVDevice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:layout_weight="0.97"
+                            android:text="5C:B5:24:0B:5C:CD"
+                            android:textSize="22sp" />
+
+                        <ImageView
+                            android:id="@+id/imageViewStatus"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_marginTop="25dp"
+                            android:contentDescription="@string/image_status"
+                            android:src="@drawable/status_busy" />
+                    </LinearLayout>
+					
+                    <TextView
+                        android:id="@+id/tvMsg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="0.05"
+                        android:background="#050505"
+                        android:ellipsize="end"
+                        android:text="Msg"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:id="@+id/deviceHeart"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="0.01"
+                        android:background="@drawable/heart2"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/tVMeasurement"
+                            android:layout_width="135dp"
+                            android:layout_height="127dp"
+                            android:layout_gravity="right"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="0.02"
+                            android:text="ZZZ bpm"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+					<TextView
+                        android:id="@+id/tvSugestion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="0.05"
+                        android:background="#050505"
+                        android:ellipsize="end"
+                        android:text="Sugestion"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/history"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" 
+                    android:orientation="vertical">
+                    <ListView
+                            android:id="@+id/listViewDataHistory"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" >
+                        </ListView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" 
+                    android:orientation="vertical">
+						<CheckBox
+					        android:id="@+id/checkBoxNotifications"
+					        android:layout_width="wrap_content"
+					        android:layout_height="wrap_content"
+					        android:layout_marginLeft="15dp"
+					        android:layout_marginTop="30dp"
+					        android:text="@string/text_notifications"
+					        android:textSize="20sp" />
+					
+					    <TextView
+					        android:id="@+id/tVNotificationsDescription"
+					        android:layout_width="255dp"
+					        android:layout_height="50dp"
+					        android:layout_marginLeft="53dp"
+					        android:layout_marginRight="10dp"
+					        android:text="@string/text_notifications_description"
+					        android:textSize="15sp" />
+					
+					    <TimePicker
+					        android:id="@+id/timePicker1"
+					        android:layout_width="wrap_content"
+					        android:layout_height="wrap_content"
+					        android:layout_gravity="center_horizontal"
+					        android:layout_marginBottom="15dp"
+					        android:layout_marginTop="15dp" />
+					
+					    <LinearLayout
+					        android:layout_width="wrap_content"
+					        android:layout_height="wrap_content"
+					        android:layout_gravity="center_horizontal" >
+					
+					        <Button
+					            android:id="@+id/btnClearHistory"
+					            android:layout_width="wrap_content"
+					            android:layout_height="wrap_content"
+					            android:layout_gravity="center_horizontal"
+					            android:layout_marginRight="15dp"
+					            android:text="@string/btn_clear_history" />
+					
+					        <Button
+					            android:id="@+id/btnOk"
+					            android:layout_width="wrap_content"
+					            android:layout_height="wrap_content"
+					            android:layout_marginRight="15dp"
+					            android:text="@string/btn_ok" />
+					    </LinearLayout>
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+
+</LinearLayout>

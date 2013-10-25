@@ -4,6 +4,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * Class of connection with database.
+ * @author Tiago Brasileiro Araujo
+ *
+ */
 public class PersistenceHelper extends SQLiteOpenHelper {
     
     public static final String NAME_DATABASE =  "HEALTHDB";

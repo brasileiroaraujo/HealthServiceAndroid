@@ -2,7 +2,7 @@ package com.signove.health.structures;
 
 import java.util.Date;
 
-public class HealthData {
+public class HealthData implements Comparable<HealthData>{
     private String device;
     private Double heartbeat;
     private Date date;
@@ -48,5 +48,16 @@ public class HealthData {
 
     public Integer getId() {
         return id;
+    }
+
+    @Override
+    public int compareTo(HealthData another) {
+        if (this.getDate().before(another.getDate())) {
+            return -1;
+        }
+        if (this.getDate().after(another.getDate())) {
+            return 1;
+        }
+        return 0;
     }
 }

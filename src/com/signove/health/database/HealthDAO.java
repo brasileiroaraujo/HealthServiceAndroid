@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.signove.health.structures.HealthData;
 
+/**
+ * Class of interface to use methods of database.
+ * @author Tiago Brasileiro Araujo
+ *
+ */
 public class HealthDAO {
     public static final String TABLE_NAME = "HEALTH";
     public static final String COLUMN_ID = "ID";
@@ -57,9 +63,10 @@ public class HealthDAO {
     public List<HealthData> ListAll() {
         String queryReturnAll = "SELECT * FROM " + TABLE_NAME;
         Cursor cursor = dataBase.rawQuery(queryReturnAll, null);
-        List<HealthData> veiculos = createHealthList(cursor);
- 
-        return veiculos;
+        ArrayList<HealthData> healthdatas = (ArrayList<HealthData>) createHealthList(cursor);
+        Collections.sort(healthdatas);
+        
+        return healthdatas;
     }
  
     public void delete(HealthData health) {
@@ -122,16 +129,10 @@ public class HealthDAO {
     }
 
     private String convertToString(Date date) {
-        SimpleDateFormat formatBra;     
-        formatBra = new SimpleDateFormat("dd/MM/yyyy");  
-              
-        java.util.Date newDate;
-        try {
-            newDate = formatBra.parse(date.toString());
-            return (formatBra.format(newDate));
-        } catch (ParseException e) {
-            return "Error when converting the date.";
-        }
+        DateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
+        String reportDate = formater.format(date);
+        
+        return reportDate;
     }
     
     private Date convertToDate(String date_string) {

@@ -5,28 +5,43 @@
     android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="15" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
+
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    
+
     <application
+        android:debuggable="true"
         android:icon="@drawable/heart"
-                android:debuggable="true"
         android:label="@string/app_name" >
-        <activity
-            android:name=".HealthServiceTestActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:debuggable="true">
-            <intent-filter>
+         <activity
+            android:name="com.signove.health.servicetest.SplashScreen"
+            android:theme="@android:style/Theme.NoTitleBar" >
+            <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-                 <action
-                         android:name="com.signove.health.service.HealthService" />
             </intent-filter>
         </activity>
-        <receiver  android:process=":remote" android:name="NotificationReceiver"></receiver>
+        <activity
+            android:name="com.signove.health.servicetest.HealthServiceTestActivity"
+            android:debuggable="true"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="com.signove.health.service.HealthService" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name="com.signove.health.servicetest.NotificationReceiver"
+            android:process=":remote" >
+        </receiver>
+
+       
     </application>
 
 </manifest>

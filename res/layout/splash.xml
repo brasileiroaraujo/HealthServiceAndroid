@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/LinearLayout01"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center|center"
+    android:orientation="vertical"
+    android:background="#000000">
+
+    <ImageView
+        android:layout_marginTop="-60dip"
+        android:paddingLeft="20dip"
+        android:paddingRight="20dip"
+        android:scaleType="centerInside"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView1"
+        android:src="@drawable/heart" />
+
+    <TextView android:text="MyPressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dip"
+        android:shadowDx="0"
+        android:shadowDy="2"
+        android:shadowRadius="1"
+        android:shadowColor="#444444"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        android:id="@+id/versionNumber"
+        android:gravity="bottom" />
+
+</LinearLayout>

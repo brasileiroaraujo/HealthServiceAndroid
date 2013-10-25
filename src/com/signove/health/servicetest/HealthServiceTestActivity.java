@@ -37,6 +37,7 @@ public class HealthServiceTestActivity extends Activity {
 	
 	int [] specs = {0x1004};
 	HealthServiceAPI api;
+	private HealthServiceTestActivity frame = this;
 
 	TextView status;
 	TextView menssage;
@@ -59,7 +60,7 @@ public class HealthServiceTestActivity extends Activity {
 
 			// that's how we get the client side of the IPC connection
 			api = HealthServiceAPI.Stub.asInterface(service);
-			agent = new AgentHealth(device, data, menssage, map, api).getAgent();
+			agent = new AgentHealth(device, data, menssage, map, api, frame).getAgent();
 			try {
 				Log.w("HST", "Configuring...");
 				api.ConfigurePassive(agent, specs);

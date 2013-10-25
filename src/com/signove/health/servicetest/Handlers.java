@@ -1,5 +1,6 @@
 package com.signove.health.servicetest;
 
+import java.util.Date;
 import java.util.Map;
 
 import org.w3c.dom.Document;
@@ -8,9 +9,13 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import android.app.Activity;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.TextView;
+
+import com.signove.health.database.HealthDAO;
+import com.signove.health.structures.HealthData;
 
 public class Handlers {
     private TextView menssage;
@@ -19,14 +24,16 @@ public class Handlers {
     private Map<String, String> map;
     private Handler tm;
     private ParserXML parser;
+    private Activity frame;
 
-    public Handlers(TextView device, TextView data,TextView menssage, Map<String, String> map) {
+    public Handlers(TextView device, TextView data,TextView menssage, Map<String, String> map, Activity frame) {
         this.menssage = menssage;
         this.data = data;
         this.device = device;
         this.map = map;
         this.tm = new Handler();
         this.parser = new ParserXML();
+        this.frame = frame;
     }
 
     public void handle_packet_connected(String path, String dev)
@@ -151,9 +158,21 @@ public class Handlers {
         System.out.println("Dataaa "+measurement);
         show(data, measurement);
         show(menssage, "Measurement");
-        show_dev(path);  
+        show_dev(path);
+        persistInDatabase(measurement, path);
     }
     
+    private void persistInDatabase(String measurement, String path) {
+        if (map.containsKey(path) && frame != null) {
+            HealthDAO healthDao = HealthDAO.getInstance(frame);
+            HealthData healthObject = new HealthData(map.get(path), 75.0, new Date());
+            healthDao.save(healthObject);
+        }else{
+            Log.w("Antidote", "Cannot save this health data.");
+        }
+        
+    }
+
     public void show(TextView field, String menssage)
     {
         final TextView text = field;

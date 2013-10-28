@@ -50,7 +50,6 @@ public class HealthServiceTestActivity extends Activity {
 	private TimePicker timePicker; 
 	Button btnOk;
 	Button btnClearHistory;
-	Context context = this;
 	private AlarmManager alarmManager;
 	private Intent myIntent;
 	private List<HealthData> datasHistory;
@@ -125,8 +124,10 @@ public class HealthServiceTestActivity extends Activity {
 					Toast.makeText(getApplicationContext(), "Notifications preferences saved with success", Toast.LENGTH_SHORT).show();
 					break;
 				case R.id.btnClearHistory:
-					//TODO put clear history
-					Toast.makeText(getApplicationContext(), "Cleaned history", Toast.LENGTH_SHORT).show();
+					HealthDAO mDAO = HealthDAO.getInstance(frame);
+					mDAO.deleteAll();
+					updateListHistory();
+				    Toast.makeText(getApplicationContext(), "Cleaned history", Toast.LENGTH_SHORT).show();
 					break;
 				default:
 					break;
@@ -174,13 +175,7 @@ public class HealthServiceTestActivity extends Activity {
 	    
 		map = new HashMap<String, String>();
 
-	    datasHistory = HealthDAO.getInstance(this).ListAll();
-        if(datasHistory.size() == 0){
-        	history.setText("History empty");
-        }else{
-        	HealthDataAdapter adapter = new HealthDataAdapter(getApplicationContext(), datasHistory);
-            list.setAdapter(adapter);
-        }
+	    updateListHistory();
 	        
 		Intent intent = new Intent("com.signove.health.service.HealthService");
 		startService(intent);
@@ -192,6 +187,17 @@ public class HealthServiceTestActivity extends Activity {
 		device.setText("--");
 		data.setText("--");
 	}
+
+	public void updateListHistory() {
+		datasHistory = HealthDAO.getInstance(this).ListAll();
+        if(datasHistory.size() == 0){
+        	history.setText("History empty");
+        } else{
+        	history.setText("");;
+        }
+       	HealthDataAdapter adapter = new HealthDataAdapter(getApplicationContext(), datasHistory);
+        list.setAdapter(adapter);
+     }
 
 	@Override
 	public void onDestroy() {

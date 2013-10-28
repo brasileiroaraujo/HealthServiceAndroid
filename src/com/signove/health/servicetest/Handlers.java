@@ -218,10 +218,17 @@ public class Handlers {
     public void updateHistoryList()
     {
     	final ListView list = (ListView) frame.findViewById(R.id.listViewDataHistory);
-        tm.post(new Runnable() {
+    	final TextView history = (TextView) frame.findViewById(R.id.tvHistoryEmpty);
+    	final List<HealthData> datasHistory = HealthDAO.getInstance(frame).ListAll();
+    	tm.post(new Runnable() {
             @Override
             public void run() {
-            	HealthDataAdapter adapter = new HealthDataAdapter(frame.getApplicationContext(), HealthDAO.getInstance(frame.getApplicationContext()).ListAll());
+            	if(datasHistory.size() == 0){
+                	history.setText("History empty");
+                }else{
+                	history.setText("");;
+                }
+               	HealthDataAdapter adapter = new HealthDataAdapter(frame.getApplicationContext(), datasHistory);
                 list.setAdapter(adapter);
             }
         });

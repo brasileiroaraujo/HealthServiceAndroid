@@ -17,8 +17,8 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import br.ufcg.embedded.health.R;
 import br.ufcg.embedded.health.database.HealthDAO;
-import br.ufcg.embedded.health.service.health.servicetest.R;
 import br.ufcg.embedded.health.structures.HealthData;
 
 public class Handlers {

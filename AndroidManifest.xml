@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.ufcg.embedded.health.service.health.servicetest"
+    package="br.ufcg.embedded.health"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -32,7 +32,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
 
-                <action android:name="br.ufcg.embedded.health.service.service.HealthService" />
+                <action android:name="com.signove.health.service.HealthService" />
             </intent-filter>
         </activity>
 
@@ -41,7 +41,14 @@
             android:process=":remote" >
         </receiver>
 
-       
+        <service android:exported="true" android:name="com.signove.health.service.HealthService" 
+            android:enabled="true" android:stopWithTask="false" android:permission="android.permission.BLUETOOTH">
+            <intent-filter>
+                 <action
+                         android:name="com.signove.health.service.HealthService" />
+                 </intent-filter>
+        </service>
+    <service android:name="com.signove.health.service.BluetoothHDPService" />
     </application>
 
 </manifest>

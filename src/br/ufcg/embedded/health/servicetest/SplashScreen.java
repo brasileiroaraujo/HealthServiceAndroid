@@ -4,7 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import br.ufcg.embedded.health.service.health.servicetest.R;
+import br.ufcg.embedded.health.R;
+
 public class SplashScreen extends Activity implements Runnable {
 
     @Override

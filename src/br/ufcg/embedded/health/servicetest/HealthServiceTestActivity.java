@@ -27,11 +27,12 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import br.ufcg.embedded.health.R;
 import br.ufcg.embedded.health.database.HealthDAO;
+import br.ufcg.embedded.health.structures.HealthData;
+
 import com.signove.health.service.HealthAgentAPI;
 import com.signove.health.service.HealthServiceAPI;
-import br.ufcg.embedded.health.service.health.servicetest.R;
-import br.ufcg.embedded.health.structures.HealthData;
 
 public class HealthServiceTestActivity extends Activity {
     private static final String APP_PREF_FILE = "appPreferences";

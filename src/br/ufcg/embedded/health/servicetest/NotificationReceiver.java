@@ -9,7 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
-import br.ufcg.embedded.health.service.health.servicetest.R;
+import br.ufcg.embedded.health.R;
 
 public class NotificationReceiver extends BroadcastReceiver {
 

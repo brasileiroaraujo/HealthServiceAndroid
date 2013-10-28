@@ -23,6 +23,7 @@ import com.signove.health.database.HealthDAO;
 import com.signove.health.structures.HealthData;
 
 public class Handlers {
+    private static final int TIMEOUT_PERSISTENCE = 10;
     private TextView menssage;
     private TextView device;
     private TextView data;
@@ -194,7 +195,7 @@ public class Handlers {
     private boolean validateInterval(HealthData insert, HealthData lastInsert) {
         if(insert != null && lastInsert != null){
             long interval = (insert.getDate().getTime() - lastInsert.getDate().getTime()) / 1000;
-            if(interval > 10){
+            if(interval > TIMEOUT_PERSISTENCE){
                 return true;
             }else{
                 return false;

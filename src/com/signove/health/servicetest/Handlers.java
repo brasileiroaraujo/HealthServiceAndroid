@@ -174,12 +174,34 @@ public class Handlers {
         }
         show(data, "SYS: "+ datas.get(0).intValue() + "\n" + "DIS: "+ datas.get(1).intValue());
         show(menssage, "Measurement");
-        show(sugestion, "My sugestion");
+        show(sugestion, analyzePressure(datas.get(0).intValue(), datas.get(1).intValue()));
         show_dev(path);
         persistInDatabase(datas, path);
         updateHistoryList();
     }
     
+    /**
+     * Method to analyse blood pressure. (National Institutes of Health)
+     * http://www.nhlbi.nih.gov/health/health-topics/topics/hyp/
+     * http://www.nhlbi.nih.gov/health/health-topics/topics/hbp/
+     * @param sys
+     * @param dis
+     * @return
+     */
+    private String analyzePressure(int sys, int dis) {
+        if ((sys > 120 && sys <= 139) || (dis > 80 && dis <= 89)) {
+            return "Prehypertension.";
+        } else if((sys >= 140 && sys <= 159) || (dis >= 90 && dis <= 99)) {
+            return "High blood pressure (Stage1).";
+        } else if((sys >= 160) || (dis >= 100)) {
+            return "High blood pressure (Stage2).";
+        } else if((sys < 90) || (dis < 60)) {
+            return "Low blood pressure.";
+        } else {
+            return "Normal.";
+        }
+    }
+
     private void persistInDatabase(List<Double> datas, String path) {
         if (map.containsKey(path) && frame != null) {
             HealthDAO healthDao = HealthDAO.getInstance(frame);

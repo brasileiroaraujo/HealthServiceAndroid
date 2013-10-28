@@ -49,7 +49,7 @@ public class HealthDataAdapter extends BaseAdapter {
 	        tvDevice.setText(data.getDevice());
 	        
 	        TextView tvData = (TextView) view.findViewById(R.id.historyData);
-	        tvData.setText(String.valueOf(data.getSystolic()));
+	        tvData.setText(String.valueOf(data.getSystolic())+":"+String.valueOf(data.getDiastolic()));
 
 	        return view;
 	    }

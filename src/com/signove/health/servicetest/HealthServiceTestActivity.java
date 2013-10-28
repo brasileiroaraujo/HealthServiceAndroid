@@ -243,7 +243,7 @@ public class HealthServiceTestActivity extends Activity {
 //				String.valueOf(dpNotificationTime.getCurrentMinute()));
 
 		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-				data.getTimeInMillis(), 1000 * 30, pendingIntent);
+				data.getTimeInMillis(), 1000 * 60*60*24, pendingIntent);
 	}
 	
 	public List<HealthData> getHealthHistoryList(){

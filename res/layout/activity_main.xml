@@ -101,7 +101,7 @@
                             android:layout_marginBottom="10dp"
                             android:layout_weight="0.02"
                             android:text="ZZZ bpm"
-                            android:textSize="15sp" />
+                            android:textSize="25sp" />
 
                     </LinearLayout>
 					<TextView

@@ -160,14 +160,15 @@ public class Handlers {
                 if (ok) {
                     if (unit != ""){
                         measurement += value + " " + unit + "\n";
-                        datas.add(Double.parseDouble(value));
-                    }else
+                    }else{
                         measurement += value + " ";
+                        Log.w("AntidoteDatabase", unit + "--" + value);
+                        datas.add(Double.parseDouble(value));
+                    }
                 }
             }
         }
-        System.out.println("Dataaa "+measurement);
-        show(data, measurement);
+        show(data, "SYS: "+ datas.get(0) + "\n" + "DIS: "+ datas.get(1));
         show(menssage, "Measurement");
         show_dev(path);
         persistInDatabase(datas, path);
@@ -177,7 +178,7 @@ public class Handlers {
     private void persistInDatabase(List<Double> datas, String path) {
         if (map.containsKey(path) && frame != null) {
             HealthDAO healthDao = HealthDAO.getInstance(frame);
-            Log.w("AntidoteDatabase", "Insert " + map.get(path) + " - " + datas.toArray().toString() + " ("+ new Date() + ")");
+            Log.w("AntidoteDatabase", "Insert " + map.get(path) + " - " + datas.size() + " ("+ new Date() + ")");
             HealthData healthObject = new HealthData(map.get(path), datas.get(0), datas.get(1), datas.get(2), new Date());
             if(validateInterval(healthObject, healthDao.lastInsert())){
                 healthDao.save(healthObject);

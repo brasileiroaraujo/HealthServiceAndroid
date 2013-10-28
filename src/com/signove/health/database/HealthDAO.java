@@ -148,7 +148,7 @@ public class HealthDAO {
     }
 
     private String convertToString(Date date) {
-        DateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String reportDate = formater.format(date);
         
         return reportDate;
@@ -156,7 +156,7 @@ public class HealthDAO {
     
     private Date convertToDate(String date_string) {
         Date date = null;
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {  
             date = (java.util.Date)formatter.parse(date_string);
             return date;

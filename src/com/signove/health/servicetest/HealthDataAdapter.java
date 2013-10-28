@@ -42,7 +42,7 @@ public class HealthDataAdapter extends BaseAdapter {
 	        HealthData data = mData.get(posicao);
 
 	        TextView tvDate = (TextView) view.findViewById(R.id.historyDate);
-	        tvDate.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(data.getDate()));
+	        tvDate.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(data.getDate()));
 
 	        TextView tvDevice = (TextView) 
 	                              view.findViewById(R.id.historyDevice);

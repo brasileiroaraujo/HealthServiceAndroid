@@ -13,7 +13,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
@@ -195,13 +194,13 @@ public class Handlers {
     private boolean validateInterval(HealthData insert, HealthData lastInsert) {
         if(insert != null && lastInsert != null){
             long interval = (insert.getDate().getTime() - lastInsert.getDate().getTime()) / 1000;
-            if(interval > 4){
+            if(interval > 10){
                 return true;
             }else{
                 return false;
             }
         }
-        return false;
+        return true;
     }
 
     public void show(TextView field, String menssage)

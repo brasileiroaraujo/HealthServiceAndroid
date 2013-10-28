@@ -2,14 +2,14 @@ package com.signove.health.structures;
 
 import java.util.Date;
 
-public class HealthData implements Comparable<HealthData>{
+public class HealthData implements Comparable<HealthData> {
     private String device;
     private Double systolic;
     private Double diastolic;
     private Double MAP;
     private Date date;
     private Integer id;
-    
+
     public HealthData(String device, Double systolic, Double diastolic,
             Double map, Date date, Integer id) {
         super();
@@ -20,7 +20,7 @@ public class HealthData implements Comparable<HealthData>{
         this.date = date;
         this.id = id;
     }
-    
+
     public HealthData(String device, Double systolic, Double diastolic,
             Double map, Date date) {
         super();

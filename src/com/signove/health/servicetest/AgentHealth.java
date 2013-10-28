@@ -12,9 +12,9 @@ import com.signove.health.service.HealthServiceAPI;
 public class AgentHealth {
     private Handlers handler;
     private HealthServiceAPI api;
-    
-    
-    public AgentHealth(Map<String, String> map, HealthServiceAPI api, Activity frame) {
+
+    public AgentHealth(Map<String, String> map, HealthServiceAPI api,
+            Activity frame) {
         handler = new Handlers(map, frame);
         Log.w("APITESTE", "API: " + api);
         this.api = api;
@@ -31,8 +31,8 @@ public class AgentHealth {
         @Override
         public void Associated(String dev, String xmldata) {
             final String idev = dev;
-            Log.w("HST", "Associated " + dev);          
-            Log.w("HST", "...." + xmldata);         
+            Log.w("HST", "Associated " + dev);
+            Log.w("HST", "...." + xmldata);
             handler.handle_packet_associated(dev, xmldata);
 
             Runnable req1 = new Runnable() {
@@ -47,25 +47,27 @@ public class AgentHealth {
                     RequestDeviceAttributes(idev);
                 }
             };
-            handler.getTm().postDelayed(req1, 1); 
-            handler.getTm().postDelayed(req2, 500); 
+            handler.getTm().postDelayed(req1, 1);
+            handler.getTm().postDelayed(req2, 500);
         }
+
         @Override
         public void MeasurementData(String dev, String xmldata) {
             Log.w("HST", "MeasurementData " + dev);
             Log.w("HST", "....." + xmldata);
             handler.handle_packet_measurement(dev, xmldata);
         }
+
         @Override
         public void DeviceAttributes(String dev, String xmldata) {
-            Log.w("HST", "DeviceAttributes " + dev);            
+            Log.w("HST", "DeviceAttributes " + dev);
             Log.w("HST", ".." + xmldata);
             handler.handle_packet_description(dev, xmldata);
         }
 
         @Override
         public void Disassociated(String dev) {
-            Log.w("HST", "Disassociated " + dev);                       
+            Log.w("HST", "Disassociated " + dev);
             handler.handle_packet_disassociated(dev);
         }
 
@@ -75,9 +77,8 @@ public class AgentHealth {
             handler.handle_packet_disconnected(dev);
         }
     };
-    
-    private void RequestConfig(String dev)
-    {   
+
+    private void RequestConfig(String dev) {
         try {
             Log.w("HST", "Getting configuration ");
             String xmldata = api.GetConfiguration(dev);
@@ -88,8 +89,7 @@ public class AgentHealth {
         }
     }
 
-    private void RequestDeviceAttributes(String dev)
-    {   
+    private void RequestDeviceAttributes(String dev) {
         try {
             Log.w("HST", "Requested device attributes");
             api.RequestDeviceAttributes(dev);

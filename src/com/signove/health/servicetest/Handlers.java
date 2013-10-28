@@ -36,7 +36,6 @@ public class Handlers {
     public Handlers(Map<String, String> map, Activity frame) {
         this.menssage = (TextView) frame.findViewById(R.id.tvMsg);
         this.data = (TextView) frame.findViewById(R.id.tVMeasurement);
-        ;
         this.device = (TextView) frame.findViewById(R.id.tVDevice);
         this.sugestion = (TextView) frame.findViewById(R.id.tvSugestion);
         this.map = map;
@@ -48,32 +47,42 @@ public class Handlers {
     public void handle_packet_connected(String path, String dev) {
         map.put(path, dev);
         show_dev(path);
-        show(menssage, "Connected");
-        showStatusImage("Connected");
+        show(menssage, frame.getResources()
+                .getString(R.string.status_connected));
+        showStatusImage(frame.getResources().getString(
+                R.string.status_connected));
     }
 
     public void handle_packet_disconnected(String path) {
-        show(menssage, "Disconnected");
+        show(menssage,
+                frame.getResources().getString(R.string.status_disconnected));
         show_dev(path);
-        showStatusImage("Disconnected");
+        showStatusImage(frame.getResources().getString(
+                R.string.status_disconnected));
     }
 
     public void handle_packet_associated(String path, String xml) {
-        show(menssage, "Associated");
+        show(menssage,
+                frame.getResources().getString(R.string.status_associated));
         show_dev(path);
-        showStatusImage("Associated");
+        showStatusImage(frame.getResources().getString(
+                R.string.status_associated));
     }
 
     public void handle_packet_disassociated(String path) {
-        show(menssage, "Disassociated");
+        show(menssage,
+                frame.getResources().getString(R.string.status_disassociated));
         show_dev(path);
-        showStatusImage("Disassociated");
+        showStatusImage(frame.getResources().getString(
+                R.string.status_disassociated));
     }
 
     public void handle_packet_description(String path, String xml) {
-        show(menssage, "MDS received");
+        show(menssage,
+                frame.getResources().getString(R.string.status_mds_received));
         show_dev(path);
-        showStatusImage("MDS received");
+        showStatusImage(frame.getResources().getString(
+                R.string.status_mds_received));
     }
 
     public void handle_packet_measurement(String path, String xml) {
@@ -179,7 +188,8 @@ public class Handlers {
         }
         show(data, "SYS: " + datas.get(0).intValue() + "\n" + "DIS: "
                 + datas.get(1).intValue());
-        show(menssage, "Measurement");
+        show(menssage,
+                frame.getResources().getString(R.string.status_measurement));
         show(sugestion,
                 analyzePressure(datas.get(0).intValue(), datas.get(1)
                         .intValue()));
@@ -294,8 +304,10 @@ public class Handlers {
         tm.post(new Runnable() {
             @Override
             public void run() {
-                if (menssage.contains("Disconnected")
-                        || menssage.contains("Disassociated")) {
+                if (menssage.contains(frame.getResources().getString(
+                        R.string.status_disconnected))
+                        || menssage.contains(frame.getResources().getString(
+                                R.string.status_disassociated))) {
                     img.setImageResource(R.drawable.status_red);
                 } else {
                     img.setImageResource(R.drawable.status_green);

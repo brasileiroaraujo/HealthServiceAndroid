@@ -1,13 +1,12 @@
-package com.signove.health.servicetest;
+package br.ufcg.embedded.health.servicetest;
 
 import java.util.Map;
 
 import android.app.Activity;
 import android.os.RemoteException;
 import android.util.Log;
-
-import com.signove.health.service.HealthAgentAPI;
-import com.signove.health.service.HealthServiceAPI;
+import br.ufcg.embedded.health.service.HealthAgentAPI;
+import br.ufcg.embedded.health.service.HealthServiceAPI;
 
 public class AgentHealth {
     private Handlers handler;

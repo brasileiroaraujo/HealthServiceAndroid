@@ -1,4 +1,4 @@
-package com.signove.health.servicetest;
+package br.ufcg.embedded.health.servicetest;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

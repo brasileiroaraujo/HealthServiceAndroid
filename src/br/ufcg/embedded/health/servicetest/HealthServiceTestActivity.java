@@ -1,4 +1,4 @@
-package com.signove.health.servicetest;
+package br.ufcg.embedded.health.servicetest;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -27,11 +27,11 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
-import com.signove.health.database.HealthDAO;
-import com.signove.health.service.HealthAgentAPI;
-import com.signove.health.service.HealthServiceAPI;
-import com.signove.health.structures.HealthData;
+import br.ufcg.embedded.health.database.HealthDAO;
+import br.ufcg.embedded.health.service.HealthAgentAPI;
+import br.ufcg.embedded.health.service.HealthServiceAPI;
+import br.ufcg.embedded.health.service.health.servicetest.R;
+import br.ufcg.embedded.health.structures.HealthData;
 
 public class HealthServiceTestActivity extends Activity {
     private static final String APP_PREF_FILE = "appPreferences";

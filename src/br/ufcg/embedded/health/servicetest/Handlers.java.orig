@@ -216,6 +216,11 @@ public class Handlers {
             return "High blood pressure (Stage1).";
         } else if ((sys >= 160) || (dis >= 100)) {
             return "High blood pressure (Stage2).";
+<<<<<<< HEAD
+=======
+        } else if ((sys < 90) || (dis < 60)) {
+            return "Low blood pressure.";
+>>>>>>> bb50561a5fe02dd87b8dac17ae11b84c9b766cee
         } else {
             return "Normal.";
         }

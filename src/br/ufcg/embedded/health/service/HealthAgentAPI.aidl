@@ -1,4 +1,4 @@
-package com.signove.health.service;
+package br.ufcg.embedded.health.service;
 
 interface HealthAgentAPI {
 	void Connected(String dev, String addr);

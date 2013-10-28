@@ -1,4 +1,4 @@
-package com.signove.health.database;
+package br.ufcg.embedded.health.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

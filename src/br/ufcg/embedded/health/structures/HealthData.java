@@ -1,4 +1,4 @@
-package com.signove.health.structures;
+package br.ufcg.embedded.health.structures;
 
 import java.util.Date;
 

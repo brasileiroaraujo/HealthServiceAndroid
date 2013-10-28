@@ -1,9 +1,7 @@
-package com.signove.health.servicetest;
+package br.ufcg.embedded.health.servicetest;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
-
-import com.signove.health.structures.HealthData;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import br.ufcg.embedded.health.service.health.servicetest.R;
+import br.ufcg.embedded.health.structures.HealthData;
 
 public class HealthDataAdapter extends BaseAdapter {
     private List<HealthData> mData;

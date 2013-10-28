@@ -1,6 +1,6 @@
-package com.signove.health.service;
+package br.ufcg.embedded.health.service;
 
-import com.signove.health.service.HealthAgentAPI;
+import br.ufcg.embedded.health.service.HealthAgentAPI;
 
 interface HealthServiceAPI {
 	void ConfigurePassive(HealthAgentAPI agt, in int[] specs);

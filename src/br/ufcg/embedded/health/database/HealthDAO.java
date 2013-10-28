@@ -1,4 +1,4 @@
-package com.signove.health.database;
+package br.ufcg.embedded.health.database;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -12,8 +12,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
-import com.signove.health.structures.HealthData;
+import br.ufcg.embedded.health.structures.HealthData;
 
 /**
  * Class of interface to use methods of database.
@@ -161,7 +160,7 @@ public class HealthDAO {
         Date date = null;
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
-            date = (java.util.Date) formatter.parse(date_string);
+            date = formatter.parse(date_string);
             return date;
         } catch (ParseException e) {
             return null;

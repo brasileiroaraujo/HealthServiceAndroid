@@ -10,7 +10,6 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
@@ -42,24 +41,22 @@ public class HealthServiceTestActivity extends Activity {
 	HealthServiceAPI api;
 	private HealthServiceTestActivity frame = this;
 
-	TextView status;
-	TextView menssage;
-	TextView device;
-	TextView data;
-	TextView history;
-	CheckBox cbNotification;
-	TimePicker timePicker; 
-	Button btnOk;
-	Button btnClearHistory;
-	Context context = this;
+	private TextView status;
+	private TextView menssage;
+	private TextView device;
+	private TextView data;
+	private TextView history;
+	private CheckBox cbNotification;
+	private TimePicker timePicker; 
+	private Button btnOk;
+	private Button btnClearHistory;
 	private AlarmManager alarmManager;
-	private PendingIntent pendingIntent;
 	private Intent myIntent;
-	List<HealthData> datasHistory;
-	ListView list;
+	private List<HealthData> datasHistory;
+	private ListView list;
 	private HealthAgentAPI.Stub agent;
 
-	Map <String, String> map;
+	private Map <String, String> map;
 
 	private ServiceConnection serviceConnection = new ServiceConnection() {
 		@Override
@@ -68,7 +65,7 @@ public class HealthServiceTestActivity extends Activity {
 
 			// that's how we get the client side of the IPC connection
 			api = HealthServiceAPI.Stub.asInterface(service);
-			agent = new AgentHealth(device, data, menssage, map, api, frame, list, context).getAgent();
+			agent = new AgentHealth(map, api, frame).getAgent();
 			try {
 				Log.w("HST", "Configuring...");
 				api.ConfigurePassive(agent, specs);
@@ -170,9 +167,10 @@ public class HealthServiceTestActivity extends Activity {
 		device.setOnLongClickListener(l);
 		data.setOnLongClickListener(l);
 		cbNotification.setOnClickListener(o);
-		cbNotification.setChecked(notification);
-	    btnOk.setOnClickListener(o);
+		btnOk.setOnClickListener(o);
 	    btnClearHistory.setOnClickListener(o);
+	    
+	    cbNotification.setChecked(notification);
 	    
 		map = new HashMap<String, String>();
 
@@ -253,4 +251,5 @@ public class HealthServiceTestActivity extends Activity {
 	public void setHealthHistoryList(List<HealthData> list){
 		datasHistory = list;
 	}
+	
 }

@@ -15,6 +15,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,24 +26,20 @@ public class Handlers {
     private TextView menssage;
     private TextView device;
     private TextView data;
-    private ListView list;
     private Map<String, String> map;
     private Handler tm;
     private ParserXML parser;
     private Activity frame;
     private List<Double> datas = new ArrayList<Double>();
-    private Context context;
-    
-    public Handlers(TextView device, TextView data,TextView menssage, Map<String, String> map, Activity frame, ListView list, Context context) {
-        this.menssage = menssage;
-        this.data = data;
-        this.device = device;
+     
+    public Handlers(Map<String, String> map, Activity frame) {
+        this.menssage = (TextView) frame.findViewById(R.id.tvMsg);
+        this.data = (TextView) frame.findViewById(R.id.tVMeasurement);;
+        this.device = (TextView) frame.findViewById(R.id.tVDevice);
         this.map = map;
         this.tm = new Handler();
         this.parser = new ParserXML();
         this.frame = frame;
-        this.list = list;
-        this.context = context;
     }
 
     public void handle_packet_connected(String path, String dev)
@@ -50,30 +47,35 @@ public class Handlers {
         map.put(path, dev);
         show_dev(path);
         show(menssage, "Connected");
+        showStatusImage("Connected");
     }
 
     public void handle_packet_disconnected(String path)
     {
         show(menssage, "Disconnected");
         show_dev(path);
+        showStatusImage("Disconnected");
     }
 
     public void handle_packet_associated(String path, String xml)
     {
         show(menssage, "Associated");
         show_dev(path);
+        showStatusImage("Associated");
     }
 
     public void handle_packet_disassociated(String path)
     {
         show(menssage, "Disassociated");
         show_dev(path);
+        showStatusImage("Disassociated");
     }
 
     public void handle_packet_description(String path, String xml)
     {
         show(menssage, "MDS received");
         show_dev(path);
+        showStatusImage("MDS received");
     }
     
     public void handle_packet_measurement(String path, String xml)
@@ -200,10 +202,11 @@ public class Handlers {
     
     public void updateHistoryList()
     {
+    	final ListView list = (ListView) frame.findViewById(R.id.listViewDataHistory);
         tm.post(new Runnable() {
             @Override
             public void run() {
-            	HealthDataAdapter adapter = new HealthDataAdapter(context, HealthDAO.getInstance(context).ListAll());
+            	HealthDataAdapter adapter = new HealthDataAdapter(frame.getApplicationContext(), HealthDAO.getInstance(frame.getApplicationContext()).ListAll());
                 list.setAdapter(adapter);
             }
         });
@@ -222,4 +225,20 @@ public class Handlers {
     public Handler getTm() {
         return tm;
     }
+    
+    public void showStatusImage(final String menssage)
+    {
+       final ImageView img = (ImageView) frame.findViewById(R.id.imageViewStatus);
+       tm.post(new Runnable() {
+            @Override
+            public void run() {
+            	 if(menssage.contains("Disconnected") || menssage.contains("Disassociated")){
+            			img.setImageResource(R.drawable.status_red);
+            	 }else{
+                		img.setImageResource(R.drawable.status_green);
+                }
+            }
+        });
+    }
+    
 }

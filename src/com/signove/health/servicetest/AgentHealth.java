@@ -3,11 +3,8 @@ package com.signove.health.servicetest;
 import java.util.Map;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.RemoteException;
 import android.util.Log;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.signove.health.service.HealthAgentAPI;
 import com.signove.health.service.HealthServiceAPI;
@@ -17,8 +14,8 @@ public class AgentHealth {
     private HealthServiceAPI api;
     
     
-    public AgentHealth(TextView device, TextView data, TextView msg, Map<String, String> map, HealthServiceAPI api, Activity frame, ListView list, Context context) {
-        handler = new Handlers(device, data, msg, map, frame, list, context);
+    public AgentHealth(Map<String, String> map, HealthServiceAPI api, Activity frame) {
+        handler = new Handlers(map, frame);
         Log.w("APITESTE", "API: " + api);
         this.api = api;
     }

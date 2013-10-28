@@ -103,8 +103,8 @@ public class Handlers {
             NodeList entries = ((Element) datalist_node)
                     .getElementsByTagName("entry");
 
-            for (int j = 0; j < 6; ++j) {
-
+            for (int j = 0; j < entries.getLength(); ++j) {
+                
                 Log.w("Antidote", "processing entry " + j);
 
                 boolean ok = false;
@@ -122,21 +122,11 @@ public class Handlers {
                     Log.w("Antidote",
                             "processing entry child "
                                     + entry_child.getNodeName());
-
-                    if (entry_child.getNodeName().equals("simple")) {
-                        // simple -> value -> (text)
-                        NodeList simple = ((Element) entry_child)
-                                .getElementsByTagName("value");
-                        Log.w("Antidote",
-                                "simple.value count: " + simple.getLength());
-                        if (simple.getLength() > 0) {
-                            String text = parser.get_xml_text(simple.item(0));
-                            if (text != null) {
-                                ok = true;
-                                value = text;
-                            }
-                        }
-                    } else if (entry_child.getNodeName().equals("meta-data")) {
+                    
+                    
+                    
+                    
+                    if (entry_child.getNodeName().equals("meta-data")) {
                         // meta-data -> meta name=unit
                         NodeList metas = ((Element) entry_child)
                                 .getElementsByTagName("meta");
@@ -168,11 +158,35 @@ public class Handlers {
                                         .get_xml_text(metas.item(l));
                                 if (text != null) {
                                     unit = text;
+                                    if (unit.equals("mmHg")){
+                                        if (entry_child.getNodeName().equals("simple")) {
+                                            // simple -> value -> (text)
+                                            NodeList simple = ((Element) entry_child)
+                                                    .getElementsByTagName("value");
+                                            Log.w("Antidote",
+                                                    "simple.value count: " + simple.getLength());
+                                            if (simple.getLength() > 0) {
+                                                String textSimple = parser.get_xml_text(simple.item(0));
+                                                if (textSimple != null) {
+                                                    ok = true;
+                                                    value = textSimple;
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
 
                     }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
                 }
 
                 if (ok) {

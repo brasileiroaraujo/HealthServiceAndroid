@@ -15,8 +15,7 @@ import org.xml.sax.SAXException;
 import android.util.Log;
 
 public class ParserXML {
-    public Document parse_xml(String xml)
-    {
+    public Document parse_xml(String xml) {
         Document doc = null;
 
         try {
@@ -44,7 +43,7 @@ public class ParserXML {
                 if (s == null) {
                     s = "";
                 }
-                s += txt.getNodeValue();                            
+                s += txt.getNodeValue();
             }
         }
 

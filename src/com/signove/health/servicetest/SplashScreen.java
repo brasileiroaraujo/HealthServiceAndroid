@@ -21,5 +21,3 @@ public class SplashScreen extends Activity implements Runnable {
         finish();
     }
 }
-
-

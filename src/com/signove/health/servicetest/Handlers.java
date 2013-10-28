@@ -189,14 +189,14 @@ public class Handlers {
      * @return
      */
     private String analyzePressure(int sys, int dis) {
-        if ((sys > 120 && sys <= 139) || (dis > 80 && dis <= 89)) {
+        if((sys < 90) || (dis < 60)) {
+            return "Low blood pressure.";
+        } else if ((sys > 120 && sys <= 139) || (dis > 80 && dis <= 89)) {
             return "Prehypertension.";
         } else if((sys >= 140 && sys <= 159) || (dis >= 90 && dis <= 99)) {
             return "High blood pressure (Stage1).";
         } else if((sys >= 160) || (dis >= 100)) {
             return "High blood pressure (Stage2).";
-        } else if((sys < 90) || (dis < 60)) {
-            return "Low blood pressure.";
         } else {
             return "Normal.";
         }

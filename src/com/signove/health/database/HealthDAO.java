@@ -70,6 +70,17 @@ public class HealthDAO {
         
         return healthdatas;
     }
+    
+    public HealthData lastInsert() {
+        String queryReturnAll = "SELECT * FROM " + TABLE_NAME + " WHERE id = (SELECT MAX(id) FROM "+ TABLE_NAME +")";
+        Cursor cursor = dataBase.rawQuery(queryReturnAll, null);
+        ArrayList<HealthData> healthdatas = (ArrayList<HealthData>) createHealthList(cursor);
+        Collections.sort(healthdatas);
+        if (healthdatas.isEmpty()) {
+            return null;
+        }
+        return healthdatas.get(0);
+    }
  
     public void delete(HealthData health) {
         String[] whereArgs = {

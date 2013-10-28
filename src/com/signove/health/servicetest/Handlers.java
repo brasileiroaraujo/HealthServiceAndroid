@@ -1,5 +1,6 @@
 package com.signove.health.servicetest;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -178,11 +179,26 @@ public class Handlers {
             HealthDAO healthDao = HealthDAO.getInstance(frame);
             Log.w("AntidoteDatabase", "Insert " + map.get(path) + " - " + datas.toArray().toString() + " ("+ new Date() + ")");
             HealthData healthObject = new HealthData(map.get(path), datas.get(0), datas.get(1), datas.get(2), new Date());
-            healthDao.save(healthObject);
+            if(validateInterval(healthObject, healthDao.lastInsert())){
+                healthDao.save(healthObject);
+            }
+            
         }else{
             Log.w("AntidoteDatabase", "Cannot save this health data.");
         }
         
+    }
+
+    private boolean validateInterval(HealthData insert, HealthData lastInsert) {
+        if(insert != null && lastInsert != null){
+            long interval = (insert.getDate().getTime() - lastInsert.getDate().getTime()) / 1000;
+            if(interval > 4){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return false;
     }
 
     public void show(TextView field, String menssage)

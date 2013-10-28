@@ -2,7 +2,7 @@ package com.signove.health.servicetest;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.HashMap; 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,8 +36,8 @@ import com.signove.health.structures.HealthData;
 public class HealthServiceTestActivity extends Activity {
 	private static final String APP_PREF_FILE = "appPreferences";
 	private static final String NOTIFICATION_ACTIVE = "notificationActive";
-	
-	int [] specs = {0x1004};
+
+	int[] specs = { 0x1004 };
 	HealthServiceAPI api;
 	private HealthServiceTestActivity frame = this;
 
@@ -48,8 +48,9 @@ public class HealthServiceTestActivity extends Activity {
 	private TextView history;
 	private CheckBox cbNotification;
 	private TimePicker timePicker; 
-	private Button btnOk;
-	private Button btnClearHistory;
+	Button btnOk;
+	Button btnClearHistory;
+	Context context = this;
 	private AlarmManager alarmManager;
 	private Intent myIntent;
 	private List<HealthData> datasHistory;
@@ -80,13 +81,12 @@ public class HealthServiceTestActivity extends Activity {
 		}
 	};
 
-
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 		myIntent = new Intent(this, NotificationReceiver.class);
 		
@@ -95,31 +95,31 @@ public class HealthServiceTestActivity extends Activity {
 	    boolean notification = sharedPreferences.getBoolean(NOTIFICATION_ACTIVE, true);
 	  
 		OnLongClickListener l = new OnLongClickListener() {
-		    @Override
-            public boolean onLongClick(View v) {
-		    	finish();
-		    	return true;
-		    }
+			@Override
+			public boolean onLongClick(View v) {
+				finish();
+				return true;
+			}
 		};
-		
+
 		OnClickListener o = new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				switch (v.getId()) {
 				case R.id.checkBoxNotifications:
-					if(cbNotification.isChecked()){
+					if (cbNotification.isChecked()) {
 						timePicker.setEnabled(true);
-					}else{
+					} else {
 						timePicker.setEnabled(false);
 					}
 					break;
 				case R.id.btnOk:
-					if(cbNotification.isChecked()){
+					if (cbNotification.isChecked()) {
 						setAlarm();
 					} else {
 						alarmManager.cancel(PendingIntent.getBroadcast(
-								getApplicationContext(), 0, myIntent,0));
+								getApplicationContext(), 0, myIntent, 0));
 					}
 					setNotificationActive(cbNotification.isChecked());
 					Toast.makeText(getApplicationContext(), "Notifications preferences saved with success", Toast.LENGTH_SHORT).show();
@@ -131,28 +131,28 @@ public class HealthServiceTestActivity extends Activity {
 				default:
 					break;
 				}
-				
+
 			}
 		};
-		
-		TabHost tabs=(TabHost)findViewById(R.id.tabhost); 
-		tabs.setup(); 
-		TabHost.TabSpec spec=tabs.newTabSpec("tag1"); 
-		spec.setContent(R.id.data); 
-		spec.setIndicator("Data"); 
-		tabs.addTab(spec); 
-		spec=tabs.newTabSpec("tag2"); 
-		spec.setContent(R.id.history); 
-		spec.setIndicator("History"); 
-		tabs.addTab(spec); 
-		spec=tabs.newTabSpec("tag3"); 
-		spec.setContent(R.id.settings); 
-		spec.setIndicator("Settings"); 
-		tabs.addTab(spec); 
-		tabs.setCurrentTab(0); 
-		
-	    list = (ListView) findViewById(R.id.listViewDataHistory);
-        status = (TextView) findViewById(R.id.tvSugestion);
+
+		TabHost tabs = (TabHost) findViewById(R.id.tabhost);
+		tabs.setup();
+		TabHost.TabSpec spec = tabs.newTabSpec("tag1");
+		spec.setContent(R.id.data);
+		spec.setIndicator("Data");
+		tabs.addTab(spec);
+		spec = tabs.newTabSpec("tag2");
+		spec.setContent(R.id.history);
+		spec.setIndicator("History");
+		tabs.addTab(spec);
+		spec = tabs.newTabSpec("tag3");
+		spec.setContent(R.id.settings);
+		spec.setIndicator("Settings");
+		tabs.addTab(spec);
+		tabs.setCurrentTab(0);
+
+		list = (ListView) findViewById(R.id.listViewDataHistory);
+		status = (TextView) findViewById(R.id.tvSugestion);
 		menssage = (TextView) findViewById(R.id.tvMsg);
 		device = (TextView) findViewById(R.id.tVDevice);
 		data = (TextView) findViewById(R.id.tVMeasurement);
@@ -161,7 +161,7 @@ public class HealthServiceTestActivity extends Activity {
 		cbNotification = (CheckBox) findViewById(R.id.checkBoxNotifications);
 		btnOk = (Button) findViewById(R.id.btnOk);
 		btnClearHistory = (Button) findViewById(R.id.btnClearHistory);
-		
+
 		status.setOnLongClickListener(l);
 		menssage.setOnLongClickListener(l);
 		device.setOnLongClickListener(l);
@@ -194,8 +194,7 @@ public class HealthServiceTestActivity extends Activity {
 	}
 
 	@Override
-	public void onDestroy()
-	{
+	public void onDestroy() {
 		super.onDestroy();
 		try {
 			Log.w("HST", "Unconfiguring...");
@@ -207,7 +206,7 @@ public class HealthServiceTestActivity extends Activity {
 		unbindService(serviceConnection);
 
 	}
-	
+
 	private void setNotificationActive(boolean value) {
 		  SharedPreferences sharedPreferences =     
 		      getSharedPreferences(APP_PREF_FILE, MODE_PRIVATE);
@@ -215,40 +214,65 @@ public class HealthServiceTestActivity extends Activity {
 		  editor.putBoolean(NOTIFICATION_ACTIVE, value);   
 		  editor.commit();   
 	}
-	
+
 	private void setAlarm() {
 
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,
 				myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+		
+		Calendar cur_cal = new GregorianCalendar(); //TIRAR
 
-		Calendar cur_cal = new GregorianCalendar();
-		cur_cal.setTimeInMillis(System.currentTimeMillis());
-
-		GregorianCalendar data = new GregorianCalendar(
-				cur_cal.get(Calendar.YEAR), cur_cal.get(Calendar.MONTH),
-				cur_cal.get(Calendar.DAY_OF_MONTH),
-				timePicker.getCurrentHour(),
-				timePicker.getCurrentMinute());
-
-		 Log.e("ANO",String.valueOf(data.get(Calendar.YEAR)));
-		 Log.e("MES",String.valueOf(data.get(Calendar.MONTH)));
-		 Log.e("DIA",String.valueOf(data.get(Calendar.DAY_OF_MONTH)));
+		GregorianCalendar data = calculateNotificationDate();
+		
+		
+		Log.e("MAX DIA", String.valueOf(data.getActualMaximum(Calendar.DAY_OF_MONTH)));
+		Log.e("MES", String.valueOf(data.get(Calendar.MONTH)));
+		Log.e("DIA", String.valueOf(data.get(Calendar.DAY_OF_MONTH)));
+		Log.e("ANO", String.valueOf(data.get(Calendar.YEAR)));
+//		Log.e("DIA", String.valueOf(data.get(Calendar.DAY_OF_MONTH)));
 		// Log.e("HORA",String.valueOf(data.get(Calendar.HOUR_OF_DAY)));
 		// Log.e("MIN",String.valueOf(data.get(Calendar.MINUTE)));
 
-//		Log.e("DATEPICKER", String.valueOf(dpNotificationTime.getCurrentHour()));
-//		Log.e("DATEPICKER",
-//				String.valueOf(dpNotificationTime.getCurrentMinute()));
-
 		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-				data.getTimeInMillis(), 1000 * 60*60*24, pendingIntent);
+				data.getTimeInMillis(), 1000 * 60 * 60 * 24, pendingIntent);
 	}
 	
-	public List<HealthData> getHealthHistoryList(){
+	private GregorianCalendar calculateNotificationDate() {
+		Calendar actualCal = new GregorianCalendar();
+		actualCal.setTimeInMillis(System.currentTimeMillis());
+		
+		int dayOfMonth = actualCal.get(Calendar.DAY_OF_MONTH);
+		int month = actualCal.get(Calendar.MONTH);
+		int year = actualCal.get(Calendar.YEAR);
+		
+		if ((actualCal.get(Calendar.HOUR_OF_DAY) > timePicker.getCurrentHour()) || 
+				(actualCal.get(Calendar.HOUR_OF_DAY) == timePicker.getCurrentHour()) &&
+				(actualCal.get(Calendar.MINUTE) > timePicker.getCurrentMinute())  ) {	
+			if(actualCal.get(Calendar.DAY_OF_MONTH) == actualCal.getActualMaximum(Calendar.DAY_OF_MONTH)){
+				if(actualCal.get(Calendar.MONTH) == 11){
+					year+=1;
+					month=0;
+					dayOfMonth=1;
+				} else {
+					month+=1;
+					dayOfMonth=1;
+				}
+			} else {
+				dayOfMonth +=1;
+			}
+		}
+		
+		return new GregorianCalendar(
+				year, month,
+				dayOfMonth,
+				timePicker.getCurrentHour(), timePicker.getCurrentMinute());
+	}
+
+	public List<HealthData> getHealthHistoryList() {
 		return datasHistory;
 	}
-	
-	public void setHealthHistoryList(List<HealthData> list){
+
+	public void setHealthHistoryList(List<HealthData> list) {
 		datasHistory = list;
 	}
 	

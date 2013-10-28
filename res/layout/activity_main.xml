@@ -133,13 +133,19 @@
                         android:layout_marginLeft="10dp"
                         android:textSize="15sp" />
                     
-                    <ListView
+                      <ListView
                             android:id="@+id/listViewDataHistory"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1" >
                         </ListView>
-                       
+                        
+                       <Button
+				            android:id="@+id/btnClearHistory"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:layout_gravity="center_horizontal"
+				            android:text="@string/btn_clear_history" /> 
                         
                 </LinearLayout>
 
@@ -180,18 +186,9 @@
 					        android:layout_gravity="center_horizontal" >
 					
 					        <Button
-					            android:id="@+id/btnClearHistory"
-					            android:layout_width="wrap_content"
-					            android:layout_height="wrap_content"
-					            android:layout_gravity="center_horizontal"
-					            android:layout_marginRight="15dp"
-					            android:text="@string/btn_clear_history" />
-					
-					        <Button
 					            android:id="@+id/btnOk"
 					            android:layout_width="wrap_content"
 					            android:layout_height="wrap_content"
-					            android:layout_marginRight="15dp"
 					            android:text="@string/btn_ok" />
 					    </LinearLayout>
                 </LinearLayout>

@@ -42,14 +42,14 @@ public class HealthDataAdapter extends BaseAdapter {
 	        HealthData data = mData.get(posicao);
 
 	        TextView tvDate = (TextView) view.findViewById(R.id.historyDate);
-	        tvDate.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(data.getDate()));
+	        tvDate.setText("Date: "+ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(data.getDate()));
 
 	        TextView tvDevice = (TextView) 
 	                              view.findViewById(R.id.historyDevice);
 	        tvDevice.setText(data.getDevice());
 	        
 	        TextView tvData = (TextView) view.findViewById(R.id.historyData);
-	        tvData.setText(String.valueOf(data.getSystolic())+":"+String.valueOf(data.getDiastolic()));
+	        tvData.setText("SYS: "+String.valueOf(data.getSystolic().intValue())+"\nDIS: "+String.valueOf(data.getDiastolic().intValue()));
 
 	        return view;
 	    }

@@ -41,7 +41,7 @@ public class HealthServiceTestActivity extends Activity {
 	HealthServiceAPI api;
 	private HealthServiceTestActivity frame = this;
 
-	private TextView status;
+	private TextView sugestion;
 	private TextView menssage;
 	private TextView device;
 	private TextView data;
@@ -153,7 +153,7 @@ public class HealthServiceTestActivity extends Activity {
 		tabs.setCurrentTab(0);
 
 		list = (ListView) findViewById(R.id.listViewDataHistory);
-		status = (TextView) findViewById(R.id.tvSugestion);
+		sugestion = (TextView) findViewById(R.id.tvSugestion);
 		menssage = (TextView) findViewById(R.id.tvMsg);
 		device = (TextView) findViewById(R.id.tVDevice);
 		data = (TextView) findViewById(R.id.tVMeasurement);
@@ -163,7 +163,7 @@ public class HealthServiceTestActivity extends Activity {
 		btnOk = (Button) findViewById(R.id.btnOk);
 		btnClearHistory = (Button) findViewById(R.id.btnClearHistory);
 
-		status.setOnLongClickListener(l);
+		sugestion.setOnLongClickListener(l);
 		menssage.setOnLongClickListener(l);
 		device.setOnLongClickListener(l);
 		data.setOnLongClickListener(l);
@@ -182,7 +182,7 @@ public class HealthServiceTestActivity extends Activity {
 		bindService(intent, serviceConnection, 0);
 		Log.w("HST", "Activity created");
 
-		status.setText("Ready");
+		sugestion.setText("--");
 		menssage.setText("--");
 		device.setText("--");
 		data.setText("--");

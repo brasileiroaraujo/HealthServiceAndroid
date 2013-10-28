@@ -27,6 +27,7 @@ public class Handlers {
     private TextView menssage;
     private TextView device;
     private TextView data;
+    private TextView sugestion;
     private Map<String, String> map;
     private Handler tm;
     private ParserXML parser;
@@ -37,6 +38,7 @@ public class Handlers {
         this.menssage = (TextView) frame.findViewById(R.id.tvMsg);
         this.data = (TextView) frame.findViewById(R.id.tVMeasurement);;
         this.device = (TextView) frame.findViewById(R.id.tVDevice);
+        this.sugestion = (TextView) frame.findViewById(R.id.tvSugestion);
         this.map = map;
         this.tm = new Handler();
         this.parser = new ParserXML();
@@ -170,8 +172,9 @@ public class Handlers {
                 }
             }
         }
-        show(data, "SYS: "+ datas.get(0) + "\n" + "DIS: "+ datas.get(1));
+        show(data, "SYS: "+ datas.get(0).intValue() + "\n" + "DIS: "+ datas.get(1).intValue());
         show(menssage, "Measurement");
+        show(sugestion, "My sugestion");
         show_dev(path);
         persistInDatabase(datas, path);
         updateHistoryList();
@@ -241,7 +244,7 @@ public class Handlers {
         if (map.containsKey(path)) {
             show(device, "Device " + map.get(path));
         } else {
-            show(device, "Unknown device " + path);
+            show(device, "Unknown device ");
         }
     }
     

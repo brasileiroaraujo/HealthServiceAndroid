@@ -28,8 +28,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import br.ufcg.embedded.health.database.HealthDAO;
-import br.ufcg.embedded.health.service.HealthAgentAPI;
-import br.ufcg.embedded.health.service.HealthServiceAPI;
+import com.signove.health.service.HealthAgentAPI;
+import com.signove.health.service.HealthServiceAPI;
 import br.ufcg.embedded.health.service.health.servicetest.R;
 import br.ufcg.embedded.health.structures.HealthData;
 

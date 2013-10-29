@@ -131,7 +131,7 @@ public class HealthServiceTestActivity extends Activity {
                     HealthDAO mDAO = HealthDAO.getInstance(frame);
                     mDAO.deleteAll();
                     updateListHistory();
-                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.history_cleaned),
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.history_clean),
                             Toast.LENGTH_SHORT).show();
                     break;
                 default:

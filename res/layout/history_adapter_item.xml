@@ -12,6 +12,7 @@
                 android:id="@+id/imageViewHistoryDate"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:layout_marginBottom="5dp"
                 android:src="@drawable/calendar_day" />
              <TextView
 		        android:id="@+id/historyDate"

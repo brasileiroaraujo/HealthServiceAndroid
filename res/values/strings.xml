@@ -17,7 +17,7 @@
     <string name="status_disconnected">Disconnected</string>
     <string name="status_associated">Associated</string>
     <string name="status_disassociated">Disassociated</string>
-    <string name="status_mds_received">MDS received</string>
+    <string name="status_mds_received">Receiving data</string>
     <string name="status_measurement">Measurement</string>
     <string name="pressure_sys">SYS:</string>
     <string name="pressure_dis">DIS:</string>
@@ -30,7 +30,7 @@
     <string name="device_unknown">Unknown device </string>
     <string name="history_empty">History empty</string>
     <string name="history_date">Date: </string>
-    <string name="history_cleaned">Cleaned history.</string>
+    <string name="history_clean">History was clean</string>
     <string name="notifications_preferences_success">Notifications preferences saved with success.</string>
     <string name="invalid_data_received">Invalid data received.</string>
 </resources>

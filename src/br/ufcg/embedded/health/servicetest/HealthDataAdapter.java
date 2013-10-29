@@ -11,7 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import br.ufcg.embedded.health.R;
 import br.ufcg.embedded.health.structures.HealthData;
-import br.ufcg.embedded.health.servicetest.Handlers;
 
 public class HealthDataAdapter extends BaseAdapter {
     private List<HealthData> mData;
@@ -45,18 +44,17 @@ public class HealthDataAdapter extends BaseAdapter {
         HealthData data = mData.get(posicao);
 
         TextView tvDate = (TextView) view.findViewById(R.id.historyDate);
-        tvDate.setText(mContext.getResources().getString(R.string.history_date)
-                + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(data
-                        .getDate()));
+        tvDate.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(data
+                .getDate()));
 
         TextView tvDevice = (TextView) view.findViewById(R.id.historyDevice);
         tvDevice.setText(data.getDevice());
 
         TextView tvData = (TextView) view.findViewById(R.id.historyData);
         tvData.setText(mContext.getResources().getString(R.string.pressure_sys)
-                + String.valueOf(data.getSystolic().intValue()) + "\n"
+                + " " + String.valueOf(data.getSystolic().intValue()) + "\n"
                 + mContext.getResources().getString(R.string.pressure_dis)
-                + String.valueOf(data.getDiastolic().intValue()));
+                + " " + String.valueOf(data.getDiastolic().intValue()));
 
         TextView tvAnalyzePressure = (TextView) view
                 .findViewById(R.id.historyAnalyzePressure);

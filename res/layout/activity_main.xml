@@ -54,7 +54,7 @@
                             android:id="@+id/tVDevice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="30dp"
+                            android:layout_marginTop="25dp"
                             android:layout_weight="0.97"
                             android:text="5C:B5:24:0B:5C:CD"
                             android:textSize="22sp" />
@@ -130,7 +130,7 @@
                         android:background="#050505"
                         android:ellipsize="end"
                         android:text="Sugestion"
-                        android:textSize="15sp" />
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -180,7 +180,7 @@
 					    <TextView
 					        android:id="@+id/tVNotificationsDescription"
 					        android:layout_width="255dp"
-					        android:layout_height="50dp"
+					        android:layout_height="70dp"
 					        android:layout_marginLeft="53dp"
 					        android:layout_marginRight="10dp"
 					        android:text="@string/text_notifications_description"

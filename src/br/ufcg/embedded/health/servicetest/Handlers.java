@@ -216,7 +216,7 @@ public class Handlers {
         if (map.containsKey(path)) {
             show(device,
                     frame.getResources().getString(R.string.device)
-                            + map.get(path));
+                            + " "+ map.get(path));
         } else {
             show(device, frame.getResources()
                     .getString(R.string.device_unknown));

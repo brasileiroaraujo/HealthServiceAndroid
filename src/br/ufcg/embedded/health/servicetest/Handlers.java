@@ -6,10 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import android.app.Activity;
 import android.os.Handler;
@@ -32,7 +28,6 @@ public class Handlers {
     private ParserXML parser;
     private Activity frame;
     private List<Double> datas = new ArrayList<Double>();
-    private boolean flag = false;
 
     public Handlers(Map<String, String> map, Activity frame) {
         this.menssage = (TextView) frame.findViewById(R.id.tvMsg);
@@ -94,8 +89,10 @@ public class Handlers {
         }
 
         datas = parser.extractValues(document);
-        
-        show(data, "SYS: " + datas.get(0).intValue() + "\n" + "DIS: "
+
+        show(data, frame.getResources().getString(R.string.pressure_sys)
+                + datas.get(0).intValue() + "\n"
+                + frame.getResources().getString(R.string.pressure_dis)
                 + datas.get(1).intValue());
         show(menssage,
                 frame.getResources().getString(R.string.status_measurement));
@@ -117,16 +114,19 @@ public class Handlers {
      * @return
      */
     private String analyzePressure(int sys, int dis) {
-        if((sys < 90) || (dis < 60)) {
-            return "Low blood pressure.";
+        if ((sys < 90) || (dis < 60)) {
+            return frame.getResources().getString(R.string.pressure_low_blood);
         } else if ((sys > 120 && sys <= 139) || (dis > 80 && dis <= 89)) {
-            return "Prehypertension.";
+            return frame.getResources().getString(
+                    R.string.pressure_prehypertension);
         } else if ((sys >= 140 && sys <= 159) || (dis >= 90 && dis <= 99)) {
-            return "High blood pressure (Stage1).";
+            return frame.getResources().getString(
+                    R.string.pressure_high_blood_stage1);
         } else if ((sys >= 160) || (dis >= 100)) {
-            return "High blood pressure (Stage2).";
+            return frame.getResources().getString(
+                    R.string.pressure_high_blood_stage2);
         } else {
-            return "Normal.";
+            return frame.getResources().getString(R.string.pressure_normal);
         }
     }
 
@@ -152,7 +152,9 @@ public class Handlers {
         if (insert != null && lastInsert != null) {
             long interval = (insert.getDate().getTime() - lastInsert.getDate()
                     .getTime()) / 1000;
-            if (interval > TIMEOUT_PERSISTENCE || insert.getSystolic() != lastInsert.getSystolic() || insert.getDiastolic() != lastInsert.getDiastolic()) {
+            if (interval > TIMEOUT_PERSISTENCE
+                    || insert.getSystolic() != lastInsert.getSystolic()
+                    || insert.getDiastolic() != lastInsert.getDiastolic()) {
                 return true;
             } else {
                 return false;
@@ -183,7 +185,8 @@ public class Handlers {
             @Override
             public void run() {
                 if (datasHistory.size() == 0) {
-                    history.setText("History empty");
+                    history.setText(frame.getResources().getString(
+                            R.string.history_empty));
                 } else {
                     history.setText("");
                     ;
@@ -197,9 +200,12 @@ public class Handlers {
 
     public void show_dev(String path) {
         if (map.containsKey(path)) {
-            show(device, "Device " + map.get(path));
+            show(device,
+                    frame.getResources().getString(R.string.device)
+                            + map.get(path));
         } else {
-            show(device, "Unknown device ");
+            show(device, frame.getResources()
+                    .getString(R.string.device_unknown));
         }
     }
 

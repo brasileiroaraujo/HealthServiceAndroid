@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="hello">Hello World, HealthServiceTestActivity!</string>
     <string name="app_name">MyPressure</string>
     <string name="image_status">Essa imagem indica o status de conexão do agente com o celular</string>
@@ -20,4 +19,16 @@
     <string name="status_disassociated">Disassociated</string>
     <string name="status_mds_received">MDS received</string>
     <string name="status_measurement">Measurement</string>
+    <string name="pressure_sys">SYS:</string>
+    <string name="pressure_dis">DIS:</string>
+    <string name="pressure_low_blood">Low blood pressure.</string>
+    <string name="pressure_prehypertension">Prehypertension.</string>
+    <string name="pressure_high_blood_stage1">High blood pressure (Stage1).</string>
+    <string name="pressure_high_blood_stage2">High blood pressure (Stage2).</string>
+    <string name="pressure_normal">Normal.</string>
+    <string name="device">Device </string>
+    <string name="device_unknown">Unknown device </string>
+    <string name="history_empty">History empty</string>
+    <string name="history_cleaned">Cleaned history</string>
+    <string name="notifications_preferences_success">Notifications preferences saved with success</string>
 </resources>

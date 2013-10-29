@@ -54,9 +54,8 @@
                             android:id="@+id/tVDevice"
                             android:layout_width="120dp"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="25dp"
+                            android:layout_marginTop="17dp"
                             android:layout_weight="0.98"
-                            android:text="5C:B5:24:0B:5C:CD"
                             android:textSize="22sp" />
 
                         <ImageView
@@ -83,10 +82,8 @@
                              android:layout_marginLeft="5dp"
                              android:layout_marginRight="5dp"
                              android:layout_marginTop="10dp"
-                             android:layout_weight="0.66"
-                             android:background="#050505"
+                             android:layout_weight="0.67"
                              android:ellipsize="end"
-                             android:text="Msg"
                              android:textSize="18sp" />
 
                          <ProgressBar
@@ -113,7 +110,6 @@
                             android:layout_marginTop="20dp"
                             android:layout_marginBottom="10dp"
                             android:layout_weight="0.02"
-                            android:text="ZZZ bpm"
                             android:textSize="25sp" />
 
                     </LinearLayout>
@@ -128,7 +124,6 @@
                         android:layout_weight="0.05"
                         android:background="#050505"
                         android:ellipsize="end"
-                        android:text="Sugestion"
                         android:textSize="18sp" />
                 </LinearLayout>
 

@@ -54,10 +54,10 @@ public class HealthData implements Comparable<HealthData> {
     @Override
     public int compareTo(HealthData another) {
         if (this.getDate().before(another.getDate())) {
-            return -1;
+            return 1;
         }
         if (this.getDate().after(another.getDate())) {
-            return 1;
+            return -1;
         }
         return 0;
     }

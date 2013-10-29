@@ -10,8 +10,10 @@ import org.w3c.dom.Document;
 import android.app.Activity;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import br.ufcg.embedded.health.R;
@@ -20,6 +22,7 @@ import br.ufcg.embedded.health.structures.HealthData;
 
 public class Handlers {
     private static final int TIMEOUT_PERSISTENCE = 10;
+    private ProgressBar progressBar;
     private TextView menssage;
     private TextView device;
     private TextView data;
@@ -39,6 +42,8 @@ public class Handlers {
         this.tm = new Handler();
         this.parser = new ParserXML();
         this.frame = frame;
+        this.progressBar=(ProgressBar) frame.findViewById(R.id.progressBar1);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     public void handle_packet_connected(String path, String dev) {
@@ -48,6 +53,7 @@ public class Handlers {
                 .getString(R.string.status_connected));
         showStatusImage(frame.getResources().getString(
                 R.string.status_connected));
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     public void handle_packet_disconnected(String path) {
@@ -56,6 +62,7 @@ public class Handlers {
         show_dev(path);
         showStatusImage(frame.getResources().getString(
                 R.string.status_disconnected));
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     public void handle_packet_associated(String path, String xml) {
@@ -64,6 +71,7 @@ public class Handlers {
         show_dev(path);
         showStatusImage(frame.getResources().getString(
                 R.string.status_associated));
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     public void handle_packet_disassociated(String path) {
@@ -72,6 +80,7 @@ public class Handlers {
         show_dev(path);
         showStatusImage(frame.getResources().getString(
                 R.string.status_disassociated));
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     public void handle_packet_description(String path, String xml) {
@@ -235,5 +244,4 @@ public class Handlers {
             }
         });
     }
-
 }

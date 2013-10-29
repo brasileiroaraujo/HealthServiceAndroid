@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 import br.ufcg.embedded.health.R;
 
@@ -23,6 +24,12 @@ public class NotificationReceiver extends BroadcastReceiver {
         Intent intent1 = new Intent(context, SplashScreen.class);
         PendingIntent pIntent = PendingIntent.getActivity(context, 0, intent1,
                 0);
+        
+      
+        Vibrator v;
+        v=(Vibrator)context.getSystemService(Context.VIBRATOR_SERVICE);
+        v.vibrate(1000);
+
 
         Bitmap bm = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.heart_80px);

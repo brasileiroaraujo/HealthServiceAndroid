@@ -32,11 +32,11 @@ public class NotificationReceiver extends BroadcastReceiver {
 
 
         Bitmap bm = BitmapFactory.decodeResource(context.getResources(),
-                R.drawable.heart_80px);
+                R.drawable.heart_50px);
 
         Notification n = new NotificationCompat.Builder(context)
-                .setContentTitle("CheckMyPressure Reminder")
-                .setContentText("Click here to check your pressure today")
+                .setContentTitle(context.getResources().getString(R.string.notification_title))
+                .setContentText(context.getResources().getString(R.string.notification_text))
                 .setSmallIcon(R.drawable.heart).setLargeIcon(bm)
                 .setContentIntent(pIntent).build();
 

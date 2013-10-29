@@ -104,9 +104,9 @@ public class Handlers {
                     Toast.LENGTH_SHORT).show();
         }else{
             show(data, frame.getResources().getString(R.string.pressure_sys)
-                    + datas.get(0).intValue() + "\n"
+                    + " " +  datas.get(0).intValue() + "\n"
                     + frame.getResources().getString(R.string.pressure_dis)
-                    + datas.get(1).intValue());
+                    + " " + datas.get(1).intValue());
             show(menssage,
                     frame.getResources().getString(R.string.status_measurement));
             show(sugestion,

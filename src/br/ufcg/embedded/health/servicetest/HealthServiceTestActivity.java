@@ -124,14 +124,14 @@ public class HealthServiceTestActivity extends Activity {
                     }
                     setNotificationActive(cbNotification.isChecked());
                     Toast.makeText(getApplicationContext(),
-                            "Notifications preferences saved with success",
+                            getResources().getString(R.string.notifications_preferences_success),
                             Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.btnClearHistory:
                     HealthDAO mDAO = HealthDAO.getInstance(frame);
                     mDAO.deleteAll();
                     updateListHistory();
-                    Toast.makeText(getApplicationContext(), "Cleaned history",
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.history_cleaned),
                             Toast.LENGTH_SHORT).show();
                     break;
                 default:
@@ -145,15 +145,15 @@ public class HealthServiceTestActivity extends Activity {
         tabs.setup();
         TabHost.TabSpec spec = tabs.newTabSpec("tag1");
         spec.setContent(R.id.data);
-        spec.setIndicator("Data");
+        spec.setIndicator(getResources().getString(R.string.tab_data));
         tabs.addTab(spec);
         spec = tabs.newTabSpec("tag2");
         spec.setContent(R.id.history);
-        spec.setIndicator("History");
+        spec.setIndicator(getResources().getString(R.string.tab_history));
         tabs.addTab(spec);
         spec = tabs.newTabSpec("tag3");
         spec.setContent(R.id.settings);
-        spec.setIndicator("Settings");
+        spec.setIndicator(getResources().getString(R.string.tab_settings));
         tabs.addTab(spec);
         tabs.setCurrentTab(0);
 
@@ -196,7 +196,7 @@ public class HealthServiceTestActivity extends Activity {
     public void updateListHistory() {
         datasHistory = HealthDAO.getInstance(this).ListAll();
         if (datasHistory.size() == 0) {
-            history.setText("History empty");
+            history.setText(getResources().getString(R.string.history_empty));
         } else {
             history.setText("");
         }

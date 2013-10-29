@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyPressure</string>
+    <string name="text_notifications">Notificações</string>
+    <string name="text_notifications_description">Ativando a notificação você receberá lembretes para fazer a medição.</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_clear_history">Limpar histórico</string>
+    <string name="tab_history">Histórico</string>
+    <string name="tab_settings">Configurações</string>
+    <string name="tab_data">Dados</string>
+    <string name="action_settings">Configurações</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="status_connected">Conectado</string>
+    <string name="status_disconnected">Desconectado</string>
+    <string name="status_associated">Associado</string>
+    <string name="status_disassociated">Desassociado</string>
+    <string name="status_mds_received">Recebendo dados</string>
+    <string name="status_measurement">Medição completa</string>
+    <string name="pressure_sys">SIS:</string>
+    <string name="pressure_dis">DIA:</string>
+    <string name="pressure_low_blood">Pressão baixa.</string>
+    <string name="pressure_prehypertension">Pré hipertensão.</string>
+    <string name="pressure_high_blood_stage1">Pressão alta (Estágio 1).</string>
+    <string name="pressure_high_blood_stage2">Pressão alta (Estágio 2).</string>
+    <string name="pressure_normal">Normal.</string>
+    <string name="device">Dispositivo</string>
+    <string name="device_unknown">Dispositivo desconhecido</string>
+    <string name="history_empty">Histórico vazio</string>
+    <string name="history_clean">Histórico foi limpo</string>
+    <string name="notifications_preferences_success">Configurações de preferências atualizadas.</string>
+    <string name="invalid_data_received">Dados inválidos.</string>
+    <string name="notification_title">MyPressure Lembrete</string>
+    <string name="notification_text">Clique aqui para aferir sua pressão hoje</string>
+    <string name="format_date">dd-MM-yyyy HH:mm:ss</string>
+</resources>

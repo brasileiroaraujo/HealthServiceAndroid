@@ -14,10 +14,10 @@
         android:debuggable="true"
         android:icon="@drawable/heart"
         android:label="@string/app_name" >
-         <activity
+        <activity
             android:name="br.ufcg.embedded.health.servicetest.SplashScreen"
             android:theme="@android:style/Theme.NoTitleBar" >
-            <intent-filter >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -29,7 +29,6 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
-
                 <category android:name="android.intent.category.LAUNCHER" />
 
                 <action android:name="com.signove.health.service.HealthService" />
@@ -41,14 +40,17 @@
             android:process=":remote" >
         </receiver>
 
-        <service android:exported="true" android:name="com.signove.health.service.HealthService" 
-            android:enabled="true" android:stopWithTask="false" android:permission="android.permission.BLUETOOTH">
+        <service
+            android:name="com.signove.health.service.HealthService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BLUETOOTH"
+            android:stopWithTask="false" >
             <intent-filter>
-                 <action
-                         android:name="com.signove.health.service.HealthService" />
-                 </intent-filter>
+                <action android:name="com.signove.health.service.HealthService" />
+            </intent-filter>
         </service>
-    <service android:name="com.signove.health.service.BluetoothHDPService" />
+        <service android:name="com.signove.health.service.BluetoothHDPService" />
     </application>
 
 </manifest>

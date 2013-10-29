@@ -2,7 +2,7 @@
 <resources>
 
     <string name="hello">Hello World, HealthServiceTestActivity!</string>
-    <string name="app_name">HealthServiceTest</string>
+    <string name="app_name">MyPressure</string>
     <string name="image_status">Essa imagem indica o status de conexão do agente com o celular</string>
     <string name="text_notifications">Notifications</string>
     <string name="text_notifications_description">Enabling notification you will receive reminders to make the measurement</string>

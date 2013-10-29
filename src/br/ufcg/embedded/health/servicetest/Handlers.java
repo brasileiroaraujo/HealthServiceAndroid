@@ -13,6 +13,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import br.ufcg.embedded.health.R;
 import br.ufcg.embedded.health.database.HealthDAO;
 import br.ufcg.embedded.health.structures.HealthData;
@@ -26,7 +27,7 @@ public class Handlers {
     private Map<String, String> map;
     private Handler tm;
     private ParserXML parser;
-    private Activity frame;
+    private static Activity frame;
     private List<Double> datas = new ArrayList<Double>();
 
     public Handlers(Map<String, String> map, Activity frame) {
@@ -89,19 +90,23 @@ public class Handlers {
         }
 
         datas = parser.extractValues(document);
-
-        show(data, frame.getResources().getString(R.string.pressure_sys)
-                + datas.get(0).intValue() + "\n"
-                + frame.getResources().getString(R.string.pressure_dis)
-                + datas.get(1).intValue());
-        show(menssage,
-                frame.getResources().getString(R.string.status_measurement));
-        show(sugestion,
-                analyzePressure(datas.get(0).intValue(), datas.get(1)
-                        .intValue()));
-        show_dev(path);
-        persistInDatabase(datas, path);
-        updateHistoryList();
+        if(datas.isEmpty()){
+            Toast.makeText(frame.getApplicationContext(), frame.getResources().getString(R.string.invalid_data_received),
+                    Toast.LENGTH_SHORT).show();
+        }else{
+            show(data, frame.getResources().getString(R.string.pressure_sys)
+                    + datas.get(0).intValue() + "\n"
+                    + frame.getResources().getString(R.string.pressure_dis)
+                    + datas.get(1).intValue());
+            show(menssage,
+                    frame.getResources().getString(R.string.status_measurement));
+            show(sugestion,
+                    analyzePressure(datas.get(0).intValue(), datas.get(1)
+                            .intValue()));
+            show_dev(path);
+            persistInDatabase(datas, path);
+            updateHistoryList();
+        }
     }
 
     /**
@@ -113,7 +118,7 @@ public class Handlers {
      * @param dis
      * @return
      */
-    private String analyzePressure(int sys, int dis) {
+    public static String analyzePressure(int sys, int dis) {
         if ((sys < 90) || (dis < 60)) {
             return frame.getResources().getString(R.string.pressure_low_blood);
         } else if ((sys > 120 && sys <= 139) || (dis > 80 && dis <= 89)) {

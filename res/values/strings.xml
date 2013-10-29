@@ -4,7 +4,7 @@
     <string name="app_name">MyPressure</string>
     <string name="image_status">Essa imagem indica o status de conexão do agente com o celular</string>
     <string name="text_notifications">Notifications</string>
-    <string name="text_notifications_description">Enabling notification you will receive reminders to make the measurement</string>
+    <string name="text_notifications_description">Enabling notification you will receive reminders to make the measurement.</string>
     <string name="btn_ok">OK</string>
     <string name="btn_clear_history">Clear history</string>
     <string name="tab_history">History</string>
@@ -29,6 +29,8 @@
     <string name="device">Device </string>
     <string name="device_unknown">Unknown device </string>
     <string name="history_empty">History empty</string>
-    <string name="history_cleaned">Cleaned history</string>
-    <string name="notifications_preferences_success">Notifications preferences saved with success</string>
+    <string name="history_date">Date: </string>
+    <string name="history_cleaned">Cleaned history.</string>
+    <string name="notifications_preferences_success">Notifications preferences saved with success.</string>
+    <string name="invalid_data_received">Invalid data received.</string>
 </resources>

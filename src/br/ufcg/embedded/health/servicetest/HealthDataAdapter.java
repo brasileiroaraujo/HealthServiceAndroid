@@ -11,14 +11,17 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import br.ufcg.embedded.health.R;
 import br.ufcg.embedded.health.structures.HealthData;
+import br.ufcg.embedded.health.servicetest.Handlers;
 
 public class HealthDataAdapter extends BaseAdapter {
     private List<HealthData> mData;
     private LayoutInflater mInflater;
+    private Context mContext;
 
     public HealthDataAdapter(Context context, List<HealthData> data) {
         mInflater = LayoutInflater.from(context);
         mData = data;
+        mContext = context;
     }
 
     @Override
@@ -42,7 +45,7 @@ public class HealthDataAdapter extends BaseAdapter {
         HealthData data = mData.get(posicao);
 
         TextView tvDate = (TextView) view.findViewById(R.id.historyDate);
-        tvDate.setText("Date: "
+        tvDate.setText(mContext.getResources().getString(R.string.history_date)
                 + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(data
                         .getDate()));
 
@@ -50,9 +53,15 @@ public class HealthDataAdapter extends BaseAdapter {
         tvDevice.setText(data.getDevice());
 
         TextView tvData = (TextView) view.findViewById(R.id.historyData);
-        tvData.setText("SYS: " + String.valueOf(data.getSystolic().intValue())
-                + "\nDIS: " + String.valueOf(data.getDiastolic().intValue()));
+        tvData.setText(mContext.getResources().getString(R.string.pressure_sys)
+                + String.valueOf(data.getSystolic().intValue()) + "\n"
+                + mContext.getResources().getString(R.string.pressure_dis)
+                + String.valueOf(data.getDiastolic().intValue()));
 
+        TextView tvAnalyzePressure = (TextView) view
+                .findViewById(R.id.historyAnalyzePressure);
+        tvAnalyzePressure.setText(Handlers.analyzePressure(data.getSystolic()
+                .intValue(), data.getDiastolic().intValue()));
         return view;
     }
 }

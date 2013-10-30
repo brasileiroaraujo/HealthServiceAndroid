@@ -28,7 +28,7 @@
     <string name="history_empty">Histórico vazio</string>
     <string name="history_clean">Histórico foi limpo</string>
     <string name="notifications_preferences_success">Configurações de preferências atualizadas.</string>
-    <string name="invalid_data_received">Dados inválidos.</string>
+    <string name="invalid_data_received">Não recebeu pressão arterial.</string>
     <string name="notification_title">MyPressure Lembrete</string>
     <string name="notification_text">Clique aqui para aferir sua pressão hoje</string>
     <string name="format_date">dd-MM-yyyy HH:mm:ss</string>

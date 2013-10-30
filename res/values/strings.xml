@@ -28,7 +28,7 @@
     <string name="history_empty">History empty</string>
     <string name="history_clean">History was clean</string>
     <string name="notifications_preferences_success">Notifications preferences saved with success.</string>
-    <string name="invalid_data_received">Invalid data received.</string>
+    <string name="invalid_data_received">Non-blood pressure measurement received.</string>
     <string name="notification_title">MyPressure Reminder</string>
     <string name="notification_text">Click here to check your pressure today</string>
     <string name="format_date">yyyy-MM-dd HH:mm:ss</string>

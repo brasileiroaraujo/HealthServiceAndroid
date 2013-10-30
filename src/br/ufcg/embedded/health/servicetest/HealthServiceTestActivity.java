@@ -315,8 +315,6 @@ public class HealthServiceTestActivity extends Activity {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,
                 myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Calendar cur_cal = new GregorianCalendar(); // TIRAR
-
         GregorianCalendar data = calculateNotificationDate();
 
         Log.e("MAX DIA",

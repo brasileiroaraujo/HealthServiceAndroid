@@ -1,43 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:textSize="12sp">
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:id="@+id/status"
-    android:background="#000080"
-    android:textColor="#ffffff"
-    android:textSize="20sp"
-    android:layout_weight=".25"
-    />
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:id="@+id/msg"
-    android:background="#400000"
-    android:textColor="#ffffff"
-    android:textSize="20sp"
-    android:layout_weight=".25"
-    />
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:id="@+id/device"
-    android:background="#004000"
-    android:textColor="#ffffff"
-    android:textSize="20sp"
-    android:layout_weight=".25"
-    />
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:id="@+id/data"
-    android:background="#804000"
-    android:textColor="#ffffff"
-    android:textSize="20sp"
-    android:layout_weight=".25"
-    />
-</LinearLayout>
+
+                    android:id="@+id/history"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" 
+                    android:orientation="vertical">
+                   
+                     <TextView
+                        android:id="@+id/tvHistoryEmpty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="15sp" />
+                    
+                      <ListView
+                            android:id="@+id/listViewDataHistory"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" >
+                        </ListView>
+                      
+                        <LinearLayout
+                            android:id="@+id/history2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:orientation="horizontal" >
+                            
+                               <Button
+                                    android:id="@+id/btnClearHistory"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/btn_clear_history" /> 
+                               <Button
+                                    android:id="@+id/btnShowGraphic"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/btn_graphic" /> 
+                        </LinearLayout>
+                </LinearLayout>

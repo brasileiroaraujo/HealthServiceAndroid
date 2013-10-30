@@ -5,6 +5,7 @@
     <string name="text_notifications_description">Ativando a notificação você receberá lembretes para fazer a medição.</string>
     <string name="btn_ok">OK</string>
     <string name="btn_clear_history">Limpar histórico</string>
+    <string name="btn_graphic">Mostrar gráfico</string>
     <string name="tab_history">Histórico</string>
     <string name="tab_settings">Configurações</string>
     <string name="tab_data">Dados</string>

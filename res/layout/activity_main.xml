@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/linearMain"
     android:orientation="vertical" >
 
     <TabHost
@@ -127,7 +128,7 @@
                         android:textSize="18sp" />
                 </LinearLayout>
 
-                <LinearLayout
+               <LinearLayout
                     android:id="@+id/history"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" 
@@ -147,14 +148,25 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1" >
                         </ListView>
-                        
-                       <Button
-				            android:id="@+id/btnClearHistory"
-				            android:layout_width="wrap_content"
-				            android:layout_height="wrap_content"
-				            android:layout_gravity="center_horizontal"
-				            android:text="@string/btn_clear_history" /> 
-                        
+                      
+                        <LinearLayout
+                            android:id="@+id/history2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:orientation="horizontal" >
+                            
+                               <Button
+                                    android:id="@+id/btnClearHistory"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/btn_clear_history" /> 
+                               <Button
+                                    android:id="@+id/btnShowGraphic"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/btn_graphic" /> 
+                        </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout

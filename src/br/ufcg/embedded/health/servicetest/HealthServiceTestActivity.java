@@ -17,12 +17,16 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -31,6 +35,10 @@ import br.ufcg.embedded.health.R;
 import br.ufcg.embedded.health.database.HealthDAO;
 import br.ufcg.embedded.health.structures.HealthData;
 
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GraphView.GraphViewData;
+import com.jjoe64.graphview.GraphViewSeries;
+import com.jjoe64.graphview.LineGraphView;
 import com.signove.health.service.HealthAgentAPI;
 import com.signove.health.service.HealthServiceAPI;
 
@@ -50,6 +58,7 @@ public class HealthServiceTestActivity extends Activity {
     private CheckBox cbNotification;
     private TimePicker timePicker;
     private Button btnOk;
+    private Button btnShowGraphic;
     private Button btnClearHistory;
     private AlarmManager alarmManager;
     private Intent myIntent;
@@ -58,6 +67,10 @@ public class HealthServiceTestActivity extends Activity {
     private HealthAgentAPI.Stub agent;
 
     private Map<String, String> map;
+    PopupWindow popUp;
+    boolean click = true;
+    LayoutParams params;
+    LinearLayout layoutMain;
 
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
@@ -123,15 +136,32 @@ public class HealthServiceTestActivity extends Activity {
                                 getApplicationContext(), 0, myIntent, 0));
                     }
                     setNotificationActive(cbNotification.isChecked());
-                    Toast.makeText(getApplicationContext(),
-                            getResources().getString(R.string.notifications_preferences_success),
+                    Toast.makeText(
+                            getApplicationContext(),
+                            getResources().getString(
+                                    R.string.notifications_preferences_success),
                             Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.btnShowGraphic:
+                    if (click) {
+                        popUp.showAtLocation(layoutMain, Gravity.START, 10, 10);
+                        popUp.setFocusable(true);
+                        popUp.update(100, 100, 600, 500);
+                        btnShowGraphic.setText("Close Graphic");
+                        click = false;
+                    } else {
+                        popUp.dismiss();
+                        btnShowGraphic.setText(getResources().getString(
+                                R.string.btn_graphic));
+                        click = true;
+                    }
                     break;
                 case R.id.btnClearHistory:
                     HealthDAO mDAO = HealthDAO.getInstance(frame);
                     mDAO.deleteAll();
                     updateListHistory();
-                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.history_clean),
+                    Toast.makeText(getApplicationContext(),
+                            getResources().getString(R.string.history_clean),
                             Toast.LENGTH_SHORT).show();
                     break;
                 default:
@@ -166,6 +196,7 @@ public class HealthServiceTestActivity extends Activity {
         timePicker = (TimePicker) findViewById(R.id.timePicker1);
         cbNotification = (CheckBox) findViewById(R.id.checkBoxNotifications);
         btnOk = (Button) findViewById(R.id.btnOk);
+        btnShowGraphic = (Button) findViewById(R.id.btnShowGraphic);
         btnClearHistory = (Button) findViewById(R.id.btnClearHistory);
 
         sugestion.setOnLongClickListener(l);
@@ -174,12 +205,37 @@ public class HealthServiceTestActivity extends Activity {
         data.setOnLongClickListener(l);
         cbNotification.setOnClickListener(o);
         btnOk.setOnClickListener(o);
+        btnShowGraphic.setOnClickListener(o);
         btnClearHistory.setOnClickListener(o);
 
         cbNotification.setChecked(notification);
 
         map = new HashMap<String, String>();
+        popUp = new PopupWindow(this);
+        layoutMain = new LinearLayout(this);
+        layoutMain.setOrientation(LinearLayout.VERTICAL);
+       initGraphic();
+        popUp.setContentView(layoutMain);
 
+//        AlertDialog.Builder builder = new AlertDialog.Builder(
+//                getApplicationContext());
+//        builder.setCancelable(true);
+//        builder.setTitle("Title");
+//        //builder.setMessage( initGraphic());
+//       LinearLayout layout3 = (LinearLayout) findViewById(R.id.data);
+//       // builder.setView(R.id.data);
+//        builder.setInverseBackgroundForced(true);
+//        builder.setPositiveButton("Close",
+//                new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog,
+//                            int which) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//        AlertDialog alert = builder.create();
+//        alert.show();
+        
         updateListHistory();
 
         Intent intent = new Intent("com.signove.health.service.HealthService");
@@ -192,6 +248,33 @@ public class HealthServiceTestActivity extends Activity {
         device.setText("--");
         data.setText("--");
     }
+
+    private void initGraphic() {
+        List<HealthData> datasHistoryInternal = HealthDAO.getInstance(this).ListAll();
+        
+        GraphViewData[] datasGraph = new GraphViewData[datasHistoryInternal.size()];
+        for (int i = 0; i < datasHistoryInternal.size(); i++) {
+            datasGraph[i] = new GraphViewData(i+1, datasHistoryInternal.get(i).getSystolic());
+        }
+        
+        GraphViewSeries graph = new GraphViewSeries(datasGraph
+               // new GraphViewData[] { 
+                        
+                        
+                        
+                        
+                        
+                      //  new GraphViewData(1, 2.0d),
+                       // new GraphViewData(2, 1.5d), new GraphViewData(3, 2.5d),
+                //        new GraphViewData(4, 1.0d) }
+                );
+
+        GraphView graphView = new LineGraphView(this, "Blood Pressure Graph");
+        graphView.addSeries(graph); // data
+        layoutMain.addView(graphView, 600, 450);
+        
+        
+   }
 
     public void updateListHistory() {
         datasHistory = HealthDAO.getInstance(this).ListAll();

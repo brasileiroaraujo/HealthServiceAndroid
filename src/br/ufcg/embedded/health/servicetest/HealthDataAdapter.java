@@ -44,17 +44,19 @@ public class HealthDataAdapter extends BaseAdapter {
         HealthData data = mData.get(posicao);
 
         TextView tvDate = (TextView) view.findViewById(R.id.historyDate);
-        tvDate.setText(new SimpleDateFormat(mContext.getResources().getString(R.string.format_date)).format(data
-                .getDate()));
+        tvDate.setText(new SimpleDateFormat(mContext.getResources().getString(
+                R.string.format_date)).format(data.getDate()));
 
         TextView tvDevice = (TextView) view.findViewById(R.id.historyDevice);
         tvDevice.setText(data.getDevice());
 
         TextView tvData = (TextView) view.findViewById(R.id.historyData);
         tvData.setText(mContext.getResources().getString(R.string.pressure_sys)
-                + " " + String.valueOf(data.getSystolic().intValue()) + "\n"
+                + " " + String.valueOf(data.getSystolic().intValue())
+                + " " + mContext.getResources().getString(R.string.unit_mmHg) + "\n"
                 + mContext.getResources().getString(R.string.pressure_dis)
-                + " " + String.valueOf(data.getDiastolic().intValue()));
+                + " " + String.valueOf(data.getDiastolic().intValue())
+                + " " + mContext.getResources().getString(R.string.unit_mmHg));
 
         TextView tvAnalyzePressure = (TextView) view
                 .findViewById(R.id.historyAnalyzePressure);

@@ -255,6 +255,7 @@ public class HealthServiceTestActivity extends Activity {
         graphView.setScalable(true);
         graphView.setShowLegend(true); 
         graphView.setLegendAlign(LegendAlign.MIDDLE);  
+        graphView.setLegendWidth(190);
         
         layoutPopUp.addView(graphView,500,500);
         layoutPopUp.addView(btnGraphic);

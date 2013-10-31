@@ -42,7 +42,7 @@ public class Handlers {
         this.tm = new Handler();
         this.parser = new ParserXML();
         this.frame = frame;
-        this.progressBar=(ProgressBar) frame.findViewById(R.id.progressBar1);
+        this.progressBar = (ProgressBar) frame.findViewById(R.id.progressBar1);
         progressBar.setVisibility(View.INVISIBLE);
     }
 
@@ -106,7 +106,8 @@ public class Handlers {
             show(data, frame.getResources().getString(R.string.pressure_sys)
                     + " " +  datas.get(0).intValue() + "\n"
                     + frame.getResources().getString(R.string.pressure_dis)
-                    + " " + datas.get(1).intValue());
+                    + " " + datas.get(1).intValue() + "\n"
+                    + "*" + frame.getResources().getString(R.string.unit_mmHg));
             show(menssage,
                     frame.getResources().getString(R.string.status_measurement));
             show(sugestion,
@@ -214,9 +215,8 @@ public class Handlers {
 
     public void show_dev(String path) {
         if (map.containsKey(path)) {
-            show(device,
-                    frame.getResources().getString(R.string.device)
-                            + " "+ map.get(path));
+            show(device, frame.getResources().getString(R.string.device) + " "
+                    + map.get(path));
         } else {
             show(device, frame.getResources()
                     .getString(R.string.device_unknown));

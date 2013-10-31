@@ -35,6 +35,7 @@
     <string name="notification_text">Click here to check your pressure today</string>
     <string name="format_date">yyyy-MM-dd HH:mm:ss</string>
     <string name="graph_title">Blood Pressure Graph</string>
-    <string name="graph_diastolic">Diastolic</string>
-    <string name="graph_systolic">Systolic</string>
+    <string name="graph_diastolic">Diastolic (mmHg)</string>
+    <string name="graph_systolic">Systolic (mmHg)</string>
+    <string name="unit_mmHg">mmHg</string>
 </resources>

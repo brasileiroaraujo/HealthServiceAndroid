@@ -7,6 +7,7 @@
     <string name="btn_clear_history">Limpar histórico</string>
     <string name="btn_graphic">Mostrar gráfico</string>
     <string name="btn_close_graphic">Fechar gráfico</string>
+    <string name="btn_save">Salvar</string>
     <string name="tab_history">Histórico</string>
     <string name="tab_settings">Configurações</string>
     <string name="tab_data">Dados</string>

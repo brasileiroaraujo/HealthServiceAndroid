@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/linearMain"
     android:orientation="vertical" >
 
     <TabHost
@@ -20,7 +20,6 @@
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
-
             </TabWidget>
 
             <FrameLayout
@@ -32,73 +31,154 @@
                     android:id="@+id/data"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp" >
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical" >
 
                     <LinearLayout
                         android:id="@+id/deviceData"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:orientation="horizontal"
-                        android:background="#050505" >
+                        android:background="@drawable/bluetooth_box"
+                        android:orientation="horizontal" >
 
-                        <ImageView
-                            android:id="@+id/imageViewBluetooh"
-                            android:layout_width="36dp"
-                            android:layout_height="80dp"
-                            android:layout_weight="0.54"
-                            android:src="@drawable/bluetooth" />
+                        <TableLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="170dp"
+                            android:layout_weight="0.98" >
 
-                        <TextView
-                            android:id="@+id/tVDevice"
-                            android:layout_width="120dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="17dp"
-                            android:layout_weight="0.98"
-                            android:textSize="22sp" />
+                            <TableRow
+                                android:id="@+id/tableRow1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_weight="0.6" >
 
-                        <ImageView
-                            android:id="@+id/imageViewStatus"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:layout_marginTop="25dp"
-                            android:src="@drawable/status_red" />
+                                <TextView
+                                    android:id="@+id/tVDevice"
+                                    android:layout_width="120dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="80dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="0.5"
+                                    android:textSize="22sp" />
+
+                                <ProgressBar
+                                    android:id="@+id/progressBar1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginRight="5dp" />
+                            </TableRow>
+
+                            <TableRow
+                                android:id="@+id/tableRow2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp" >
+
+                                <TextView
+                                    android:id="@+id/tvMsg"
+                                    android:layout_width="208dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="80dp"
+                                    android:layout_marginRight="5dp"
+                                    android:ellipsize="end"
+                                    android:textSize="18sp" />
+
+                                <ImageView
+                                    android:id="@+id/imageViewStatus"
+                                    android:layout_width="36dp"
+                                    android:layout_height="36dp"
+                                    android:src="@drawable/status_red" />
+                            </TableRow>
+                        </TableLayout>
                     </LinearLayout>
 
-                     <LinearLayout
-                         android:id="@+id/linearMsg"
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_marginTop="10dp"
-                         android:layout_weight="0.01"
-                         android:orientation="horizontal" >
+                    <LinearLayout
+                        android:id="@+id/bloodAdd"
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:background="@drawable/blood_box"
+                        android:orientation="vertical" >
 
-                         <TextView
-                             android:id="@+id/tvMsg"
-                             android:layout_width="208dp"
-                             android:layout_height="match_parent"
-                             android:layout_marginBottom="10dp"
-                             android:layout_marginLeft="5dp"
-                             android:layout_marginRight="5dp"
-                             android:layout_marginTop="10dp"
-                             android:layout_weight="0.67"
-                             android:ellipsize="end"
-                             android:textSize="18sp" />
+                        <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="80dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="20dp" >
 
-                         <ProgressBar
-                             android:id="@+id/progressBar1"
-                             android:layout_width="wrap_content"
-                             android:layout_height="wrap_content" />
-                     </LinearLayout>
-					
+                            <TableRow
+                                android:id="@+id/tableRowDis"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <TextView
+                                    android:id="@+id/textViewDis"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/pressure_dis"
+                                    android:textSize="20sp" />
+
+                                <EditText
+                                    android:id="@+id/editTextDis"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:ems="8"
+                                    android:inputType="numberDecimal" >
+
+                                    <requestFocus />
+                                </EditText>
+                            </TableRow>
+
+                            <TableRow
+                                android:id="@+id/tableRowSys"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" >
+
+                                <TextView
+                                    android:id="@+id/textViewSys"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/pressure_sys"
+                                    android:textSize="20sp" />
+
+                                <EditText
+                                    android:id="@+id/editTextSys"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ems="8"
+                                    android:inputType="numberDecimal" >
+
+                                    <requestFocus />
+                                </EditText>
+                            </TableRow>
+
+                            <TableRow
+                                android:id="@+id/tableRowButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp" >
+                                 <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"/>
+                                <Button
+                                    android:id="@+id/buttonSave"
+                                    android:layout_width="20dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="30dp"
+                                    android:layout_marginLeft="30dp"
+                                    android:text="@string/btn_save" />
+                            </TableRow>
+	                           
+                            
+                        </TableLayout>
+                    </LinearLayout>
+
                     <LinearLayout
                         android:id="@+id/deviceHeart"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="0.01"
+                        android:layout_height="170dp"
                         android:background="@drawable/heart2"
                         android:orientation="vertical" >
 
@@ -109,108 +189,110 @@
                             android:layout_gravity="right"
                             android:layout_marginRight="5dp"
                             android:layout_marginTop="20dp"
-                            android:layout_marginBottom="10dp"
                             android:layout_weight="0.02"
-                            android:textSize="25sp" />
+                            android:text="BBBBB"
+                            android:textSize="20sp" />
 
+                        <TextView
+                            android:id="@+id/tvSugestion"
+                            android:layout_width="165dp"
+                            android:layout_height="127dp"
+                            android:layout_gravity="right"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="0.05"
+                            android:ellipsize="end"
+                            android:text="AAA"
+                            android:textSize="18sp" />
                     </LinearLayout>
-					<TextView
-                        android:id="@+id/tvSugestion"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="0.05"
-                        android:background="#050505"
-                        android:ellipsize="end"
-                        android:textSize="18sp" />
                 </LinearLayout>
 
-               <LinearLayout
+                <LinearLayout
                     android:id="@+id/history"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" 
-                    android:orientation="vertical">
-                   
-                     <TextView
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
+
+                    <TextView
                         android:id="@+id/tvHistoryEmpty"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
                         android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
                         android:textSize="15sp" />
-                    
-                      <ListView
-                            android:id="@+id/listViewDataHistory"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" >
-                        </ListView>
-                      
-                        <LinearLayout
-                            android:id="@+id/history2"
+
+                    <ListView
+                        android:id="@+id/listViewDataHistory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" >
+                    </ListView>
+
+                    <LinearLayout
+                        android:id="@+id/history2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="horizontal" >
+
+                        <Button
+                            android:id="@+id/btnClearHistory"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:orientation="horizontal" >
-                            
-                               <Button
-                                    android:id="@+id/btnClearHistory"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/btn_clear_history" /> 
-                               <Button
-                                    android:id="@+id/btnShowGraphic"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/btn_graphic" /> 
-                        </LinearLayout>
+                            android:text="@string/btn_clear_history" />
+
+                        <Button
+                            android:id="@+id/btnShowGraphic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/btn_graphic" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/settings"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" 
-                    android:orientation="vertical">
-						<CheckBox
-					        android:id="@+id/checkBoxNotifications"
-					        android:layout_width="wrap_content"
-					        android:layout_height="wrap_content"
-					        android:layout_marginLeft="15dp"
-					        android:layout_marginTop="30dp"
-					        android:text="@string/text_notifications"
-					        android:textSize="20sp" />
-					
-					    <TextView
-					        android:id="@+id/tVNotificationsDescription"
-					        android:layout_width="255dp"
-					        android:layout_height="70dp"
-					        android:layout_marginLeft="53dp"
-					        android:layout_marginRight="10dp"
-					        android:text="@string/text_notifications_description"
-					        android:textSize="15sp" />
-					
-					    <TimePicker
-					        android:id="@+id/timePicker1"
-					        android:layout_width="wrap_content"
-					        android:layout_height="wrap_content"
-					        android:layout_gravity="center_horizontal"
-					        android:layout_marginBottom="15dp"
-					        android:layout_marginTop="15dp" />
-					
-					    <LinearLayout
-					        android:layout_width="wrap_content"
-					        android:layout_height="wrap_content"
-					        android:layout_gravity="center_horizontal" >
-					
-					        <Button
-					            android:id="@+id/btnOk"
-					            android:layout_width="wrap_content"
-					            android:layout_height="wrap_content"
-					            android:text="@string/btn_ok" />
-					    </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
+
+                    <CheckBox
+                        android:id="@+id/checkBoxNotifications"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="30dp"
+                        android:text="@string/text_notifications"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tVNotificationsDescription"
+                        android:layout_width="255dp"
+                        android:layout_height="70dp"
+                        android:layout_marginLeft="53dp"
+                        android:layout_marginRight="10dp"
+                        android:text="@string/text_notifications_description"
+                        android:textSize="15sp" />
+
+                    <TimePicker
+                        android:id="@+id/timePicker1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="15dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal" >
+
+                        <Button
+                            android:id="@+id/btnOk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/btn_ok" />
+                    </LinearLayout>
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>

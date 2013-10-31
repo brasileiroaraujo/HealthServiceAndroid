@@ -39,4 +39,7 @@
     <string name="graph_diastolic">Diastolic (mmHg)</string>
     <string name="graph_systolic">Systolic (mmHg)</string>
     <string name="unit_mmHg">mmHg</string>
+    <string name="manual_data">Manual Data.</string>
+    <string name="save_success">Data saved with success.</string>
+    <string name="invalid_data">Invalid data.</string>
 </resources>

@@ -27,187 +27,196 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" >
 
-                <LinearLayout
-                    android:id="@+id/data"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="vertical" >
+                <ScrollView
+                    android:id="@+id/scrollView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" 
+                    android:layout_gravity="center_horizontal">
 
                     <LinearLayout
-                        android:id="@+id/deviceData"
+                        android:id="@+id/data"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bluetooth_box"
-                        android:orientation="horizontal" >
-
-                        <TableLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="170dp"
-                            android:layout_weight="0.98" >
-
-                            <TableRow
-                                android:id="@+id/tableRow1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:layout_weight="0.6" >
-
-                                <TextView
-                                    android:id="@+id/tVDevice"
-                                    android:layout_width="120dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginLeft="80dp"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_weight="0.5"
-                                    android:textSize="22sp" />
-
-                                <ProgressBar
-                                    android:id="@+id/progressBar1"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_marginRight="5dp" />
-                            </TableRow>
-
-                            <TableRow
-                                android:id="@+id/tableRow2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="5dp" >
-
-                                <TextView
-                                    android:id="@+id/tvMsg"
-                                    android:layout_width="208dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginLeft="80dp"
-                                    android:layout_marginRight="5dp"
-                                    android:ellipsize="end"
-                                    android:textSize="18sp" />
-
-                                <ImageView
-                                    android:id="@+id/imageViewStatus"
-                                    android:layout_width="36dp"
-                                    android:layout_height="36dp"
-                                    android:src="@drawable/status_red" />
-                            </TableRow>
-                        </TableLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/bloodAdd"
-                        android:layout_width="match_parent"
-                        android:layout_height="170dp"
-                        android:background="@drawable/blood_box"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
                         android:orientation="vertical" >
 
-                        <TableLayout
+                        <LinearLayout
+                            android:id="@+id/deviceData"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="80dp"
-                            android:layout_marginRight="5dp"
-                            android:layout_marginTop="20dp" >
-                            
-                            <TableRow
-                                android:id="@+id/tableRowSys"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" >
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bluetooth_box"
+                            android:orientation="horizontal" >
 
-                                <TextView
-                                    android:id="@+id/textViewSys"
+                            <TableLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="170dp"
+                                android:layout_weight="0.98" >
+
+                                <TableRow
+                                    android:id="@+id/tableRow1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/pressure_sys"
-                                    android:textSize="20sp" />
+                                    android:layout_marginTop="10dp"
+                                    android:layout_weight="0.6" >
 
-                                <EditText
-                                    android:id="@+id/editTextSystolic"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:ems="8"
-                                    android:inputType="numberDecimal" >
+                                    <TextView
+                                        android:id="@+id/tVDevice"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginLeft="80dp"
+                                        android:layout_marginTop="10dp"
+                                        android:layout_weight="0.5"
+                                        android:textSize="22sp" />
 
-                                    <requestFocus />
-                                </EditText>
-                            </TableRow>
-
-                            <TableRow
-                                android:id="@+id/tableRowDis"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" >
-
-                                <TextView
-                                    android:id="@+id/textViewDis"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/pressure_dis"
-                                    android:textSize="20sp" />
-
-                                <EditText
-                                    android:id="@+id/editTextDiastolic"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:ems="8"
-                                    android:inputType="numberDecimal" >
-
-                                    <requestFocus />
-                                </EditText>
-                            </TableRow>
-
-                            
-                            <TableRow
-                                android:id="@+id/tableRowButton"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="5dp" >
-                                 <TextView
+                                    <ProgressBar
+                                        android:id="@+id/progressBar1"
                                         android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"/>
-                                <Button
-                                    android:id="@+id/buttonSave"
-                                    android:layout_width="20dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginRight="5dp"
+                                        android:layout_marginTop="30dp" />
+                                </TableRow>
+
+                                <TableRow
+                                    android:id="@+id/tableRow2"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginRight="30dp"
-                                    android:layout_marginLeft="30dp"
-                                    android:text="@string/btn_save" />
-                            </TableRow>
-	                           
-                            
-                        </TableLayout>
+                                    android:layout_marginBottom="10dp" >
+
+                                    <TextView
+                                        android:id="@+id/tvMsg"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginLeft="80dp"
+                                        android:layout_marginRight="5dp"
+                                        android:ellipsize="end"
+                                        android:layout_weight="0.5"
+                                        android:textSize="18sp" />
+
+                                    <ImageView
+                                        android:id="@+id/imageViewStatus"
+                                         android:layout_width="36dp"
+                                        android:layout_height="36dp"
+                                        android:layout_marginRight="5dp"
+                                        android:layout_marginTop="5dp" 
+                                        android:src="@drawable/status_red" />
+                                </TableRow>
+                            </TableLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/bloodAdd"
+                            android:layout_width="match_parent"
+                            android:layout_height="170dp"
+                            android:background="@drawable/blood_box"
+                            android:orientation="vertical" >
+
+                            <TableLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="80dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginTop="20dp" >
+
+                                <TableRow
+                                    android:id="@+id/tableRowSys"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" >
+
+                                    <TextView
+                                        android:id="@+id/textViewSys"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/pressure_sys"
+                                        android:textSize="20sp" />
+
+                                    <EditText
+                                        android:id="@+id/editTextSystolic"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ems="8"
+                                        android:inputType="numberDecimal" >
+
+                                        <requestFocus />
+                                    </EditText>
+                                </TableRow>
+
+                                <TableRow
+                                    android:id="@+id/tableRowDis"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" >
+
+                                    <TextView
+                                        android:id="@+id/textViewDis"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/pressure_dis"
+                                        android:textSize="20sp" />
+
+                                    <EditText
+                                        android:id="@+id/editTextDiastolic"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:ems="8"
+                                        android:inputType="numberDecimal" >
+
+                                        <requestFocus />
+                                    </EditText>
+                                </TableRow>
+
+                                <TableRow
+                                    android:id="@+id/tableRowButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="5dp" >
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content" />
+
+                                    <Button
+                                        android:id="@+id/buttonSave"
+                                        android:layout_width="20dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="30dp"
+                                        android:layout_marginRight="30dp"
+                                        android:text="@string/btn_save" />
+                                </TableRow>
+                            </TableLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/deviceHeart"
+                            android:layout_width="match_parent"
+                            android:layout_height="170dp"
+                            android:background="@drawable/heart2"
+                            android:orientation="vertical" >
+
+                            <TextView
+                                android:id="@+id/tVMeasurement"
+                                android:layout_width="135dp"
+                                android:layout_height="127dp"
+                                android:layout_gravity="right"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_weight="0.02"
+                                android:text="BBBBB"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/tvSugestion"
+                                android:layout_width="165dp"
+                                android:layout_height="127dp"
+                                android:layout_gravity="right"
+                                android:layout_marginBottom="15dp"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="0.05"
+                                android:ellipsize="end"
+                                android:text="AAA"
+                                android:textSize="18sp" />
+                        </LinearLayout>
                     </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/deviceHeart"
-                        android:layout_width="match_parent"
-                        android:layout_height="170dp"
-                        android:background="@drawable/heart2"
-                        android:orientation="vertical" >
-
-                        <TextView
-                            android:id="@+id/tVMeasurement"
-                            android:layout_width="135dp"
-                            android:layout_height="127dp"
-                            android:layout_gravity="right"
-                            android:layout_marginRight="5dp"
-                            android:layout_marginTop="20dp"
-                            android:layout_weight="0.02"
-                            android:text="BBBBB"
-                            android:textSize="20sp" />
-
-                        <TextView
-                            android:id="@+id/tvSugestion"
-                            android:layout_width="165dp"
-                            android:layout_height="127dp"
-                            android:layout_gravity="right"
-                            android:layout_marginBottom="15dp"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="5dp"
-                            android:layout_weight="0.05"
-                            android:ellipsize="end"
-                            android:text="AAA"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-                </LinearLayout>
+                </ScrollView>
 
                 <LinearLayout
                     android:id="@+id/history"

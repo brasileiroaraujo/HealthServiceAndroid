@@ -281,9 +281,9 @@ public class HealthServiceTestActivity extends Activity {
         GraphViewData[] datasGraphDia = new GraphViewData[datasHistoryInternal
                 .size()];
         for (int i = 0; i < datasHistoryInternal.size(); i++) {
-            datasGraphSys[i] = new GraphViewData(i + 1, datasHistoryInternal
+            datasGraphSys[i] = new GraphViewData(i, datasHistoryInternal
                     .get(i).getSystolic());
-            datasGraphDia[i] = new GraphViewData(i + 1, datasHistoryInternal
+            datasGraphDia[i] = new GraphViewData(i, datasHistoryInternal
                     .get(i).getDiastolic());
         }
         GraphViewSeriesStyle seriesStyleSys = new GraphViewSeriesStyle();

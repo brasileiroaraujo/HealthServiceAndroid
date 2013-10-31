@@ -1,7 +1,7 @@
 package br.ufcg.embedded.health.servicetest;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -22,10 +22,9 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -75,7 +74,8 @@ public class HealthServiceTestActivity extends Activity {
     private LinearLayout layoutPopUp;
     private LinearLayout layoutMain;
     private Button btnGraphic;
-    
+    private Button btnSave;
+
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -139,9 +139,9 @@ public class HealthServiceTestActivity extends Activity {
                             Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.btnShowGraphic:
-                        layoutMain.setVisibility(View.GONE);
-                        popUp.showAtLocation(layoutPopUp, Gravity.START, 10, 10);
-                        popUp.update(10,10, 520, 600);
+                    layoutMain.setVisibility(View.GONE);
+                    popUp.showAtLocation(layoutPopUp, Gravity.START, 10, 10);
+                    popUp.update(10, 10, 520, 600);
                     break;
                 case R.id.btnClearHistory:
                     HealthDAO mDAO = HealthDAO.getInstance(frame);
@@ -196,8 +196,12 @@ public class HealthServiceTestActivity extends Activity {
         map = new HashMap<String, String>();
         popUp = new PopupWindow(this);
         btnGraphic = new Button(this);
-        btnGraphic.setText(getResources().getString(R.string.btn_close_graphic));
+        btnGraphic
+                .setText(getResources().getString(R.string.btn_close_graphic));
         btnGraphic.setOnClickListener(onclick);
+        btnSave = (Button) findViewById(R.id.buttonSave);
+        btnSave.setOnClickListener(onClickSave);
+
         layoutPopUp = new LinearLayout(this);
         layoutPopUp.setOrientation(LinearLayout.VERTICAL);
         layoutMain = (LinearLayout) findViewById(R.id.linearMain);
@@ -218,48 +222,102 @@ public class HealthServiceTestActivity extends Activity {
     }
 
     private OnClickListener onclick = new OnClickListener() {
-        
+
         @Override
         public void onClick(View v) {
             popUp.dismiss();
             layoutMain.setVisibility(View.VISIBLE);
         }
     };
-    private void initGraphic() {
-        List<HealthData> datasHistoryInternal = HealthDAO.getInstance(this).ListAll();
-        GraphViewData[] datasGraphSys = new GraphViewData[datasHistoryInternal.size()];
-        GraphViewData[] datasGraphDia = new GraphViewData[datasHistoryInternal.size()];
-        for (int i = 0; i < datasHistoryInternal.size(); i++) {
-            datasGraphSys[i] = new GraphViewData(i+1, datasHistoryInternal.get(i).getSystolic());
-            datasGraphDia[i] = new GraphViewData(i+1, datasHistoryInternal.get(i).getDiastolic());
+
+    private OnClickListener onClickSave = new OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            EditText editTextSys = (EditText) findViewById(R.id.editTextSystolic);
+            EditText editTextDis = (EditText) findViewById(R.id.editTextDiastolic);
+            String sys = editTextSys.getText().toString();
+            String dis = editTextDis.getText().toString();
+            HealthDAO healthDao = HealthDAO.getInstance(frame);
+
+            try {
+                HealthData dataInsert = new HealthData(getResources()
+                        .getString(R.string.manual_data),
+                        Double.parseDouble(sys), Double.parseDouble(dis), 0.0,
+                        new Date());
+                healthDao.save(dataInsert);
+
+                editTextDis.setText("");
+                editTextSys.setText("");
+
+                showResults(dataInsert);
+                updateListHistory();
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(),
+                        getResources().getString(R.string.invalid_data),
+                        Toast.LENGTH_SHORT).show();
+            }
+
         }
-        GraphViewSeriesStyle seriesStyleSys = new GraphViewSeriesStyle();  
+
+        private void showResults(HealthData dataInsert) {
+            data.setText(frame.getResources().getString(R.string.pressure_sys)
+                    + " " + dataInsert.getSystolic().intValue() + "\n"
+                    + frame.getResources().getString(R.string.pressure_dis)
+                    + " " + dataInsert.getDiastolic().intValue() + "\n" + "*"
+                    + frame.getResources().getString(R.string.unit_mmHg));
+            sugestion.setText(Handlers.analyzePressure(dataInsert.getSystolic()
+                    .intValue(), dataInsert.getDiastolic().intValue()));
+
+        }
+
+    };
+
+    private void initGraphic() {
+        List<HealthData> datasHistoryInternal = HealthDAO.getInstance(this)
+                .ListAll();
+        GraphViewData[] datasGraphSys = new GraphViewData[datasHistoryInternal
+                .size()];
+        GraphViewData[] datasGraphDia = new GraphViewData[datasHistoryInternal
+                .size()];
+        for (int i = 0; i < datasHistoryInternal.size(); i++) {
+            datasGraphSys[i] = new GraphViewData(i + 1, datasHistoryInternal
+                    .get(i).getSystolic());
+            datasGraphDia[i] = new GraphViewData(i + 1, datasHistoryInternal
+                    .get(i).getDiastolic());
+        }
+        GraphViewSeriesStyle seriesStyleSys = new GraphViewSeriesStyle();
         seriesStyleSys.color = Color.RED;
-        GraphViewSeriesStyle seriesStyleDia = new GraphViewSeriesStyle();  
-        seriesStyleDia.color = Color.GREEN ;
-        GraphViewSeries graphDys = new GraphViewSeries(getResources().getString(R.string.graph_systolic), seriesStyleSys,datasGraphSys);
-        GraphViewSeries graphDia = new GraphViewSeries(getResources().getString(R.string.graph_diastolic), seriesStyleDia, datasGraphDia);
-        GraphView graphView = new LineGraphView(this, getResources().getString(R.string.graph_title)){
+        GraphViewSeriesStyle seriesStyleDia = new GraphViewSeriesStyle();
+        seriesStyleDia.color = Color.GREEN;
+        GraphViewSeries graphDys = new GraphViewSeries(getResources()
+                .getString(R.string.graph_systolic), seriesStyleSys,
+                datasGraphSys);
+        GraphViewSeries graphDia = new GraphViewSeries(getResources()
+                .getString(R.string.graph_diastolic), seriesStyleDia,
+                datasGraphDia);
+        GraphView graphView = new LineGraphView(this, getResources().getString(
+                R.string.graph_title)) {
             @Override
-            protected String formatLabel(double value, boolean isValueX) { 
-               return String.valueOf((int) value);
+            protected String formatLabel(double value, boolean isValueX) {
+                return String.valueOf((int) value);
             }
         };
         graphView.addSeries(graphDys);
         graphView.addSeries(graphDia);
         graphView.getGraphViewStyle().setTextSize(18);
-        graphView.setViewPort(2, 10);  
-        graphView.getGraphViewStyle().setNumHorizontalLabels(5); 
+        graphView.setViewPort(2, 10);
+        graphView.getGraphViewStyle().setNumHorizontalLabels(5);
         graphView.setHorizontalScrollBarEnabled(true);
         graphView.setScrollable(true);
         graphView.setScalable(true);
-        graphView.setShowLegend(true); 
-        graphView.setLegendAlign(LegendAlign.MIDDLE);  
+        graphView.setShowLegend(true);
+        graphView.setLegendAlign(LegendAlign.MIDDLE);
         graphView.setLegendWidth(190);
-        
-        layoutPopUp.addView(graphView,500,500);
+
+        layoutPopUp.addView(graphView, 500, 500);
         layoutPopUp.addView(btnGraphic);
-   }
+    }
 
     public void updateListHistory() {
         datasHistory = HealthDAO.getInstance(this).ListAll();

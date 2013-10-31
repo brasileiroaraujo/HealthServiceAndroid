@@ -6,6 +6,7 @@
     <string name="btn_ok">OK</string>
     <string name="btn_clear_history">Limpar histórico</string>
     <string name="btn_graphic">Mostrar gráfico</string>
+    <string name="btn_close_graphic">Fechar gráfico</string>
     <string name="tab_history">Histórico</string>
     <string name="tab_settings">Configurações</string>
     <string name="tab_data">Dados</string>
@@ -33,4 +34,7 @@
     <string name="notification_title">MyPressure Lembrete</string>
     <string name="notification_text">Clique aqui para aferir sua pressão hoje</string>
     <string name="format_date">dd-MM-yyyy HH:mm:ss</string>
+    <string name="graph_title">Gráfico da Pressão Sanguínea</string>
+    <string name="graph_diastolic">Diastólica</string>
+    <string name="graph_systolic">Sistólica</string>
 </resources>

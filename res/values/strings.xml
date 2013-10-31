@@ -6,6 +6,7 @@
     <string name="btn_ok">OK</string>
     <string name="btn_clear_history">Clear history</string>
     <string name="btn_graphic">Show graphic</string>
+    <string name="btn_close_graphic">Close graphic</string>
     <string name="tab_history">History</string>
     <string name="tab_settings">Settings</string>
     <string name="tab_data">Data</string>
@@ -33,4 +34,7 @@
     <string name="notification_title">MyPressure Reminder</string>
     <string name="notification_text">Click here to check your pressure today</string>
     <string name="format_date">yyyy-MM-dd HH:mm:ss</string>
+    <string name="graph_title">Blood Pressure Graph</string>
+    <string name="graph_diastolic">Diastolic</string>
+    <string name="graph_systolic">Systolic</string>
 </resources>

@@ -1,5 +1,6 @@
 package br.ufcg.embedded.health.servicetest;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -37,7 +39,9 @@ import br.ufcg.embedded.health.structures.HealthData;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GraphView.GraphViewData;
+import com.jjoe64.graphview.GraphView.LegendAlign;
 import com.jjoe64.graphview.GraphViewSeries;
+import com.jjoe64.graphview.GraphViewSeries.GraphViewSeriesStyle;
 import com.jjoe64.graphview.LineGraphView;
 import com.signove.health.service.HealthAgentAPI;
 import com.signove.health.service.HealthServiceAPI;
@@ -67,11 +71,11 @@ public class HealthServiceTestActivity extends Activity {
     private HealthAgentAPI.Stub agent;
 
     private Map<String, String> map;
-    PopupWindow popUp;
-    boolean click = true;
-    LayoutParams params;
-    LinearLayout layoutMain;
-
+    private PopupWindow popUp;
+    private LinearLayout layoutPopUp;
+    private LinearLayout layoutMain;
+    private Button btnGraphic;
+    
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -108,14 +112,6 @@ public class HealthServiceTestActivity extends Activity {
         boolean notification = sharedPreferences.getBoolean(
                 NOTIFICATION_ACTIVE, true);
 
-        OnLongClickListener l = new OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                finish();
-                return true;
-            }
-        };
-
         OnClickListener o = new OnClickListener() {
 
             @Override
@@ -143,18 +139,9 @@ public class HealthServiceTestActivity extends Activity {
                             Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.btnShowGraphic:
-                    if (click) {
-                        popUp.showAtLocation(layoutMain, Gravity.START, 10, 10);
-                        popUp.setFocusable(true);
-                        popUp.update(100, 100, 600, 500);
-                        btnShowGraphic.setText("Close Graphic");
-                        click = false;
-                    } else {
-                        popUp.dismiss();
-                        btnShowGraphic.setText(getResources().getString(
-                                R.string.btn_graphic));
-                        click = true;
-                    }
+                        layoutMain.setVisibility(View.GONE);
+                        popUp.showAtLocation(layoutPopUp, Gravity.START, 10, 10);
+                        popUp.update(10,10, 520, 600);
                     break;
                 case R.id.btnClearHistory:
                     HealthDAO mDAO = HealthDAO.getInstance(frame);
@@ -199,10 +186,6 @@ public class HealthServiceTestActivity extends Activity {
         btnShowGraphic = (Button) findViewById(R.id.btnShowGraphic);
         btnClearHistory = (Button) findViewById(R.id.btnClearHistory);
 
-        sugestion.setOnLongClickListener(l);
-        menssage.setOnLongClickListener(l);
-        device.setOnLongClickListener(l);
-        data.setOnLongClickListener(l);
         cbNotification.setOnClickListener(o);
         btnOk.setOnClickListener(o);
         btnShowGraphic.setOnClickListener(o);
@@ -212,30 +195,15 @@ public class HealthServiceTestActivity extends Activity {
 
         map = new HashMap<String, String>();
         popUp = new PopupWindow(this);
-        layoutMain = new LinearLayout(this);
-        layoutMain.setOrientation(LinearLayout.VERTICAL);
-       initGraphic();
-        popUp.setContentView(layoutMain);
+        btnGraphic = new Button(this);
+        btnGraphic.setText(getResources().getString(R.string.btn_close_graphic));
+        btnGraphic.setOnClickListener(onclick);
+        layoutPopUp = new LinearLayout(this);
+        layoutPopUp.setOrientation(LinearLayout.VERTICAL);
+        layoutMain = (LinearLayout) findViewById(R.id.linearMain);
+        initGraphic();
+        popUp.setContentView(layoutPopUp);
 
-//        AlertDialog.Builder builder = new AlertDialog.Builder(
-//                getApplicationContext());
-//        builder.setCancelable(true);
-//        builder.setTitle("Title");
-//        //builder.setMessage( initGraphic());
-//       LinearLayout layout3 = (LinearLayout) findViewById(R.id.data);
-//       // builder.setView(R.id.data);
-//        builder.setInverseBackgroundForced(true);
-//        builder.setPositiveButton("Close",
-//                new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog,
-//                            int which) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//        AlertDialog alert = builder.create();
-//        alert.show();
-        
         updateListHistory();
 
         Intent intent = new Intent("com.signove.health.service.HealthService");
@@ -249,31 +217,47 @@ public class HealthServiceTestActivity extends Activity {
         data.setText("--");
     }
 
+    private OnClickListener onclick = new OnClickListener() {
+        
+        @Override
+        public void onClick(View v) {
+            popUp.dismiss();
+            layoutMain.setVisibility(View.VISIBLE);
+        }
+    };
     private void initGraphic() {
         List<HealthData> datasHistoryInternal = HealthDAO.getInstance(this).ListAll();
-        
-        GraphViewData[] datasGraph = new GraphViewData[datasHistoryInternal.size()];
+        GraphViewData[] datasGraphSys = new GraphViewData[datasHistoryInternal.size()];
+        GraphViewData[] datasGraphDia = new GraphViewData[datasHistoryInternal.size()];
         for (int i = 0; i < datasHistoryInternal.size(); i++) {
-            datasGraph[i] = new GraphViewData(i+1, datasHistoryInternal.get(i).getSystolic());
+            datasGraphSys[i] = new GraphViewData(i+1, datasHistoryInternal.get(i).getSystolic());
+            datasGraphDia[i] = new GraphViewData(i+1, datasHistoryInternal.get(i).getDiastolic());
         }
+        GraphViewSeriesStyle seriesStyleSys = new GraphViewSeriesStyle();  
+        seriesStyleSys.color = Color.RED;
+        GraphViewSeriesStyle seriesStyleDia = new GraphViewSeriesStyle();  
+        seriesStyleDia.color = Color.GREEN ;
+        GraphViewSeries graphDys = new GraphViewSeries(getResources().getString(R.string.graph_systolic), seriesStyleSys,datasGraphSys);
+        GraphViewSeries graphDia = new GraphViewSeries(getResources().getString(R.string.graph_diastolic), seriesStyleDia, datasGraphDia);
+        GraphView graphView = new LineGraphView(this, getResources().getString(R.string.graph_title)){
+            @Override
+            protected String formatLabel(double value, boolean isValueX) { 
+               return String.valueOf((int) value);
+            }
+        };
+        graphView.addSeries(graphDys);
+        graphView.addSeries(graphDia);
+        graphView.getGraphViewStyle().setTextSize(18);
+        graphView.setViewPort(2, 10);  
+        graphView.getGraphViewStyle().setNumHorizontalLabels(5); 
+        graphView.setHorizontalScrollBarEnabled(true);
+        graphView.setScrollable(true);
+        graphView.setScalable(true);
+        graphView.setShowLegend(true); 
+        graphView.setLegendAlign(LegendAlign.MIDDLE);  
         
-        GraphViewSeries graph = new GraphViewSeries(datasGraph
-               // new GraphViewData[] { 
-                        
-                        
-                        
-                        
-                        
-                      //  new GraphViewData(1, 2.0d),
-                       // new GraphViewData(2, 1.5d), new GraphViewData(3, 2.5d),
-                //        new GraphViewData(4, 1.0d) }
-                );
-
-        GraphView graphView = new LineGraphView(this, "Blood Pressure Graph");
-        graphView.addSeries(graph); // data
-        layoutMain.addView(graphView, 600, 450);
-        
-        
+        layoutPopUp.addView(graphView,500,500);
+        layoutPopUp.addView(btnGraphic);
    }
 
     public void updateListHistory() {

@@ -140,6 +140,7 @@ public class HealthServiceTestActivity extends Activity {
                     break;
                 case R.id.btnShowGraphic:
                     layoutMain.setVisibility(View.GONE);
+                    initGraphic();
                     popUp.showAtLocation(layoutPopUp, Gravity.START, 10, 10);
                     popUp.update(10, 10, 520, 600);
                     break;
@@ -205,7 +206,7 @@ public class HealthServiceTestActivity extends Activity {
         layoutPopUp = new LinearLayout(this);
         layoutPopUp.setOrientation(LinearLayout.VERTICAL);
         layoutMain = (LinearLayout) findViewById(R.id.linearMain);
-        initGraphic();
+        //initGraphic();
         popUp.setContentView(layoutPopUp);
 
         updateListHistory();
@@ -227,6 +228,7 @@ public class HealthServiceTestActivity extends Activity {
         public void onClick(View v) {
             popUp.dismiss();
             layoutMain.setVisibility(View.VISIBLE);
+            layoutPopUp.removeAllViews();
         }
     };
 

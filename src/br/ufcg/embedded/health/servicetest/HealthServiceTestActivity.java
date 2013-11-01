@@ -378,15 +378,6 @@ public class HealthServiceTestActivity extends Activity {
 
         GregorianCalendar data = calculateNotificationDate();
 
-        Log.e("MAX DIA",
-                String.valueOf(data.getActualMaximum(Calendar.DAY_OF_MONTH)));
-        Log.e("MES", String.valueOf(data.get(Calendar.MONTH)));
-        Log.e("DIA", String.valueOf(data.get(Calendar.DAY_OF_MONTH)));
-        Log.e("ANO", String.valueOf(data.get(Calendar.YEAR)));
-        // Log.e("DIA", String.valueOf(data.get(Calendar.DAY_OF_MONTH)));
-        // Log.e("HORA",String.valueOf(data.get(Calendar.HOUR_OF_DAY)));
-        // Log.e("MIN",String.valueOf(data.get(Calendar.MINUTE)));
-
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
                 data.getTimeInMillis(), 1000 * 60 * 60 * 24, pendingIntent);
     }

@@ -50,8 +50,28 @@
                             <TableLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="170dp"
+                                android:layout_marginTop="20dp"
                                 android:layout_weight="0.98" >
-
+                                   <TableRow
+                                    android:id="@+id/tableRow1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:layout_weight="0.1" >
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="0.9"/>
+                                     <ImageView
+                                        android:id="@+id/imageViewHelp"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_marginRight="8dp"
+                                        android:layout_gravity="right"
+                                        android:layout_weight="0.01"
+                                        android:src="@drawable/help" />
+                                   
+                                </TableRow>
                                 <TableRow
                                     android:id="@+id/tableRow1"
                                     android:layout_width="wrap_content"
@@ -64,7 +84,6 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:layout_marginLeft="80dp"
-                                        android:layout_marginTop="10dp"
                                         android:layout_weight="0.5"
                                         android:textSize="22sp" />
 
@@ -73,7 +92,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_marginRight="5dp"
-                                        android:layout_marginTop="30dp" />
+                                        android:layout_marginTop="15dp" />
                                 </TableRow>
 
                                 <TableRow
@@ -114,28 +133,39 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="80dp"
                                 android:layout_marginRight="5dp"
-                                android:layout_marginTop="20dp" >
+                                android:layout_marginTop="20dp" 
+                                android:stretchColumns="1">
 
                                 <TableRow
                                     android:id="@+id/tableRowSys"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp" >
+                                    android:layout_height="wrap_content" >
 
                                     <TextView
                                         android:id="@+id/textViewSys"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="@string/pressure_sys"
+                                        android:layout_marginTop="5dp"
                                         android:textSize="20sp" />
 
                                     <EditText
                                         android:id="@+id/editTextSystolic"
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginTop="5dp"
                                         android:ems="8"
                                         android:inputType="numberDecimal" >
                                     </EditText>
+
+                                     <ImageView
+                                         android:id="@+id/imageViewHelp2"
+                                         android:layout_width="20dp"
+                                         android:layout_height="20dp"
+                                         android:layout_marginRight="5dp"
+                                         android:layout_marginLeft="5dp"
+                                         android:src="@drawable/help" />
+
                                 </TableRow>
 
                                 <TableRow
@@ -146,7 +176,7 @@
                                     <TextView
                                         android:id="@+id/textViewDis"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="match_parent"
                                         android:text="@string/pressure_dis"
                                         android:textSize="20sp" />
 

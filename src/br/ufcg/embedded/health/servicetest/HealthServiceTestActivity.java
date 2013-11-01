@@ -1,6 +1,8 @@
 package br.ufcg.embedded.health.servicetest;
 
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -75,6 +77,7 @@ public class HealthServiceTestActivity extends Activity {
     private LinearLayout layoutMain;
     private Button btnGraphic;
     private Button btnSave;
+    private boolean popUpVisible = false;
 
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
@@ -143,6 +146,7 @@ public class HealthServiceTestActivity extends Activity {
                     initGraphic();
                     popUp.showAtLocation(layoutPopUp, Gravity.START, 10, 10);
                     popUp.update(10, 10, 520, 600);
+                    popUpVisible = true;
                     break;
                 case R.id.btnClearHistory:
                     HealthDAO mDAO = HealthDAO.getInstance(frame);
@@ -206,7 +210,7 @@ public class HealthServiceTestActivity extends Activity {
         layoutPopUp = new LinearLayout(this);
         layoutPopUp.setOrientation(LinearLayout.VERTICAL);
         layoutMain = (LinearLayout) findViewById(R.id.linearMain);
-        //initGraphic();
+        // initGraphic();
         popUp.setContentView(layoutPopUp);
 
         updateListHistory();
@@ -275,16 +279,29 @@ public class HealthServiceTestActivity extends Activity {
 
     };
 
+    @Override
+    public void onBackPressed() {
+        if(popUpVisible){
+            popUp.dismiss();
+            layoutMain.setVisibility(View.VISIBLE);
+            layoutPopUp.removeAllViews();
+        }else{
+            super.onBackPressed();
+        }
+         
+    }
+
     private void initGraphic() {
         List<HealthData> datasHistoryInternal = HealthDAO.getInstance(this)
                 .ListAll();
+        Collections.reverse(datasHistoryInternal);
         GraphViewData[] datasGraphSys = new GraphViewData[datasHistoryInternal
                 .size()];
         GraphViewData[] datasGraphDia = new GraphViewData[datasHistoryInternal
                 .size()];
         for (int i = 0; i < datasHistoryInternal.size(); i++) {
             datasGraphSys[i] = new GraphViewData(i + 1, datasHistoryInternal
-                    .get(i).getSystolic()); 
+                    .get(i).getSystolic());
             datasGraphDia[i] = new GraphViewData(i + 1, datasHistoryInternal
                     .get(i).getDiastolic());
         }

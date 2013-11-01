@@ -41,4 +41,6 @@
     <string name="manual_data">Manual Data.</string>
     <string name="save_success">Data saved with success.</string>
     <string name="invalid_data">Invalid data.</string>
+    <string name="about">About</string>
+    <string name="about_text">Software for monitoring blood pressure, where the user can enter data manually or bluetooth (if the blood pressure device is supported). \n\nDevelopers: \nAnne Moreira (annelorayne@gmail.com)) \nTheocrito Moura (theomouram@gmail.com) \nTiago Brasileiro (brasileiroaraujo@gmail.com)</string>
 </resources>

@@ -1,7 +1,6 @@
 package br.ufcg.embedded.health.servicetest;
 
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -9,10 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
@@ -22,6 +24,9 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -78,6 +83,7 @@ public class HealthServiceTestActivity extends Activity {
     private Button btnGraphic;
     private Button btnSave;
     private boolean popUpVisible = false;
+    
 
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
@@ -106,6 +112,9 @@ public class HealthServiceTestActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        ActionBar actionBar = getActionBar();
+        actionBar.setHomeButtonEnabled(true);
 
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         myIntent = new Intent(this, NotificationReceiver.class);
@@ -280,14 +289,14 @@ public class HealthServiceTestActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        if(popUpVisible){
+        if (popUpVisible) {
             popUp.dismiss();
             layoutMain.setVisibility(View.VISIBLE);
             layoutPopUp.removeAllViews();
-        }else{
+        } else {
             super.onBackPressed();
         }
-         
+
     }
 
     private void initGraphic() {
@@ -412,5 +421,38 @@ public class HealthServiceTestActivity extends Activity {
 
         return new GregorianCalendar(year, month, dayOfMonth,
                 timePicker.getCurrentHour(), timePicker.getCurrentMinute());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.action_bar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.action_refresh:
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(frame);
+            builder1.setTitle("About");
+            builder1.setMessage(frame.getResources().getString(R.string.about_text));
+            builder1.setCancelable(true);
+            builder1.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+            break;
+
+        default:
+            break;
+        }
+
+        return true;
     }
 }

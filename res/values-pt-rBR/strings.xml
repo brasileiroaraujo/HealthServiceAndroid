@@ -41,4 +41,7 @@
     <string name="manual_data">Dados manuais.</string>
     <string name="save_success">Dados salvos com sucesso.</string>
     <string name="invalid_data">Dados inválidos.</string>
+    <string name="about">Sobre</string>
+    <string name="about_text">Software de acompanhamento da pressão arterial, onde o usuário poderá informar os dados de forma manual ou via bluetooth (caso o medidor de pressão tenha suporte). \n\nDesenvolvedores: \nAnne Moreira (annelorayne@gmail.com)) \nTheocrito Moura (theomouram@gmail.com) \nTiago Brasileiro (brasileiroaraujo@gmail.com)</string>
+    
 </resources>

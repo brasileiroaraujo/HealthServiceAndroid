@@ -50,31 +50,29 @@
                             <TableLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="170dp"
-                                android:layout_weight="0.98"
-                                 >
-                                   <TableRow
+                                android:layout_weight="0.98" >
+
+                                <TableRow
                                     android:id="@+id/tableRow1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="20dp"
+                                    android:layout_marginTop="15dp"
                                     android:layout_weight="0.01" >
-                                    <RelativeLayout 
+
+                                    <RelativeLayout
                                         android:layout_width="wrap_content"
-	                                    android:layout_height="wrap_content"
-	                                   
-                                    >
+                                        android:layout_height="wrap_content" >
+
                                         <ImageView
-                                        android:id="@+id/imageViewHelp"
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
-                                        android:layout_marginRight="5dp"
-                                        android:layout_alignParentRight="true"
-                                        android:src="@drawable/help" />
+                                            android:id="@+id/imageViewHelp"
+                                            android:layout_width="20dp"
+                                            android:layout_height="20dp"
+                                            android:layout_marginRight="3dp"
+                                            android:layout_alignParentRight="true"
+                                            android:src="@drawable/help" />
                                     </RelativeLayout>
-                                    
-                                     
-                                   
                                 </TableRow>
+
                                 <TableRow
                                     android:id="@+id/tableRow1"
                                     android:layout_width="wrap_content"
@@ -135,8 +133,8 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="80dp"
                                 android:layout_marginRight="5dp"
-                                android:layout_marginTop="20dp" 
-                                android:stretchColumns="1">
+                                android:layout_marginTop="15dp"
+                                android:stretchColumns="1" >
 
                                 <TableRow
                                     android:id="@+id/tableRowSys"
@@ -147,8 +145,8 @@
                                         android:id="@+id/textViewSys"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="@string/pressure_sys"
                                         android:layout_marginTop="5dp"
+                                        android:text="@string/pressure_sys"
                                         android:textSize="20sp" />
 
                                     <EditText
@@ -160,14 +158,17 @@
                                         android:inputType="numberDecimal" >
                                     </EditText>
 
-                                     <ImageView
-                                         android:id="@+id/imageViewHelp2"
-                                         android:layout_width="20dp"
-                                         android:layout_height="20dp"
-                                         android:layout_marginRight="5dp"
-                                         android:layout_marginLeft="5dp"
-                                         android:src="@drawable/help" />
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent" >
 
+                                        <ImageView
+                                            android:id="@+id/imageViewHelp2"
+                                            android:layout_width="20dp"
+                                            android:layout_height="20dp"
+                                            android:layout_alignParentRight="true"
+                                            android:src="@drawable/help" />
+                                    </RelativeLayout>
                                 </TableRow>
 
                                 <TableRow

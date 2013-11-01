@@ -12,7 +12,9 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.PendingIntent;
+import android.app.AlertDialog.Builder;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,6 +26,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,6 +35,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -53,6 +57,7 @@ import com.signove.health.service.HealthAgentAPI;
 import com.signove.health.service.HealthServiceAPI;
 
 public class HealthServiceTestActivity extends Activity {
+	private static final int DIALOG_ALERT = 10;
     private static final String APP_PREF_FILE = "appPreferences";
     private static final String NOTIFICATION_ACTIVE = "notificationActive";
 
@@ -75,6 +80,7 @@ public class HealthServiceTestActivity extends Activity {
     private List<HealthData> datasHistory;
     private ListView list;
     private HealthAgentAPI.Stub agent;
+    private ImageView imgHelpBluetooth;
 
     private Map<String, String> map;
     private PopupWindow popUp;
@@ -199,7 +205,9 @@ public class HealthServiceTestActivity extends Activity {
         btnOk = (Button) findViewById(R.id.btnOk);
         btnShowGraphic = (Button) findViewById(R.id.btnShowGraphic);
         btnClearHistory = (Button) findViewById(R.id.btnClearHistory);
+        imgHelpBluetooth = (ImageView) findViewById(R.id.imageViewHelp);
 
+        imgHelpBluetooth.setOnClickListener(onClickHelpBluetooth);
         cbNotification.setOnClickListener(o);
         btnOk.setOnClickListener(o);
         btnShowGraphic.setOnClickListener(o);
@@ -216,6 +224,7 @@ public class HealthServiceTestActivity extends Activity {
         btnSave = (Button) findViewById(R.id.buttonSave);
         btnSave.setOnClickListener(onClickSave);
 
+        
         layoutPopUp = new LinearLayout(this);
         layoutPopUp.setOrientation(LinearLayout.VERTICAL);
         layoutMain = (LinearLayout) findViewById(R.id.linearMain);
@@ -244,6 +253,14 @@ public class HealthServiceTestActivity extends Activity {
             layoutPopUp.removeAllViews();
         }
     };
+    
+    private OnClickListener  onClickHelpBluetooth = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			showDialog(DIALOG_ALERT);
+		}
+	};
 
     private OnClickListener onClickSave = new OnClickListener() {
 
@@ -379,6 +396,21 @@ public class HealthServiceTestActivity extends Activity {
         editor.putBoolean(NOTIFICATION_ACTIVE, value);
         editor.commit();
     }
+    
+    @Override
+	protected Dialog onCreateDialog(int id) {
+		LayoutInflater inflater = getLayoutInflater();
+		switch (id) {
+		case DIALOG_ALERT:
+			Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage("This will end the activity");
+			builder.setCancelable(true);
+//			builder.setView(inflater.inflate(R.layout.activity_main, null));
+			AlertDialog dialog = builder.create();
+			dialog.show();
+		}
+		return super.onCreateDialog(id);
+	}
 
     private void setAlarm() {
 

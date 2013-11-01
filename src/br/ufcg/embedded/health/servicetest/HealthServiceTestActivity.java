@@ -57,7 +57,6 @@ import com.signove.health.service.HealthAgentAPI;
 import com.signove.health.service.HealthServiceAPI;
 
 public class HealthServiceTestActivity extends Activity {
-	private static final int DIALOG_ALERT = 10;
     private static final String APP_PREF_FILE = "appPreferences";
     private static final String NOTIFICATION_ACTIVE = "notificationActive";
 
@@ -81,6 +80,7 @@ public class HealthServiceTestActivity extends Activity {
     private ListView list;
     private HealthAgentAPI.Stub agent;
     private ImageView imgHelpBluetooth;
+    private ImageView imgHelpManual;
 
     private Map<String, String> map;
     private PopupWindow popUp;
@@ -206,8 +206,10 @@ public class HealthServiceTestActivity extends Activity {
         btnShowGraphic = (Button) findViewById(R.id.btnShowGraphic);
         btnClearHistory = (Button) findViewById(R.id.btnClearHistory);
         imgHelpBluetooth = (ImageView) findViewById(R.id.imageViewHelp);
+        imgHelpManual = (ImageView) findViewById(R.id.imageViewHelp2);
 
         imgHelpBluetooth.setOnClickListener(onClickHelpBluetooth);
+        imgHelpManual.setOnClickListener(onClickHelpManual);
         cbNotification.setOnClickListener(o);
         btnOk.setOnClickListener(o);
         btnShowGraphic.setOnClickListener(o);
@@ -254,11 +256,41 @@ public class HealthServiceTestActivity extends Activity {
         }
     };
     
-    private OnClickListener  onClickHelpBluetooth = new OnClickListener() {
-		
+    private OnClickListener onClickHelpBluetooth = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			showDialog(DIALOG_ALERT);
+			AlertDialog.Builder builder1 = new AlertDialog.Builder(frame);
+            builder1.setTitle(frame.getResources().getString(R.string.helper));
+            builder1.setMessage(frame.getResources().getString(R.string.helper_BT));
+            builder1.setCancelable(true);
+            builder1.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+		}
+	};
+	
+private OnClickListener onClickHelpManual = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			AlertDialog.Builder builder1 = new AlertDialog.Builder(frame);
+            builder1.setTitle(frame.getResources().getString(R.string.helper));
+            builder1.setMessage(frame.getResources().getString(R.string.helper_manual));
+            builder1.setCancelable(true);
+            builder1.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
 		}
 	};
 
@@ -397,21 +429,6 @@ public class HealthServiceTestActivity extends Activity {
         editor.commit();
     }
     
-    @Override
-	protected Dialog onCreateDialog(int id) {
-		LayoutInflater inflater = getLayoutInflater();
-		switch (id) {
-		case DIALOG_ALERT:
-			Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage("This will end the activity");
-			builder.setCancelable(true);
-//			builder.setView(inflater.inflate(R.layout.activity_main, null));
-			AlertDialog dialog = builder.create();
-			dialog.show();
-		}
-		return super.onCreateDialog(id);
-	}
-
     private void setAlarm() {
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,
@@ -467,7 +484,7 @@ public class HealthServiceTestActivity extends Activity {
         switch (item.getItemId()) {
         case R.id.action_refresh:
             AlertDialog.Builder builder1 = new AlertDialog.Builder(frame);
-            builder1.setTitle("About");
+            builder1.setTitle(frame.getResources().getString(R.string.about));
             builder1.setMessage(frame.getResources().getString(R.string.about_text));
             builder1.setCancelable(true);
             builder1.setPositiveButton("Ok",

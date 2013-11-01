@@ -3,7 +3,6 @@
     <string name="app_name">MyPressure</string>
     <string name="text_notifications">Notificações</string>
     <string name="text_notifications_description">Ativando a notificação você receberá lembretes para fazer a medição.</string>
-    <string name="btn_ok">OK</string>
     <string name="btn_clear_history">Limpar histórico</string>
     <string name="btn_graphic">Mostrar gráfico</string>
     <string name="btn_close_graphic">Fechar gráfico</string>

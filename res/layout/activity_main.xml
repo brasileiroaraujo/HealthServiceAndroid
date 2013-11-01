@@ -43,48 +43,50 @@
                         <LinearLayout
                             android:id="@+id/deviceData"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="170dp"
                             android:background="@drawable/bluetooth_box"
                             android:orientation="horizontal" >
 
                             <TableLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="170dp"
-                                android:layout_marginTop="20dp"
-                                android:layout_weight="0.98" >
+                                android:layout_weight="0.98"
+                                 >
                                    <TableRow
                                     android:id="@+id/tableRow1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="right"
-                                    android:layout_weight="0.1" >
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="0.9"/>
-                                     <ImageView
+                                    android:layout_marginTop="20dp"
+                                    android:layout_weight="0.01" >
+                                    <RelativeLayout 
+                                        android:layout_width="wrap_content"
+	                                    android:layout_height="wrap_content"
+	                                   
+                                    >
+                                        <ImageView
                                         android:id="@+id/imageViewHelp"
                                         android:layout_width="20dp"
                                         android:layout_height="20dp"
-                                        android:layout_marginRight="8dp"
-                                        android:layout_gravity="right"
-                                        android:layout_weight="0.01"
+                                        android:layout_marginRight="5dp"
+                                        android:layout_alignParentRight="true"
                                         android:src="@drawable/help" />
+                                    </RelativeLayout>
+                                    
+                                     
                                    
                                 </TableRow>
                                 <TableRow
                                     android:id="@+id/tableRow1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:layout_weight="0.6" >
+                                    android:layout_weight="0.2" >
 
                                     <TextView
                                         android:id="@+id/tVDevice"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:layout_marginLeft="80dp"
-                                        android:layout_weight="0.5"
+                                        android:layout_weight="0.3"
                                         android:textSize="22sp" />
 
                                     <ProgressBar

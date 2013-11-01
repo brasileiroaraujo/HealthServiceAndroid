@@ -50,24 +50,25 @@ public class HealthDataAdapter extends BaseAdapter {
 
         TextView tvDevice = (TextView) view.findViewById(R.id.historyDevice);
         tvDevice.setText(data.getDevice());
-        
-        ImageView imgDevice = (ImageView) view.findViewById(R.id.imageViewHistoryBluetooth);
-        if(data.getDevice().equals(mContext.getResources().getString(R.string.manual_data))){
-            imgDevice.setImageDrawable(mContext.getResources().getDrawable(R.drawable.blood));
+
+        ImageView imgDevice = (ImageView) view
+                .findViewById(R.id.imageViewHistoryBluetooth);
+        if (data.getDevice().equals(
+                mContext.getResources().getString(R.string.manual_data))) {
+            imgDevice.setImageDrawable(mContext.getResources().getDrawable(
+                    R.drawable.blood));
         }
         TextView tvData = (TextView) view.findViewById(R.id.historyData);
         tvData.setText(mContext.getResources().getString(R.string.pressure_sys)
-                + " " + String.valueOf(data.getSystolic().intValue())
-                + " " + mContext.getResources().getString(R.string.unit_mmHg) + "\n"
+                + " " + String.valueOf(data.getSystolic().intValue()) + " "
+                + mContext.getResources().getString(R.string.unit_mmHg) + "\n"
                 + mContext.getResources().getString(R.string.pressure_dis)
-                + " " + String.valueOf(data.getDiastolic().intValue())
-                + " " + mContext.getResources().getString(R.string.unit_mmHg));
+                + " " + String.valueOf(data.getDiastolic().intValue()) + " "
+                + mContext.getResources().getString(R.string.unit_mmHg));
 
-        
         TextView tvAnalyzePressure = (TextView) view
                 .findViewById(R.id.historyAnalyzePressure);
-        tvAnalyzePressure.setText(Handlers.analyzePressure(data.getSystolic()
-                .intValue(), data.getDiastolic().intValue()));
+        tvAnalyzePressure.setText(data.analyzePressure(mContext));
         return view;
     }
 }

@@ -272,8 +272,7 @@ public class HealthServiceTestActivity extends Activity {
                     + frame.getResources().getString(R.string.pressure_dis)
                     + " " + dataInsert.getDiastolic().intValue() + "\n" + "*"
                     + frame.getResources().getString(R.string.unit_mmHg));
-            sugestion.setText(Handlers.analyzePressure(dataInsert.getSystolic()
-                    .intValue(), dataInsert.getDiastolic().intValue()));
+            sugestion.setText(dataInsert.analyzePressure(frame));
 
         }
 

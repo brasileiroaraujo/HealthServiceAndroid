@@ -110,42 +110,14 @@ public class Handlers {
                     + "*" + frame.getResources().getString(R.string.unit_mmHg));
             show(menssage,
                     frame.getResources().getString(R.string.status_measurement));
-            show(sugestion,
-                    analyzePressure(datas.get(0).intValue(), datas.get(1)
-                            .intValue()));
             show_dev(path);
-            persistInDatabase(datas, path);
+            HealthData dataInserted = persistInDatabase(datas, path);
+            show(sugestion, dataInserted.analyzePressure(frame));
             updateHistoryList();
         }
     }
 
-    /**
-     * Method to analyse blood pressure. (National Institutes of Health)
-     * http://www.nhlbi.nih.gov/health/health-topics/topics/hyp/
-     * http://www.nhlbi.nih.gov/health/health-topics/topics/hbp/
-     * 
-     * @param sys
-     * @param dis
-     * @return
-     */
-    public static String analyzePressure(int sys, int dis) {
-        if ((sys < 90) || (dis < 60)) {
-            return frame.getResources().getString(R.string.pressure_low_blood);
-        } else if ((sys > 120 && sys <= 139) || (dis > 80 && dis <= 89)) {
-            return frame.getResources().getString(
-                    R.string.pressure_prehypertension);
-        } else if ((sys >= 140 && sys <= 159) || (dis >= 90 && dis <= 99)) {
-            return frame.getResources().getString(
-                    R.string.pressure_high_blood_stage1);
-        } else if ((sys >= 160) || (dis >= 100)) {
-            return frame.getResources().getString(
-                    R.string.pressure_high_blood_stage2);
-        } else {
-            return frame.getResources().getString(R.string.pressure_normal);
-        }
-    }
-
-    private void persistInDatabase(List<Double> datas, String path) {
+    private HealthData persistInDatabase(List<Double> datas, String path) {
         if (map.containsKey(path) && frame != null) {
             HealthDAO healthDao = HealthDAO.getInstance(frame);
             Log.w("AntidoteDatabase",
@@ -155,12 +127,14 @@ public class Handlers {
                     datas.get(0), datas.get(1), datas.get(2), new Date());
             if (validateInterval(healthObject, healthDao.lastInsert())) {
                 healthDao.save(healthObject);
+                return healthObject;
             }
+            return null;
 
         } else {
             Log.w("AntidoteDatabase", "Cannot save this health data.");
+            return null;
         }
-
     }
 
     private boolean validateInterval(HealthData insert, HealthData lastInsert) {

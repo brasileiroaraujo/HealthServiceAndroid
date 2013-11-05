@@ -23,7 +23,20 @@
         maxwidth: 800,
         speed: 800,
 	});
-
+ // Slideshow 4
+      $("#slider4").responsiveSlides({
+        auto: false,
+        pager: false,
+        nav: true,
+        speed: 500,
+        namespace: "callbacks",
+        before: function () {
+          $('.events').append("<li>before event fired.</li>");
+        },
+        after: function () {
+          $('.events').append("<li>after event fired.</li>");
+        }
+      });
  });
   </script>
 
@@ -57,20 +70,24 @@
 
 
 
- <ul class="rslides" id="slider1">
-      <img src="images/screens/1.png" alt="">
-      <img src="images/screens/2.png" alt="">
-      <img src="images/screens/3.png" alt="">
-      <img src="images/screens/4.png" alt="">
-      <img src="images/screens/5.png" alt="">
-      <img src="images/screens/6.png" alt="">
-      <img src="images/screens/7.png" alt="">
-      <img src="images/screens/8.png" alt="">
-      <img src="images/screens/9.png" alt="">
-      <img src="images/screens/10.png" alt="">
-    </ul>
 
-
+ <!-- Slideshow 4 -->
+    <div class="callbacks_container">
+      <ul class="rslides" id="slider4">
+        <li>
+          <img src="images/screens/1.png" alt="">
+          <p class="caption">This is a caption</p>
+        </li>
+        <li>
+          <img src="images/screens/2.png" alt="">
+          <p class="caption">This is another caption</p>
+        </li>
+        <li>
+          <img src="images/screens/3.png" alt="">
+          <p class="caption">The third caption</p>
+        </li>
+      </ul>
+    </div>
 	
 <h3>
 <a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Autores</h3>

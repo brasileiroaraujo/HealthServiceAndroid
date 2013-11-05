@@ -9,8 +9,23 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 	
-	<link href="javascripts/js-image-slider.css" rel="stylesheet" type="text/css" />
-    <script src="javascripts/js-image-slider.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="stylesheets/responsiveslides.css">
+  <link rel="stylesheet" href="stylesheets/demo.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="javascripts/responsiveslides.min.js"></script>
+
+
+ <script>
+    $(function () {
+
+ // Slideshow 1
+      $("#slider1").responsiveSlides({
+        maxwidth: 800,
+        speed: 800,
+	});
+
+ });
+  </script>
 
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -40,25 +55,22 @@
 
 <p>O usuário poderá visualizar os dados por meio de gráficos e acompanhar seu histórico de medição de pressão arterial. O aplicativo poderá notificar o usuário lembrando-o de aferir a pressão. Os dados das medições serão classificados de acordo com os padrões estabelecidos pela Sociedade Brasileira de Cardiologia (<a href="http://publicacoes.cardiol.br/consenso/2010/Diretriz_hipertensao_associados.pdf">disponível aqui</a>), informando ao usuário sobre possíveis disfunções na pressão arterial.</p>
 
-<div id="sliderFrame">
-	<div id="slider">
-		<a href="http://www.menucool.com/javascript-image-slider" target="_blank">
-			<img src="images/screens/1.png" alt="Tela Inicial." />
-		</a>
-		<img src="images/screens/2.png" alt="Recebendo os dados via bluetooth." />
-		<img src="images/screens/3.png" alt="Computando os dados recebidos." />
-		<img src="images/screens/4.png" alt="Recebendo os dados via bluetooth."/>
-		<img src="images/screens/5.png" alt="Visualização do histórico."/>
-		<img src="images/screens/6.png" alt="Inserindo os dados manualmente."/>
-		<img src="images/screens/7.png" alt="Visualização dos dados (parte inferior da tela)."/>
-		<img src="images/screens/8.png" alt="Histórico com dados manuais."/>
-		<img src="images/screens/9.png" alt="Gráficos."/>
-		<img src="images/screens/10.png" alt="Configurações do aplicativo."/>
-	</div>
-	<div id="htmlcaption" style="display: none;">
-		<em>HTML</em> caption. Link to <a href="http://www.google.com/">Google</a>.
-	</div>
-</div>
+
+
+ <ul class="rslides" id="slider1">
+      <img src="images/screens/1.png" alt="">
+      <img src="images/screens/2.png" alt="">
+      <img src="images/screens/3.png" alt="">
+      <img src="images/screens/4.png" alt="">
+      <img src="images/screens/5.png" alt="">
+      <img src="images/screens/6.png" alt="">
+      <img src="images/screens/7.png" alt="">
+      <img src="images/screens/8.png" alt="">
+      <img src="images/screens/9.png" alt="">
+      <img src="images/screens/10.png" alt="">
+    </ul>
+
+
 	
 <h3>
 <a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Autores</h3>

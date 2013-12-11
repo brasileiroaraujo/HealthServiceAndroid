@@ -12,9 +12,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.PendingIntent;
-import android.app.AlertDialog.Builder;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,7 +24,6 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -89,7 +86,7 @@ public class HealthServiceTestActivity extends Activity {
     private Button btnGraphic;
     private Button btnSave;
     private boolean popUpVisible = false;
-    
+
 
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
@@ -118,7 +115,7 @@ public class HealthServiceTestActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+
         ActionBar actionBar = getActionBar();
         actionBar.setHomeButtonEnabled(true);
 
@@ -135,44 +132,44 @@ public class HealthServiceTestActivity extends Activity {
             @Override
             public void onClick(View v) {
                 switch (v.getId()) {
-                case R.id.checkBoxNotifications:
-                    if (cbNotification.isChecked()) {
-                        timePicker.setEnabled(true);
-                    } else {
-                        timePicker.setEnabled(false);
-                    }
-                    break;
-                case R.id.btnOk:
-                    if (cbNotification.isChecked()) {
-                        setAlarm();
-                    } else {
-                        alarmManager.cancel(PendingIntent.getBroadcast(
-                                getApplicationContext(), 0, myIntent, 0));
-                    }
-                    setNotificationActive(cbNotification.isChecked());
-                    Toast.makeText(
-                            getApplicationContext(),
-                            getResources().getString(
-                                    R.string.notifications_preferences_success),
-                            Toast.LENGTH_SHORT).show();
-                    break;
-                case R.id.btnShowGraphic:
-                    layoutMain.setVisibility(View.GONE);
-                    initGraphic();
-                    popUp.showAtLocation(layoutPopUp, Gravity.START, 10, 10);
-                    popUp.update(10, 10, 520, 600);
-                    popUpVisible = true;
-                    break;
-                case R.id.btnClearHistory:
-                    HealthDAO mDAO = HealthDAO.getInstance(frame);
-                    mDAO.deleteAll();
-                    updateListHistory();
-                    Toast.makeText(getApplicationContext(),
-                            getResources().getString(R.string.history_clean),
-                            Toast.LENGTH_SHORT).show();
-                    break;
-                default:
-                    break;
+                    case R.id.checkBoxNotifications:
+                        if (cbNotification.isChecked()) {
+                            timePicker.setEnabled(true);
+                        } else {
+                            timePicker.setEnabled(false);
+                        }
+                        break;
+                    case R.id.btnOk:
+                        if (cbNotification.isChecked()) {
+                            setAlarm();
+                        } else {
+                            alarmManager.cancel(PendingIntent.getBroadcast(
+                                    getApplicationContext(), 0, myIntent, 0));
+                        }
+                        setNotificationActive(cbNotification.isChecked());
+                        Toast.makeText(
+                                getApplicationContext(),
+                                getResources().getString(
+                                        R.string.notifications_preferences_success),
+                                        Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.btnShowGraphic:
+                        layoutMain.setVisibility(View.GONE);
+                        initGraphic();
+                        popUp.showAtLocation(layoutPopUp, Gravity.START, 10, 10);
+                        popUp.update(10, 10, 520, 600);
+                        popUpVisible = true;
+                        break;
+                    case R.id.btnClearHistory:
+                        HealthDAO mDAO = HealthDAO.getInstance(frame);
+                        mDAO.deleteAll();
+                        updateListHistory();
+                        Toast.makeText(getApplicationContext(),
+                                getResources().getString(R.string.history_clean),
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
                 }
 
             }
@@ -182,15 +179,15 @@ public class HealthServiceTestActivity extends Activity {
         tabs.setup();
         TabHost.TabSpec spec = tabs.newTabSpec("tag1");
         spec.setContent(R.id.data);
-        spec.setIndicator(getResources().getString(R.string.tab_data));
+        spec.setIndicator(null, getResources().getDrawable(R.drawable.icon_data));
         tabs.addTab(spec);
         spec = tabs.newTabSpec("tag2");
         spec.setContent(R.id.history);
-        spec.setIndicator(getResources().getString(R.string.tab_history));
+        spec.setIndicator(null, getResources().getDrawable(R.drawable.icon_history));
         tabs.addTab(spec);
         spec = tabs.newTabSpec("tag3");
         spec.setContent(R.id.settings);
-        spec.setIndicator(getResources().getString(R.string.tab_settings));
+        spec.setIndicator(null, getResources().getDrawable(R.drawable.icon_settings));
         tabs.addTab(spec);
         tabs.setCurrentTab(0);
 
@@ -221,12 +218,12 @@ public class HealthServiceTestActivity extends Activity {
         popUp = new PopupWindow(this);
         btnGraphic = new Button(this);
         btnGraphic
-                .setText(getResources().getString(R.string.btn_close_graphic));
+        .setText(getResources().getString(R.string.btn_close_graphic));
         btnGraphic.setOnClickListener(onclick);
         btnSave = (Button) findViewById(R.id.buttonSave);
         btnSave.setOnClickListener(onClickSave);
 
-        
+
         layoutPopUp = new LinearLayout(this);
         layoutPopUp.setOrientation(LinearLayout.VERTICAL);
         layoutMain = (LinearLayout) findViewById(R.id.linearMain);
@@ -255,16 +252,17 @@ public class HealthServiceTestActivity extends Activity {
             layoutPopUp.removeAllViews();
         }
     };
-    
+
     private OnClickListener onClickHelpBluetooth = new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			AlertDialog.Builder builder1 = new AlertDialog.Builder(frame);
+        @Override
+        public void onClick(View v) {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(frame);
             builder1.setTitle(frame.getResources().getString(R.string.helper));
             builder1.setMessage(frame.getResources().getString(R.string.helper_BT));
             builder1.setCancelable(true);
             builder1.setPositiveButton("Ok",
                     new DialogInterface.OnClickListener() {
+                @Override
                 public void onClick(DialogInterface dialog, int id) {
                     dialog.cancel();
                 }
@@ -272,18 +270,19 @@ public class HealthServiceTestActivity extends Activity {
 
             AlertDialog alert11 = builder1.create();
             alert11.show();
-		}
-	};
-	
-private OnClickListener onClickHelpManual = new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			AlertDialog.Builder builder1 = new AlertDialog.Builder(frame);
+        }
+    };
+
+    private OnClickListener onClickHelpManual = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(frame);
             builder1.setTitle(frame.getResources().getString(R.string.helper));
             builder1.setMessage(frame.getResources().getString(R.string.helper_manual));
             builder1.setCancelable(true);
             builder1.setPositiveButton("Ok",
                     new DialogInterface.OnClickListener() {
+                @Override
                 public void onClick(DialogInterface dialog, int id) {
                     dialog.cancel();
                 }
@@ -291,8 +290,8 @@ private OnClickListener onClickHelpManual = new OnClickListener() {
 
             AlertDialog alert11 = builder1.create();
             alert11.show();
-		}
-	};
+        }
+    };
 
     private OnClickListener onClickSave = new OnClickListener() {
 
@@ -344,6 +343,7 @@ private OnClickListener onClickHelpManual = new OnClickListener() {
             layoutPopUp.removeAllViews();
         } else {
             super.onBackPressed();
+            super.finish();
         }
 
     }
@@ -353,9 +353,9 @@ private OnClickListener onClickHelpManual = new OnClickListener() {
                 .ListAll();
         Collections.reverse(datasHistoryInternal);
         GraphViewData[] datasGraphSys = new GraphViewData[datasHistoryInternal
-                .size()];
+                                                          .size()];
         GraphViewData[] datasGraphDia = new GraphViewData[datasHistoryInternal
-                .size()];
+                                                          .size()];
         for (int i = 0; i < datasHistoryInternal.size(); i++) {
             datasGraphSys[i] = new GraphViewData(i + 1, datasHistoryInternal
                     .get(i).getSystolic());
@@ -397,9 +397,15 @@ private OnClickListener onClickHelpManual = new OnClickListener() {
 
     public void updateListHistory() {
         datasHistory = HealthDAO.getInstance(this).ListAll();
-        if (datasHistory.size() == 0) {
+        Button btnShowHistory = (Button) findViewById(R.id.btnShowGraphic);
+        if (datasHistory.size() == 0 ) {
             history.setText(getResources().getString(R.string.history_empty));
+            btnShowHistory.setEnabled(false);
+        } else if (datasHistory.size() == 1 ) {
+            btnShowHistory.setEnabled(false);
+            history.setText("");
         } else {
+            btnShowHistory.setEnabled(true);
             history.setText("");
         }
         HealthDataAdapter adapter = new HealthDataAdapter(
@@ -428,7 +434,7 @@ private OnClickListener onClickHelpManual = new OnClickListener() {
         editor.putBoolean(NOTIFICATION_ACTIVE, value);
         editor.commit();
     }
-    
+
     private void setAlarm() {
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,
@@ -450,7 +456,7 @@ private OnClickListener onClickHelpManual = new OnClickListener() {
 
         if ((actualCal.get(Calendar.HOUR_OF_DAY) > timePicker.getCurrentHour())
                 || (actualCal.get(Calendar.HOUR_OF_DAY) == timePicker
-                        .getCurrentHour())
+                .getCurrentHour())
                 && (actualCal.get(Calendar.MINUTE) > timePicker
                         .getCurrentMinute())) {
             if (actualCal.get(Calendar.DAY_OF_MONTH) == actualCal
@@ -482,24 +488,25 @@ private OnClickListener onClickHelpManual = new OnClickListener() {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case R.id.action_refresh:
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(frame);
-            builder1.setTitle(frame.getResources().getString(R.string.about));
-            builder1.setMessage(frame.getResources().getString(R.string.about_text));
-            builder1.setCancelable(true);
-            builder1.setPositiveButton("Ok",
-                    new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                }
-            });
+            case R.id.action_refresh:
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(frame);
+                builder1.setTitle(frame.getResources().getString(R.string.about));
+                builder1.setMessage(frame.getResources().getString(R.string.about_text));
+                builder1.setCancelable(true);
+                builder1.setPositiveButton("Ok",
+                        new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
 
-            AlertDialog alert11 = builder1.create();
-            alert11.show();
-            break;
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+                break;
 
-        default:
-            break;
+            default:
+                break;
         }
 
         return true;

@@ -34,9 +34,9 @@
     <string name="notification_title">MyPressure Lembrete</string>
     <string name="notification_text">Clique aqui para aferir sua pressão hoje</string>
     <string name="format_date">dd-MM-yyyy HH:mm:ss</string>
-    <string name="graph_title">Gráfico da Pressão Sanguínea</string>
-    <string name="graph_diastolic">Diastólica (mmHg)</string>
-    <string name="graph_systolic">Sistólica (mmHg)</string>
+    <string name="graph_title">Gráfico</string>
+    <string name="graph_diastolic">Dia(mmHg)</string>
+    <string name="graph_systolic">Sis(mmHg)</string>
     <string name="unit_mmHg">mmHg</string>
     <string name="manual_data">Dados manuais.</string>
     <string name="save_success">Dados salvos com sucesso.</string>

@@ -1,13 +1,5 @@
 package br.ufcg.embedded.health.servicetest;
 
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -40,6 +32,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
 import br.ufcg.embedded.health.R;
 import br.ufcg.embedded.health.database.HealthDAO;
 import br.ufcg.embedded.health.structures.HealthData;
@@ -52,6 +45,14 @@ import com.jjoe64.graphview.GraphViewSeries.GraphViewSeriesStyle;
 import com.jjoe64.graphview.LineGraphView;
 import com.signove.health.service.HealthAgentAPI;
 import com.signove.health.service.HealthServiceAPI;
+
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class HealthServiceTestActivity extends Activity {
     private static final String APP_PREF_FILE = "appPreferences";
@@ -87,6 +88,8 @@ public class HealthServiceTestActivity extends Activity {
     private Button btnSave;
     private boolean popUpVisible = false;
 
+    private int width = 0;
+    private int height = 0;
 
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
@@ -115,6 +118,9 @@ public class HealthServiceTestActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        width = getResources().getDisplayMetrics().widthPixels;
+        height = getResources().getDisplayMetrics().heightPixels;
 
         ActionBar actionBar = getActionBar();
         actionBar.setHomeButtonEnabled(true);
@@ -156,8 +162,8 @@ public class HealthServiceTestActivity extends Activity {
                     case R.id.btnShowGraphic:
                         layoutMain.setVisibility(View.GONE);
                         initGraphic();
-                        popUp.showAtLocation(layoutPopUp, Gravity.START, 10, 10);
-                        popUp.update(10, 10, 520, 600);
+                        popUp.showAtLocation(layoutPopUp, Gravity.START, 20, 20);
+                        popUp.update(20, 20, width, height - 50);
                         popUpVisible = true;
                         break;
                     case R.id.btnClearHistory:
@@ -341,6 +347,7 @@ public class HealthServiceTestActivity extends Activity {
             popUp.dismiss();
             layoutMain.setVisibility(View.VISIBLE);
             layoutPopUp.removeAllViews();
+            popUpVisible = false;
         } else {
             super.onBackPressed();
             super.finish();
@@ -389,9 +396,12 @@ public class HealthServiceTestActivity extends Activity {
         graphView.setScalable(true);
         graphView.setShowLegend(true);
         graphView.setLegendAlign(LegendAlign.MIDDLE);
-        graphView.setLegendWidth(190);
-
-        layoutPopUp.addView(graphView, 500, 500);
+        if ((double) width / height >= 0.75){
+            layoutPopUp.addView(graphView, width - 15, height - 100);
+        } else {
+            layoutPopUp.addView(graphView, width - 15, height - 150);
+            graphView.setLegendWidth(width / 2 - 30);
+        }
         layoutPopUp.addView(btnGraphic);
     }
 
